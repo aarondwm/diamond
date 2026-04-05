@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 /* ═══════════════════════════════════════════════════════════════════════════
    LOGO (base64 PNG)
    ═══════════════════════════════════════════════════════════════════════════ */
-const LOGO_SRC =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 50'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%23c9a84c'/%3E%3Cstop offset='50%25' stop-color='%23e8d48b'/%3E%3Cstop offset='100%25' stop-color='%23c9a84c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='25,5 32,20 47,20 35,30 39,45 25,36 11,45 15,30 3,20 18,20' fill='url(%23g)'/%3E%3Ctext x='55' y='35' font-family='Playfair Display,serif' font-weight='700' font-size='22' fill='url(%23g)'%3EDIAMOND PKW%3C/text%3E%3C/svg%3E";
 
 /* ═══════════════════════════════════════════════════════════════════════════
    TRANSLATIONS
@@ -813,129 +811,199 @@ const T: Record<Lang, Record<string, string>> = {
 /* ═══════════════════════════════════════════════════════════════════════════
    DATA
    ═══════════════════════════════════════════════════════════════════════════ */
-const SERVICE_ICONS = ["🛡️", "💎", "🪟", "🧹", "✨", "🔧", "💡", "🔩"];
-
-const WASH_PRICES = [
-  { sedan: "3 KD", suv: "4 KD", truck: "5 KD" },
-  { sedan: "5 KD", suv: "6 KD", truck: "7 KD" },
-  { sedan: "8 KD", suv: "10 KD", truck: "12 KD" },
-  { sedan: "5 KD", suv: "6 KD", truck: "7 KD" },
-  { sedan: "4 KD", suv: "5 KD", truck: "6 KD" },
-];
-
-const OFFER_ICONS = ["🏍️", "🏍️", "🚗", "🔋", "🏢", "👨‍👩‍👧‍👦"];
 
 const REVIEWS = [
-  {
-    nameEn: "Ahmed K.",
-    nameAr: "أحمد ك.",
-    dateEn: "2 weeks ago",
-    dateAr: "قبل أسبوعين",
-    textEn:
-      "Incredible work on my Range Rover. The PPF installation was flawless and the team was very professional. Highly recommend Diamond PKW!",
-    textAr:
-      "عمل رائع على سيارتي رينج روفر. تركيب PPF كان مثالياً والفريق كان محترفاً جداً. أنصح بشدة بـ Diamond PKW!",
-    stars: 5,
-    initial: "A",
-  },
-  {
-    nameEn: "Sarah M.",
-    nameAr: "سارة م.",
-    dateEn: "1 month ago",
-    dateAr: "قبل شهر",
-    textEn:
-      "Best ceramic coating in Kuwait. My car looks brand new even after months. The attention to detail is unmatched.",
-    textAr:
-      "أفضل طلاء سيراميك في الكويت. سيارتي تبدو جديدة حتى بعد أشهر. الاهتمام بالتفاصيل لا مثيل له.",
-    stars: 5,
-    initial: "S",
-  },
-  {
-    nameEn: "Mohammed R.",
-    nameAr: "محمد ر.",
-    dateEn: "3 weeks ago",
-    dateAr: "قبل 3 أسابيع",
-    textEn:
-      "Had my windows tinted and interior detailed. Fair pricing and excellent quality. Will definitely come back for more services.",
-    textAr:
-      "ظللت نوافذ سيارتي وعملت تفصيل داخلي. أسعار عادلة وجودة ممتازة. سأعود بالتأكيد لمزيد من الخدمات.",
-    stars: 5,
-    initial: "M",
-  },
-  {
-    nameEn: "Fatima A.",
-    nameAr: "فاطمة أ.",
-    dateEn: "1 week ago",
-    dateAr: "قبل أسبوع",
-    textEn:
-      "The Diamond package was worth every fils. My BMW looks absolutely stunning. Professional team and great customer service.",
-    textAr:
-      "باقة الماسية كانت تستحق كل فلس. سيارتي BMW تبدو مذهلة تماماً. فريق محترف وخدمة عملاء رائعة.",
-    stars: 5,
-    initial: "F",
-  },
-  {
-    nameEn: "Khalid H.",
-    nameAr: "خالد ح.",
-    dateEn: "2 months ago",
-    dateAr: "قبل شهرين",
-    textEn:
-      "Brought my Porsche for a full detail. The paint correction was outstanding — all swirl marks gone. True professionals.",
-    textAr:
-      "أحضرت سيارتي بورش لتفصيل كامل. تصحيح الطلاء كان رائعاً — جميع علامات الدوامة اختفت. محترفون حقيقيون.",
-    stars: 5,
-    initial: "K",
-  },
-  {
-    nameEn: "Nora S.",
-    nameAr: "نورة س.",
-    dateEn: "3 months ago",
-    dateAr: "قبل 3 أشهر",
-    textEn:
-      "Great home service option! They came to my house and detailed my car perfectly. Very convenient and high quality work.",
-    textAr:
-      "خيار الخدمة المنزلية رائع! جاؤوا إلى منزلي وفصلوا سيارتي بشكل مثالي. مريح جداً وعمل عالي الجودة.",
-    stars: 4,
-    initial: "N",
-  },
+  { name: "Bashar Alsarraf", text: "Very professional work. They used top grade materials and truly restored the car to its original state. Good value for the money.", stars: 5, initial: "B" },
+  { name: "Ahmed Alatheri", text: "This is one of the best places in Kuwait for detailing and polishing your car or motorcycle. They offer vehicle protection film and window tinting as well.", stars: 5, initial: "A" },
+  { name: "Khaled Alkhawari", text: "One of the best companies in Kuwait offering protection, window tinting, and heat insulation services for cars.", stars: 5, initial: "K" },
+  { name: "MESHAL ALNEJADI", text: "One of the best protection shops I have dealt with. I had a car that I was selling and took it to them to wash and polish it. After they finished it, it was easier to sell because they returned it to me as new.", stars: 5, initial: "M" },
+  { name: "Mohammed Almoumen", text: "Neat work, excellent customer service, and reasonable prices. May God grant them success.", stars: 5, initial: "M" },
+  { name: "A.Qambar", text: "The most elegant way to pamper your car. They are professional at what they do.", stars: 5, initial: "A" },
+  { name: "Ali Al", text: "The staff is attentive to details and is honest. The owner of the shop is a special person.", stars: 5, initial: "A" },
+  { name: "Moh ALQaed", text: "The best types of protection and shading, very nice treatment and excellent manner of dealing by management and technicians, prices are reasonable for the market.", stars: 5, initial: "M" },
+  { name: "Ali Ghuloum", text: "Best gift to have for your ride — the strongest protection ever.", stars: 5, initial: "A" },
+  { name: "Mohammed Ali", text: "Excellent materials with quick work and excellent finishing, thanks.", stars: 5, initial: "M" },
+  { name: "Husain Alsarraf", text: "I tried their cleaning service; it was excellent, and they use high-quality materials I haven't seen at any other company.", stars: 5, initial: "H" },
+  { name: "Refaat Dahey", text: "One of the best car service centers in the field of heat-resistant window tinting and protection of all kinds, and even better is their excellent reception.", stars: 5, initial: "R" },
 ];
 
-const GALLERY_ITEMS = [
-  { category: "ppf", labelEn: "Full Body PPF — Mercedes AMG GT", labelAr: "PPF كامل — مرسيدس AMG GT" },
-  { category: "ceramic", labelEn: "Ceramic Coating — Porsche 911", labelAr: "طلاء سيراميك — بورش 911" },
-  { category: "tinting", labelEn: "Window Tinting — Range Rover", labelAr: "تظليل — رينج روفر" },
-  { category: "interior", labelEn: "Interior Detail — BMW 7 Series", labelAr: "تفصيل داخلي — بي ام دبليو 7" },
-  { category: "polish", labelEn: "Paint Correction — Audi RS6", labelAr: "تصحيح الطلاء — أودي RS6" },
-  { category: "ppf", labelEn: "Partial PPF — Lamborghini Urus", labelAr: "PPF جزئي — لامبورغيني أوروس" },
-  { category: "ceramic", labelEn: "Ceramic Coat — Tesla Model S", labelAr: "طلاء سيراميك — تيسلا موديل S" },
-  { category: "tinting", labelEn: "Tinting — Lexus LX600", labelAr: "تظليل — لكزس LX600" },
-  { category: "polish", labelEn: "Full Polish — Rolls Royce Ghost", labelAr: "تلميع كامل — رولز رويس غوست" },
-  { category: "interior", labelEn: "Interior Overhaul — Bentley Bentayga", labelAr: "إعادة تأهيل — بنتلي بنتايجا" },
-  { category: "ppf", labelEn: "Front PPF — Toyota Land Cruiser", labelAr: "PPF أمامي — تويوتا لاند كروزر" },
-  { category: "ceramic", labelEn: "Graphene Coating — GMC Yukon", labelAr: "طلاء جرافين — جي ام سي يوكن" },
+/* ═══════════════════════════════════════════════════════════════════════════
+   OUR WORK SLIDESHOW
+   ═══════════════════════════════════════════════════════════════════════════ */
+const OW_SLIDES: Array<{ image?: string; gradient?: string; label: string }> = [
+  { image: "/Gemini_Generated_Image_x11nwpx11nwpx11n.png", label: "Diamond PKW — Premium Detailing" },
+  { image: "/Gemini_Generated_Image_q3dp3dq3dp3dq3dp.png", label: "Diamond PKW — Paint Protection" },
+  { gradient: "linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%)", label: "Rolls Royce Cullinan — Full PPF" },
+  { gradient: "linear-gradient(135deg, #2d1b30 0%, #1a1a2e 40%, #0d1117 100%)", label: "Ferrari 488 GTB — Ceramic Coating" },
+  { gradient: "linear-gradient(135deg, #1b2838 0%, #171a21 40%, #1e2328 100%)", label: "Mercedes AMG GT — Window Tint" },
+  { gradient: "linear-gradient(135deg, #1c1c1c 0%, #2a2a2a 40%, #111 100%)", label: "Porsche 911 Turbo S — Full Detail" },
 ];
+const OW_DURATION = 4000;
 
-const SPOTLIGHT_BUILDS = [
-  {
-    titleEn: "Mercedes AMG GT — Full Stealth PPF",
-    titleAr: "مرسيدس AMG GT — PPF خفي كامل",
-    descEn: "Matte PPF wrap with ceramic top coat",
-    descAr: "تغليف PPF مطفي مع طبقة سيراميك",
-  },
-  {
-    titleEn: "Porsche 992 GT3 — Track Detail",
-    titleAr: "بورش 992 GT3 — تفصيل المسار",
-    descEn: "Paint correction and ceramic protection",
-    descAr: "تصحيح الطلاء وحماية سيراميك",
-  },
-  {
-    titleEn: "Rolls Royce Cullinan — VIP Detail",
-    titleAr: "رولز رويس كولينان — تفصيل VIP",
-    descEn: "Complete interior and exterior transformation",
-    descAr: "تحول كامل للداخلية والخارجية",
-  },
-];
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATED COUNTER HOOK + STAT CARDS
+   ═══════════════════════════════════════════════════════════════════════════ */
+function useAnimatedCounter(target: number, started: boolean, duration = 2000, decimals = 0) {
+  const [val, setVal] = useState(0);
 
+  useEffect(() => {
+    if (!started) return;
+    const start = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setVal(eased * target);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [started, target, duration]);
+
+  return decimals ? val.toFixed(decimals) : String(Math.round(val));
+}
+
+function StatCards({ lang }: { lang: Lang }) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  const isAr = lang === "ar";
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setVisible(true); },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const ratingDisplay = useAnimatedCounter(4.9, visible, 2000, 1);
+  const clientsDisplay = useAnimatedCounter(194, visible, 2200, 0);
+  const yearsDisplay = useAnimatedCounter(5, visible, 1600, 0);
+
+  return (
+    <div className="stat-cards-wrap" ref={wrapRef}>
+      {/* Google Rating */}
+      <div className={`sc-card${visible ? " sc-visible" : ""}`} style={{ animationDelay: "0s" }}>
+        <div className="sc-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div className="sc-num">{ratingDisplay}</div>
+        <div className="sc-stars">
+          {Array.from({ length: 5 }, (_, i) => (
+            <span key={i} style={{ color: "var(--gold)", fontSize: "14px" }}>&#9733;</span>
+          ))}
+        </div>
+        <div className="sc-divider" />
+        <div className="sc-label">{isAr ? "تقييم Google" : "Google Rating"}</div>
+      </div>
+
+      {/* Happy Clients */}
+      <div className={`sc-card${visible ? " sc-visible" : ""}`} style={{ animationDelay: "0.15s" }}>
+        <div className="sc-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div className="sc-num sc-num-gold">{clientsDisplay}<span className="sc-plus">+</span></div>
+        <div className="sc-sub">{isAr ? "عملاء سعداء" : "satisfied drivers"}</div>
+        <div className="sc-divider" />
+        <div className="sc-label">{isAr ? "عملاء سعداء" : "Happy Clients"}</div>
+      </div>
+
+      {/* Years */}
+      <div className={`sc-card${visible ? " sc-visible" : ""}`} style={{ animationDelay: "0.3s" }}>
+        <div className="sc-icon">
+          <svg width="24" height="24" viewBox="0 0 40 40" fill="none"><path d="M20 2L38 16L20 38L2 16L20 2Z" stroke="var(--gold)" strokeWidth="2" fill="none"/><path d="M8 16H32M20 2L14 16L20 38L26 16L20 2Z" stroke="var(--gold)" strokeWidth="1.5" fill="none" opacity="0.4"/></svg>
+        </div>
+        <div className="sc-num">{yearsDisplay}<span className="sc-plus">+</span></div>
+        <div className="sc-sub">{isAr ? "سنوات من الإتقان" : "years of craft"}</div>
+        <div className="sc-divider" />
+        <div className="sc-label">{isAr ? "سنوات التميز" : "Years of Excellence"}</div>
+      </div>
+    </div>
+  );
+}
+
+function OurWorkSlideshow({ lang }: { lang: Lang }) {
+  const [current, setCurrent] = useState(0);
+  const [fade, setFade] = useState(true);
+  const isAr = lang === "ar";
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => { setCurrent(p => (p + 1) % OW_SLIDES.length); setFade(true); }, 600);
+    }, OW_DURATION);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="ow-container">
+      {/* Slides */}
+      {OW_SLIDES.map((slide, i) => (
+        <div key={i} className={`ow-slide${i === current ? " ow-slide-active" : ""}`} style={{ background: slide.gradient || "#000", opacity: i === current && fade ? 1 : 0 }}>
+          {slide.image && (
+            <img src={slide.image} alt={slide.label} className="ow-slide-img" />
+          )}
+          {!slide.image && <div className="ow-slide-silhouette" />}
+          <div className="ow-slide-label">{slide.label.toUpperCase()}</div>
+        </div>
+      ))}
+
+      {/* Diagonal cut */}
+      <div className="ow-diagonal" />
+      <svg className="ow-diag-line" viewBox="0 0 1000 520" preserveAspectRatio="none">
+        <line x1={isAr ? "615" : "385"} y1="0" x2={isAr ? "755" : "245"} y2="520" stroke="rgba(200,170,100,0.25)" strokeWidth="1" />
+      </svg>
+
+      {/* Text content — right-aligned (flips for RTL) */}
+      <div className={`ow-text${isAr ? " ow-text-rtl" : ""}`}>
+        <div className="ow-eyebrow">
+          <div className="ow-eyebrow-line" />
+          <span>DIAMOND PKW</span>
+        </div>
+        <h2 className="ow-title">
+          {isAr ? "" : "Our "}<span className="ow-title-accent">{isAr ? "أعمالنا" : "Work"}</span>
+        </h2>
+        <div className="ow-divider" />
+        <p className="ow-desc">
+          {isAr
+            ? "عرض للتفصيل الدقيق والحماية المثالية واللمسات النهائية بمستوى صالات العرض — صُنع في الكويت."
+            : "A showcase of precision detailing, flawless protection, and showroom-level finishes — crafted in Kuwait."}
+        </p>
+        <a href="/services" className="ow-cta">
+          {isAr ? "عرض الخدمات" : "CLICK TO VIEW"}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d={isAr ? "M19 12H5M12 19l-7-7 7-7" : "M5 12h14M12 5l7 7-7 7"} />
+          </svg>
+        </a>
+
+        {/* Dots + counter */}
+        <div className="ow-nav">
+          <div className="ow-dots">
+            {OW_SLIDES.map((_, i) => (
+              <button key={i} className={`ow-dot${i === current ? " ow-dot-active" : ""}`} onClick={() => { setCurrent(i); setFade(true); }} />
+            ))}
+          </div>
+          <span className="ow-counter">
+            <span className="ow-counter-current">{String(current + 1).padStart(2, "0")}</span>
+            <span>/</span>
+            <span>{String(OW_SLIDES.length).padStart(2, "0")}</span>
+          </span>
+        </div>
+
+        {/* Progress bar */}
+        <div className="ow-progress">
+          <div className="ow-progress-bar" key={current} />
+        </div>
+      </div>
+
+      {/* Vignette */}
+      <div className="ow-vignette" />
+      <div className="ow-fade-top" />
+      <div className="ow-fade-bottom" />
+    </div>
+  );
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    MAIN COMPONENT
@@ -945,24 +1013,7 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const [bookingStripVisible, setBookingStripVisible] = useState(false);
-  const [openServices, setOpenServices] = useState<Set<number>>(new Set());
-  const [openFaqs, setOpenFaqs] = useState<Set<number>>(new Set());
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [starRating, setStarRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
 
-  const [kocCountdown, setKocCountdown] = useState({ days: 0, hours: 0, mins: 0, secs: 0 });
-
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const bubblesRef = useRef<Array<{
-    x: number; y: number;
-    vy: number; vx: number;
-    size: number; opacity: number;
-    wobbleSpeed: number; wobbleAmp: number; wobbleOffset: number;
-    life: number; maxLife: number;
-    popping: boolean; popFrame: number;
-  }>>([]);
-  const animFrameRef = useRef<number>(0);
 
   const t = useCallback((key: string) => T[lang][key] || key, [lang]);
 
@@ -984,11 +1035,39 @@ export default function Home() {
     }
   }, [lang]);
 
-  // ─── Scroll handler (header + booking strip + reveal) ───
+  // ─── Scroll handler (header + booking strip + reveal + hero parallax) ───
+  const heroRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const onScroll = () => {
-      setHeaderScrolled(window.scrollY > 50);
-      setBookingStripVisible(window.scrollY > 600);
+      const scrollY = window.scrollY;
+      setHeaderScrolled(scrollY > 50);
+      setBookingStripVisible(scrollY > 600);
+
+      // Hero parallax: zoom out bg + fade out content
+      const hero = heroRef.current;
+      if (hero) {
+        const heroH = hero.offsetHeight;
+        const progress = Math.min(scrollY / heroH, 1); // 0 at top, 1 when hero scrolled past
+
+        const bgImg = hero.querySelector(".hero-bg-image") as HTMLElement;
+        const content = hero.querySelector(".hero-content") as HTMLElement;
+        const overlays = hero.querySelectorAll(".hero-bg-beams, .hero-prism-wrap, .hero-gradient, .hero-vignette, .hero-bg-noise");
+
+        if (bgImg) {
+          // Start zoomed in (1.15), zoom out to 1.0 as you scroll
+          const scale = 1.15 - progress * 0.15;
+          bgImg.style.transform = `scale(${scale})`;
+          bgImg.style.opacity = String(0.4 - progress * 0.35);
+        }
+        if (content) {
+          content.style.opacity = String(1 - progress * 1.5);
+          content.style.transform = `translateY(${progress * -60}px)`;
+        }
+        overlays.forEach((el) => {
+          (el as HTMLElement).style.opacity = String(1 - progress * 1.2);
+        });
+      }
 
       // Reveal
       document.querySelectorAll(".reveal:not(.revealed)").forEach((el) => {
@@ -999,7 +1078,7 @@ export default function Home() {
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll(); // initial check
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -1008,182 +1087,9 @@ export default function Home() {
     setMobileMenuOpen(false);
   }, []);
 
-  // ─── Service accordion ───
-  const toggleService = useCallback((idx: number) => {
-    setOpenServices((prev) => {
-      const next = new Set(prev);
-      if (next.has(idx)) next.delete(idx);
-      else next.add(idx);
-      return next;
-    });
-  }, []);
-
-  // ─── FAQ toggle ───
-  const toggleFaq = useCallback((idx: number) => {
-    setOpenFaqs((prev) => {
-      const next = new Set(prev);
-      if (next.has(idx)) next.delete(idx);
-      else next.add(idx);
-      return next;
-    });
-  }, []);
-
-  // ─── KOC Countdown ───
-  useEffect(() => {
-    // Set target date to end of current month + 30 days
-    const target = new Date();
-    target.setDate(target.getDate() + 30);
-    target.setHours(23, 59, 59, 0);
-
-    const tick = () => {
-      const now = new Date().getTime();
-      const diff = target.getTime() - now;
-      if (diff <= 0) {
-        setKocCountdown({ days: 0, hours: 0, mins: 0, secs: 0 });
-        return;
-      }
-      setKocCountdown({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-        mins: Math.floor((diff / (1000 * 60)) % 60),
-        secs: Math.floor((diff / 1000) % 60),
-      });
-    };
-    tick();
-    const interval = setInterval(tick, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
 
-  // ─── Champagne Bubbles ───
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
 
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const BUBBLE_COUNT = 120;
-
-    const w = canvas.width;
-    const h = canvas.height;
-
-    function makeBubble(startFromBottom = true) {
-      const size = Math.random() * 3.5 + 1;
-      return {
-        x: Math.random() * w,
-        y: startFromBottom
-          ? h + Math.random() * 100
-          : Math.random() * h,
-        vy: -(Math.random() * 1.2 + 0.3),
-        vx: 0,
-        size,
-        opacity: Math.random() * 0.4 + 0.15,
-        wobbleSpeed: Math.random() * 0.03 + 0.01,
-        wobbleAmp: Math.random() * 30 + 10,
-        wobbleOffset: Math.random() * Math.PI * 2,
-        life: 0,
-        maxLife: (h + 200) / (Math.random() * 1.2 + 0.3),
-        popping: false,
-        popFrame: 0,
-      };
-    }
-
-    // Seed initial bubbles spread across the screen
-    bubblesRef.current = Array.from({ length: BUBBLE_COUNT }, () =>
-      makeBubble(false)
-    );
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const bubbles = bubblesRef.current;
-
-      for (let i = 0; i < bubbles.length; i++) {
-        const b = bubbles[i];
-
-        if (b.popping) {
-          // Pop animation: expanding ring that fades
-          b.popFrame++;
-          const progress = b.popFrame / 12;
-          if (progress >= 1) {
-            bubbles[i] = makeBubble(true);
-            continue;
-          }
-          const popRadius = b.size + progress * 8;
-          const popOpacity = b.opacity * (1 - progress) * 0.6;
-          ctx.beginPath();
-          ctx.arc(b.x, b.y, popRadius, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(201, 168, 76, ${popOpacity})`;
-          ctx.lineWidth = 1;
-          ctx.stroke();
-          continue;
-        }
-
-        // Move upward
-        b.life++;
-        b.y += b.vy;
-        // Wobble side to side
-        b.x += Math.sin(b.life * b.wobbleSpeed + b.wobbleOffset) * 0.5;
-
-        // If bubble reaches top area, start popping
-        if (b.y < -10) {
-          b.popping = true;
-          b.popFrame = 0;
-          continue;
-        }
-
-        // Draw bubble
-        const alpha = b.opacity;
-
-        // Glow
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.size * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(201, 168, 76, ${alpha * 0.08})`;
-        ctx.fill();
-
-        // Outer ring
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(220, 190, 100, ${alpha * 0.5})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-
-        // Inner fill
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(201, 168, 76, ${alpha * 0.35})`;
-        ctx.fill();
-
-        // Highlight reflection dot
-        if (b.size > 1.5) {
-          ctx.beginPath();
-          ctx.arc(b.x - b.size * 0.3, b.y - b.size * 0.3, b.size * 0.25, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 240, 200, ${alpha * 0.6})`;
-          ctx.fill();
-        }
-      }
-
-      animFrameRef.current = requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      window.removeEventListener("resize", resize);
-      cancelAnimationFrame(animFrameRef.current);
-    };
-  }, []);
-
-  // ─── Gallery filter ───
-  const filteredGallery =
-    activeFilter === "all"
-      ? GALLERY_ITEMS
-      : GALLERY_ITEMS.filter((item) => item.category === activeFilter);
 
   // ─── Marquee items (doubled for infinite scroll) ───
   const marqueeKeys = ["marquee1", "marquee2", "marquee3", "marquee4", "marquee5", "marquee6", "marquee7", "marquee8"];
@@ -1195,24 +1101,22 @@ export default function Home() {
      ═══════════════════════════════════════════════════════════════════════════ */
   return (
     <>
-      {/* Particle canvas */}
-      <canvas ref={canvasRef} id="particles-canvas" />
 
       {/* ─── HEADER ─── */}
       <header className={`header${headerScrolled ? " scrolled" : ""}`}>
-        <a href="#hero">
-          <img src={LOGO_SRC} alt="Diamond PKW" className="header-logo" />
+        <a href="#hero" className="header-brand">
+          <img src="/diamond_logo_transparent.png" alt="Diamond PKW" className="header-logo" />
+          <span className="header-brand-name">DIAMOND <span className="gold-text">PKW</span></span>
         </a>
 
         <nav className="nav-links">
           <a href="#hero" onClick={handleNavClick}>{t("navHome")}</a>
-          <a href="#services" onClick={handleNavClick}>{t("navServices")}</a>
-          <a href="#packages" onClick={handleNavClick}>{t("navPackages")}</a>
-          <a href="#offers" onClick={handleNavClick}>{t("navOffers")}</a>
+          <a href="/services" onClick={handleNavClick}>{t("navServices")}</a>
+          <a href="/packages" onClick={handleNavClick}>{t("navPackages")}</a>
+          <a href="/deals" onClick={handleNavClick}>{t("navOffers")}</a>
           <a href="#gallery" onClick={handleNavClick}>{t("navGallery")}</a>
-          <a href="#about" onClick={handleNavClick}>{t("navAbout")}</a>
+          <a href="#reviews" onClick={handleNavClick}>{t("navAbout")}</a>
           <a href="#contact" onClick={handleNavClick}>{t("navContact")}</a>
-          <a href="#faq" onClick={handleNavClick}>{t("navFaq")}</a>
         </nav>
 
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
@@ -1239,13 +1143,12 @@ export default function Home() {
       {/* ─── MOBILE MENU ─── */}
       <div className={`mobile-menu${mobileMenuOpen ? " open" : ""}`}>
         <a href="#hero" onClick={handleNavClick}>{t("navHome")}</a>
-        <a href="#services" onClick={handleNavClick}>{t("navServices")}</a>
-        <a href="#packages" onClick={handleNavClick}>{t("navPackages")}</a>
-        <a href="#offers" onClick={handleNavClick}>{t("navOffers")}</a>
+        <a href="/services" onClick={handleNavClick}>{t("navServices")}</a>
+        <a href="/packages" onClick={handleNavClick}>{t("navPackages")}</a>
+        <a href="/deals" onClick={handleNavClick}>{t("navOffers")}</a>
         <a href="#gallery" onClick={handleNavClick}>{t("navGallery")}</a>
-        <a href="#about" onClick={handleNavClick}>{t("navAbout")}</a>
+        <a href="#reviews" onClick={handleNavClick}>{t("navAbout")}</a>
         <a href="#contact" onClick={handleNavClick}>{t("navContact")}</a>
-        <a href="#faq" onClick={handleNavClick}>{t("navFaq")}</a>
         <button className="lang-toggle" onClick={toggleLang} style={{ marginTop: "16px" }}>
           <svg className="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="12" cy="12" r="10" />
@@ -1256,41 +1159,92 @@ export default function Home() {
       </div>
 
       {/* ─── HERO ─── */}
-      <section className="hero" id="hero">
+      <section className="hero" id="hero" ref={heroRef}>
+        {/* Background image */}
+        <img src="/Gemini_Generated_Image_x11nwpx11nwpx11n.png" alt="" className="hero-bg-image" />
+        <div className="hero-video-overlay" />
+
+        {/* Layered atmospheric backgrounds */}
+        <div className="hero-bg-noise" />
+        <div className="hero-bg-beams">
+          <div className="hero-beam hero-beam-1" />
+          <div className="hero-beam hero-beam-2" />
+          <div className="hero-beam hero-beam-3" />
+        </div>
         <div className="hero-gradient" />
+        <div className="hero-vignette" />
+
+
         <div className="hero-content hero-centered">
-          <h1 className="hero-title">
-            DIAMOND <span className="gold-text">PKW</span>
+          {/* Social proof strip */}
+          <div className="proof-strip hero-reveal hero-reveal-0">
+            <div className="proof-strip__inner">
+              <svg className="proof-strip__google" width="20" height="20" viewBox="0 0 24 24">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+              <div className="proof-strip__rating">
+                <span className="proof-strip__number">4.9</span>
+                <div className="proof-strip__stars">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+              </div>
+              <div className="proof-strip__divider" />
+              <span className="proof-strip__text">{lang === "ar" ? "١٩٤ تقييم على Google" : "194 reviews on Google"}</span>
+              <div className="proof-strip__divider" />
+              <a href="https://www.google.com/maps/place/Diamond+protection/" target="_blank" rel="noopener noreferrer" className="proof-strip__link">
+                {lang === "ar" ? "اقرأ التقييمات" : "READ REVIEWS"}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <h1 className="hero-title hero-reveal hero-reveal-1">
+            <span className="hero-title-line">DIAMOND</span>
+            <span className="hero-title-line hero-title-accent">PKW</span>
           </h1>
-          <div className="hero-tags">
+
+          <div className="hero-eyebrow hero-reveal hero-reveal-2">
+            <span className="hero-eyebrow-line" />
+            <span>{lang === "ar" ? "الكويت" : "KUWAIT"}</span>
+            <span className="hero-eyebrow-diamond">◆</span>
+            <span>{lang === "ar" ? "منذ ٢٠١٩" : "EST. 2019"}</span>
+            <span className="hero-eyebrow-line" />
+          </div>
+
+          <div className="hero-tags hero-reveal hero-reveal-3">
             {(lang === "ar"
-              ? ["PPF", "طلاء سيراميك", "تظليل", "غسيل"]
+              ? ["حماية الطلاء", "سيراميك", "تظليل", "غسيل"]
               : ["PPF", "Ceramic Coating", "Tinting", "Wash"]
             ).map((tag, i, arr) => (
-              <span key={i}>
+              <span className="hero-tag" key={i}>
                 {tag}
-                {i < arr.length - 1 && <span className="hero-tag-dot">·</span>}
+                {i < arr.length - 1 && <span className="hero-tag-dot" />}
               </span>
             ))}
           </div>
-          <p className="hero-slogan">
+
+          <p className="hero-slogan hero-reveal hero-reveal-4">
             {lang === "ar"
               ? "حيث يلتقي الكمال بالحماية"
               : "Where Perfection Meets Protection"}
           </p>
-          <div className="hero-cta-group" style={{ justifyContent: "center" }}>
+
+          <div className="hero-cta-group hero-reveal hero-reveal-5">
             <a
               href="https://wa.me/96595536344?text=Hi%20Diamond%20PKW%2C%20I'd%20like%20to%20book%20a%20service."
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary btn-lg"
+              className="btn btn-primary btn-lg hero-btn-glow"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{opacity:0.8}}>
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
               </svg>
               {t("heroCta1")}
             </a>
-            <a href="#services" className="btn btn-secondary btn-lg">
+            <a href="/services" className="btn btn-secondary btn-lg">
               {t("heroCta2")}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="5" y1="12" x2="19" y2="12" />
@@ -1298,7 +1252,9 @@ export default function Home() {
               </svg>
             </a>
           </div>
+
         </div>
+
       </section>
 
       {/* ─── MARQUEE TICKER ─── */}
@@ -1313,561 +1269,61 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ─── OFFERS SECTION ─── */}
-      <section className="section" id="offers">
-        <div className="section-header reveal">
-          <div className="section-label">
-            <span className="line" />
-            {t("offersLabel")}
-            <span className="line" />
-          </div>
-          <h2 className="section-title">{t("offersTitle")}</h2>
-          <p className="section-subtitle">{t("offersSubtitle")}</p>
-        </div>
-
-        <div className="offers-grid">
-          {[1, 2, 3, 4, 5, 6].map((n) => {
-            const isKOC = n === 5;
-            const featureKeys =
-              n === 1 ? ["featureFullBody", "featurePremiumFilm", "featureWarranty"] :
-              n === 2 ? ["featureCustomFit", "featureFreeInspection", "featureDetailWash"] :
-              n === 3 ? ["featureFullBody", "featureCustomFit", "featurePaintCorrection"] :
-              n === 4 ? ["featureFullBody", "featureCeramicTop", "featureWarranty"] :
-              n === 5 ? ["featureFreeInspection", "featurePremiumFilm", "featureInteriorDetail"] :
-                        ["featureUVProtection", "featureHeatRejection", "featureMultiVehicle"];
-
-            return (
-              <div className="offer-card reveal" key={n}>
-                <div className="offer-card-icon">{OFFER_ICONS[n - 1]}</div>
-                <div className="offer-card-label">{t(`offer${n}Badge`)}</div>
-                <h3 className="offer-card-title">{t(`offer${n}Title`)}</h3>
-                <p className="offer-card-desc">{t(`offer${n}Desc`)}</p>
-                <div className="offer-card-price">
-                  <span className="current">{t(`offer${n}Price`)}</span>
-                </div>
-
-                {isKOC && (
-                  <div className="offer-countdown">
-                    <div className="countdown-box">
-                      <span className="num">{String(kocCountdown.days).padStart(2, "0")}</span>
-                      <span className="label">{t("kocCountdownDays")}</span>
-                    </div>
-                    <div className="countdown-box">
-                      <span className="num">{String(kocCountdown.hours).padStart(2, "0")}</span>
-                      <span className="label">{t("kocCountdownHours")}</span>
-                    </div>
-                    <div className="countdown-box">
-                      <span className="num">{String(kocCountdown.mins).padStart(2, "0")}</span>
-                      <span className="label">{t("kocCountdownMins")}</span>
-                    </div>
-                    <div className="countdown-box">
-                      <span className="num">{String(kocCountdown.secs).padStart(2, "0")}</span>
-                      <span className="label">{t("kocCountdownSecs")}</span>
-                    </div>
-                  </div>
-                )}
-
-                <ul className="offer-card-features">
-                  {featureKeys.map((fk) => (
-                    <li key={fk}>
-                      <span className="check">&#10003;</span>
-                      {t(fk)}
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="https://wa.me/96595536344"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary btn-block btn-sm"
-                >
-                  {t("claimOffer")}
-                </a>
-              </div>
-            );
-          })}
-        </div>
+      {/* ─── OUR WORK SECTION ─── */}
+      <section className="ourwork-section" id="gallery">
+        <OurWorkSlideshow lang={lang} />
       </section>
 
-      {/* ─── SERVICES SECTION ─── */}
-      <section className="section" id="services">
-        <div className="section-header reveal">
-          <div className="section-label">
-            <span className="line" />
-            {t("servicesLabel")}
-            <span className="line" />
-          </div>
-          <h2 className="section-title">{t("servicesTitle")}</h2>
-          <p className="section-subtitle">{t("servicesSubtitle")}</p>
+      {/* ─── REVIEWS SECTION ─── */}
+      <section className="section reviews-marquee-section" id="reviews">
+        {/* Google rating header */}
+        <div className="reviews-header reveal">
+          <h2 className="reviews-section-title">
+            {lang === "ar" ? <>ماذا يقول <span className="gold-text">عملاؤنا</span></> : <>What Our <span className="gold-text">Clients</span> Say</>}
+          </h2>
+          <div className="reviews-divider" />
+          <StatCards lang={lang} />
         </div>
 
-        <div className="services-grid">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => {
-            const isOpen = openServices.has(n);
-            return (
-              <div className={`service-card reveal${isOpen ? " open" : ""}`} key={n}>
-                <div className="service-card-header" onClick={() => toggleService(n)}>
-                  <div className="service-card-icon">{SERVICE_ICONS[n - 1]}</div>
-                  <div className="service-card-info">
-                    <h3>{t(`svc${n}Title`)}</h3>
-                    <p>{t(`svc${n}Desc`)}</p>
+        <div className="reviews-marquee-wrap">
+          {/* Row 1 */}
+          <div className="reviews-marquee-row reviews-marquee-row-1">
+            <div className="reviews-marquee-track">
+              {[...REVIEWS.slice(0, 6), ...REVIEWS.slice(0, 6)].map((review, i) => (
+                <div className="review-card-compact" key={i}>
+                  <div className="review-stars-compact">
+                    {Array.from({ length: 5 }, (_, j) => (
+                      <span key={j} style={{ color: j < review.stars ? "var(--gold)" : "rgba(255,255,255,0.12)" }}>&#9733;</span>
+                    ))}
                   </div>
-                  <div className="service-card-toggle">+</div>
-                </div>
-                <div className="service-card-body">
-                  <div className="service-card-content">
-                    <ul>
-                      <li><span className="bullet" />{t(`svc${n}Detail1`)}</li>
-                      <li><span className="bullet" />{t(`svc${n}Detail2`)}</li>
-                      <li><span className="bullet" />{t(`svc${n}Detail3`)}</li>
-                      <li><span className="bullet" />{t(`svc${n}Detail4`)}</li>
-                    </ul>
-                    <div className="service-price">{t(`svc${n}Price`)}</div>
+                  <p>&ldquo;{review.text}&rdquo;</p>
+                  <div className="review-author-compact">
+                    <span className="review-avatar-compact">{review.initial}</span>
+                    <span className="review-name-compact">{review.name}</span>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Wash Pricing Table */}
-        <div className="wash-pricing reveal">
-          <h3 className="section-title" style={{ fontSize: "24px", marginBottom: "24px", textAlign: "center" }}>
-            {t("washPricingTitle")}
-          </h3>
-          <table className="wash-pricing-table">
-            <thead>
-              <tr>
-                <th>{t("washType")}</th>
-                <th>{t("washSedan")}</th>
-                <th>{t("washSUV")}</th>
-                <th>{t("washTruck")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[1, 2, 3, 4, 5].map((n) => (
-                <tr key={n}>
-                  <td className="wash-type">{t(`wash${n}`)}</td>
-                  <td className="wash-price">{WASH_PRICES[n - 1].sedan}</td>
-                  <td className="wash-price">{WASH_PRICES[n - 1].suv}</td>
-                  <td className="wash-price">{WASH_PRICES[n - 1].truck}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Home Service Banner */}
-        <div className="home-service-banner reveal">
-          <div className="home-service-banner-content">
-            <h3>🏠 {t("homeServiceTitle")}</h3>
-            <p>{t("homeServiceDesc")}</p>
-          </div>
-          <a
-            href="https://wa.me/96595536344"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
-            {t("homeServiceCta")}
-          </a>
-        </div>
-      </section>
-
-      {/* ─── PACKAGES SECTION ─── */}
-      <section className="section" id="packages">
-        <div className="section-header reveal">
-          <div className="section-label">
-            <span className="line" />
-            {t("packagesLabel")}
-            <span className="line" />
-          </div>
-          <h2 className="section-title">{t("packagesTitle")}</h2>
-          <p className="section-subtitle">{t("packagesSubtitle")}</p>
-        </div>
-
-        <div className="packages-grid">
-          {/* Essential */}
-          <div className="package-card reveal">
-            <h3 className="package-card-name">{t("pkgEssentialName")}</h3>
-            <p className="package-card-tagline">{t("pkgEssentialTagline")}</p>
-            <div className="package-card-price">
-              <span className="amount">{t("pkgEssentialPrice")}</span>
-            </div>
-            <ul className="package-card-features">
-              {["F1", "F2", "F3", "F4", "F5"].map((f) => (
-                <li key={f}><span className="check-icon">&#10003;</span>{t(`pkgEssential${f}`)}</li>
-              ))}
-            </ul>
-            <a href="https://wa.me/96595536344" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-block">
-              {t("bookNow")}
-            </a>
-          </div>
-
-          {/* Silver */}
-          <div className="package-card reveal">
-            <h3 className="package-card-name">{t("pkgSilverName")}</h3>
-            <p className="package-card-tagline">{t("pkgSilverTagline")}</p>
-            <div className="package-card-price">
-              <span className="amount">{t("pkgSilverPrice")}</span>
-            </div>
-            <ul className="package-card-features">
-              {["F1", "F2", "F3", "F4", "F5", "F6"].map((f) => (
-                <li key={f}><span className="check-icon">&#10003;</span>{t(`pkgSilver${f}`)}</li>
-              ))}
-            </ul>
-            <a href="https://wa.me/96595536344" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-block">
-              {t("bookNow")}
-            </a>
-          </div>
-
-          {/* Gold */}
-          <div className="package-card featured reveal">
-            <div className="package-card-badge">{t("pkgGoldBadge")}</div>
-            <h3 className="package-card-name">{t("pkgGoldName")}</h3>
-            <p className="package-card-tagline">{t("pkgGoldTagline")}</p>
-            <div className="package-card-price">
-              <span className="amount">{t("pkgGoldPrice")}</span>
-            </div>
-            <ul className="package-card-features">
-              {["F1", "F2", "F3", "F4", "F5", "F6", "F7"].map((f) => (
-                <li key={f}><span className="check-icon">&#10003;</span>{t(`pkgGold${f}`)}</li>
-              ))}
-            </ul>
-            <a href="https://wa.me/96595536344" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-block">
-              {t("bookNow")}
-            </a>
-          </div>
-
-          {/* Diamond */}
-          <div className="package-card featured reveal">
-            <div className="package-card-badge">{t("pkgDiamondBadge")}</div>
-            <h3 className="package-card-name">{t("pkgDiamondName")}</h3>
-            <p className="package-card-tagline">{t("pkgDiamondTagline")}</p>
-            <div className="package-card-price">
-              <span className="amount">{t("pkgDiamondPrice")}</span>
-            </div>
-            <ul className="package-card-features">
-              {["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8"].map((f) => (
-                <li key={f}><span className="check-icon">&#10003;</span>{t(`pkgDiamond${f}`)}</li>
-              ))}
-            </ul>
-            <a href="https://wa.me/96595536344" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-block">
-              {t("bookNow")}
-            </a>
-          </div>
-        </div>
-
-        {/* VIP Experience */}
-        <div className="vip-experience reveal">
-          <div className="vip-badge">
-            <span>💎</span>
-            {t("vipBadge")}
-          </div>
-          <h3>{t("vipTitle")}</h3>
-          <p>{t("vipDesc")}</p>
-          <div className="vip-features">
-            {["vipF1", "vipF2", "vipF3", "vipF4", "vipF5", "vipF6"].map((k) => (
-              <span className="vip-feature" key={k}>
-                <span className="icon">&#10003;</span>
-                {t(k)}
-              </span>
-            ))}
-          </div>
-          <div className="vip-price">{t("vipPrice")}</div>
-          <a
-            href="https://wa.me/96595536344"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary btn-lg"
-          >
-            {t("vipCta")}
-          </a>
-        </div>
-      </section>
-
-      {/* ─── GALLERY SECTION ─── */}
-      <section className="section" id="gallery">
-        <div className="section-header reveal">
-          <div className="section-label">
-            <span className="line" />
-            {t("galleryLabel")}
-            <span className="line" />
-          </div>
-          <h2 className="section-title">{t("galleryTitle")}</h2>
-          <p className="section-subtitle">{t("gallerySubtitle")}</p>
-        </div>
-
-        {/* Spotlight Builds */}
-        <div className="spotlight-builds reveal">
-          <h3 style={{ fontFamily: "var(--font-display)", fontSize: "22px", fontWeight: 700, marginBottom: "20px" }}>
-            {t("spotlightTitle")}
-          </h3>
-          <div className="spotlight-grid">
-            {SPOTLIGHT_BUILDS.map((build, i) => (
-              <div className="spotlight-card" key={i}>
-                <div
-                  className="spotlight-card-img"
-                  style={{
-                    background: `linear-gradient(135deg, rgba(201,168,76,0.15) 0%, rgba(10,10,15,0.8) 100%)`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "48px",
-                  }}
-                >
-                  💎
-                </div>
-                <div className="spotlight-card-overlay">
-                  <div>
-                    <h4>{lang === "en" ? build.titleEn : build.titleAr}</h4>
-                    <p>{lang === "en" ? build.descEn : build.descAr}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Before & After */}
-        <div className="before-after reveal">
-          <h3 style={{ fontFamily: "var(--font-display)", fontSize: "22px", fontWeight: 700, marginBottom: "20px" }}>
-            {t("beforeAfterTitle")}
-          </h3>
-          <div className="before-after-grid">
-            {[1, 2].map((n) => (
-              <div className="before-after-card" key={n}>
-                <div className="side">
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "200px",
-                      background: "linear-gradient(135deg, rgba(120,80,40,0.3), rgba(10,10,15,0.8))",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "14px",
-                      color: "var(--text-muted)",
-                    }}
-                  >
-                    {t("beforeLabel")}
-                  </div>
-                  <span className="label">{t("beforeLabel")}</span>
-                </div>
-                <div className="side">
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "200px",
-                      background: "linear-gradient(135deg, rgba(201,168,76,0.2), rgba(10,10,15,0.6))",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontSize: "14px",
-                      color: "var(--text-muted)",
-                    }}
-                  >
-                    {t("afterLabel")}
-                  </div>
-                  <span className="label">{t("afterLabel")}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Filter Bar */}
-        <div className="filter-bar reveal">
-          {["all", "ppf", "ceramic", "tinting", "interior", "polish"].map((cat) => {
-            const labelKey =
-              cat === "all" ? "filterAll" :
-              cat === "ppf" ? "filterPPF" :
-              cat === "ceramic" ? "filterCeramic" :
-              cat === "tinting" ? "filterTinting" :
-              cat === "interior" ? "filterInterior" : "filterPolish";
-            return (
-              <button
-                key={cat}
-                className={`filter-btn${activeFilter === cat ? " active" : ""}`}
-                onClick={() => setActiveFilter(cat)}
-              >
-                {t(labelKey)}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Gallery Grid */}
-        <div className="gallery-grid">
-          {filteredGallery.map((item, i) => (
-            <div className="gallery-item reveal" key={`${item.category}-${i}`}>
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  background: `linear-gradient(135deg, rgba(201,168,76,${0.05 + i * 0.02}), rgba(10,10,15,0.9))`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "32px",
-                }}
-              >
-                🚗
-              </div>
-              <div className="gallery-item-overlay">
-                <span>{lang === "en" ? item.labelEn : item.labelAr}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── ABOUT SECTION ─── */}
-      <section className="section" id="about">
-        <div className="section-header reveal">
-          <div className="section-label">
-            <span className="line" />
-            {t("aboutLabel")}
-            <span className="line" />
-          </div>
-          <h2 className="section-title">{t("aboutTitle")}</h2>
-          <p className="section-subtitle">{t("aboutSubtitle")}</p>
-        </div>
-
-        <div className="about-content reveal">
-          <div className="about-text">
-            <h3>{t("aboutHeading")}</h3>
-            <p>{t("aboutP1")}</p>
-            <p>{t("aboutP2")}</p>
-          </div>
-          <div
-            style={{
-              background: "linear-gradient(135deg, rgba(201,168,76,0.1), rgba(10,10,15,0.6))",
-              borderRadius: "var(--radius-lg)",
-              border: "1px solid var(--glass-border)",
-              height: "400px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "64px",
-            }}
-          >
-            💎
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className="stats-grid reveal">
-          {[1, 2, 3, 4].map((n) => (
-            <div className="stat-card" key={n}>
-              <div className="stat-number">{t(`stat${n}Num`)}</div>
-              <div className="stat-label">{t(`stat${n}Label`)}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Partners Carousel */}
-        <div className="partners-section reveal">
-          <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 700, marginBottom: "24px", textAlign: "center", color: "var(--text-dim)" }}>
-            {lang === "en" ? "Trusted by Leading Brands" : "موثوق من العلامات التجارية الرائدة"}
-          </h3>
-          <div style={{ overflow: "hidden" }}>
-            <div className="partners-track">
-              {["XPEL", "SunTek", "3M", "Gtechniq", "Gyeon", "Koch Chemie", "Meguiar's", "XPEL", "SunTek", "3M", "Gtechniq", "Gyeon", "Koch Chemie", "Meguiar's"].map((brand, i) => (
-                <span
-                  key={i}
-                  className="partner-logo"
-                  style={{
-                    height: "auto",
-                    fontFamily: "var(--font-display)",
-                    fontSize: "18px",
-                    fontWeight: 700,
-                    letterSpacing: "2px",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {brand}
-                </span>
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Reviews */}
-        <div className="reviews-section reveal">
-          <h3 style={{ fontFamily: "var(--font-display)", fontSize: "24px", fontWeight: 700, marginBottom: "24px", textAlign: "center" }}>
-            {t("reviewsTitle")}
-          </h3>
-          <div className="reviews-grid">
-            {REVIEWS.map((review, i) => (
-              <div className="review-card" key={i}>
-                <div className="review-stars">
-                  {Array.from({ length: 5 }, (_, j) => (
-                    <span key={j} className="star" style={{ color: j < review.stars ? "var(--gold)" : "rgba(255,255,255,0.15)" }}>
-                      &#9733;
-                    </span>
-                  ))}
-                </div>
-                <p className="review-text">
-                  &ldquo;{lang === "en" ? review.textEn : review.textAr}&rdquo;
-                </p>
-                <div className="review-author">
-                  <div className="review-avatar">{review.initial}</div>
-                  <div className="review-author-info">
-                    <div className="name">{lang === "en" ? review.nameEn : review.nameAr}</div>
-                    <div className="date">{lang === "en" ? review.dateEn : review.dateAr}</div>
+          {/* Row 2 */}
+          <div className="reviews-marquee-row reviews-marquee-row-2">
+            <div className="reviews-marquee-track">
+              {[...REVIEWS.slice(6), ...REVIEWS.slice(6)].map((review, i) => (
+                <div className="review-card-compact" key={i}>
+                  <div className="review-stars-compact">
+                    {Array.from({ length: 5 }, (_, j) => (
+                      <span key={j} style={{ color: j < review.stars ? "var(--gold)" : "rgba(255,255,255,0.12)" }}>&#9733;</span>
+                    ))}
+                  </div>
+                  <p>&ldquo;{review.text}&rdquo;</p>
+                  <div className="review-author-compact">
+                    <span className="review-avatar-compact">{review.initial}</span>
+                    <span className="review-name-compact">{review.name}</span>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-
-        {/* Feedback Form */}
-        <div className="feedback-section reveal">
-          <h3>{t("feedbackTitle")}</h3>
-          <p>{t("feedbackDesc")}</p>
-
-          {/* Star Rating Picker */}
-          <div className="star-rating-picker">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <button
-                key={star}
-                className={`star-btn${star <= (hoverRating || starRating) ? " active" : ""}`}
-                onClick={() => setStarRating(star)}
-                onMouseEnter={() => setHoverRating(star)}
-                onMouseLeave={() => setHoverRating(0)}
-                type="button"
-              >
-                &#9733;
-              </button>
-            ))}
-          </div>
-
-          <form
-            action="https://formsubmit.co/info@diamond-pkw.com"
-            method="POST"
-          >
-            <input type="hidden" name="_subject" value="New Feedback — Diamond PKW" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="rating" value={starRating} />
-            <div className="form-group">
-              <label>{t("feedbackName")}</label>
-              <input type="text" name="name" required placeholder={t("feedbackName")} />
-            </div>
-            <div className="form-group">
-              <label>{t("feedbackEmail")}</label>
-              <input type="email" name="email" required placeholder={t("feedbackEmail")} />
-            </div>
-            <div className="form-group">
-              <label>{t("feedbackMessage")}</label>
-              <textarea name="message" required placeholder={t("feedbackMessage")} />
-            </div>
-            <button type="submit" className="btn btn-primary btn-block">
-              {t("submitFeedback")}
-            </button>
-          </form>
         </div>
       </section>
 
@@ -2003,43 +1459,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── FAQ SECTION ─── */}
-      <section className="section" id="faq">
-        <div className="section-header reveal">
-          <div className="section-label">
-            <span className="line" />
-            {t("faqLabel")}
-            <span className="line" />
-          </div>
-          <h2 className="section-title">{t("faqTitle")}</h2>
-          <p className="section-subtitle">{t("faqSubtitle")}</p>
-        </div>
-
-        <div className="faq-list">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => {
-            const isOpen = openFaqs.has(n);
-            return (
-              <div className={`faq-item reveal${isOpen ? " open" : ""}`} key={n}>
-                <div className="faq-question" onClick={() => toggleFaq(n)}>
-                  <h4>{t(`faq${n}Q`)}</h4>
-                  <span className="faq-toggle">+</span>
-                </div>
-                <div className="faq-answer">
-                  <div className="faq-answer-content">
-                    {t(`faq${n}A`)}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
 
       {/* ─── FOOTER ─── */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-brand">
-            <img src={LOGO_SRC} alt="Diamond PKW" className="footer-logo" />
+            <img src="/diamond_logo_transparent.png" alt="Diamond PKW" className="footer-logo" />
             <p>{t("footerDesc")}</p>
             <div className="footer-socials">
               <a href="https://wa.me/96595536344" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
@@ -2061,9 +1486,9 @@ export default function Home() {
             <h4>{t("footerQuickLinks")}</h4>
             <ul>
               <li><a href="#hero">{t("navHome")}</a></li>
-              <li><a href="#services">{t("navServices")}</a></li>
-              <li><a href="#packages">{t("navPackages")}</a></li>
-              <li><a href="#offers">{t("navOffers")}</a></li>
+              <li><a href="/services">{t("navServices")}</a></li>
+              <li><a href="/packages">{t("navPackages")}</a></li>
+              <li><a href="/deals">{t("navOffers")}</a></li>
               <li><a href="#gallery">{t("navGallery")}</a></li>
             </ul>
           </div>
@@ -2071,11 +1496,11 @@ export default function Home() {
           <div className="footer-column">
             <h4>{t("footerServices")}</h4>
             <ul>
-              <li><a href="#services">{t("svc1Title")}</a></li>
-              <li><a href="#services">{t("svc2Title")}</a></li>
-              <li><a href="#services">{t("svc3Title")}</a></li>
-              <li><a href="#services">{t("svc4Title")}</a></li>
-              <li><a href="#services">{t("svc5Title")}</a></li>
+              <li><a href="/services">{t("svc1Title")}</a></li>
+              <li><a href="/services">{t("svc2Title")}</a></li>
+              <li><a href="/services">{t("svc3Title")}</a></li>
+              <li><a href="/services">{t("svc4Title")}</a></li>
+              <li><a href="/services">{t("svc5Title")}</a></li>
             </ul>
           </div>
 
