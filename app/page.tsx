@@ -1531,7 +1531,7 @@ export default function Home() {
         {/* Background video */}
         <video
           className="hero-bg-video"
-          src="/0410(1).MP4"
+          src="/hero-bg.mp4"
           autoPlay
           loop
           muted
