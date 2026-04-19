@@ -1531,12 +1531,14 @@ export default function Home() {
         {/* Background video */}
         <video
           className="hero-bg-video"
-          src="/hero-bg.mp4"
           autoPlay
           loop
           muted
           playsInline
-        />
+          preload="auto"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
         <div className="hero-video-overlay" />
 
         {/* Layered atmospheric backgrounds */}
