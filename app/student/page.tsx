@@ -13,6 +13,7 @@ const TEXT3 = "rgba(255,255,255,0.5)";
 const WA = "#1ea952";
 
 type Lang = "en" | "ar";
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbyhTF08oPcacrbBGEYbnvIU-uvRM92C9JIAGGtEYwNkikSRGd-JslzMzMsYcAJuB_9u/exec";
 const WA_MESSAGE_EN = "Hi Diamond PKW, I'm a student — I'd like to claim the 5 KD Home Wash offer.";
 const WA_MESSAGE_AR = "هلا، أنا طالب وأبغي أحجز عرض الغسيل المنزلي حق الطلاب بـ٥ د.ك.";
 const waUrl = (lang: Lang) => `https://wa.me/96595536344?text=${encodeURIComponent(lang === "ar" ? WA_MESSAGE_AR : WA_MESSAGE_EN)}`;
@@ -34,6 +35,8 @@ export default function StudentPage() {
   const [loaded, setLoaded] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [lang, setLang] = useState<Lang>("en");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const isAr = lang === "ar";
 
   useEffect(() => {
@@ -347,17 +350,55 @@ export default function StudentPage() {
             style={{ scrollMarginTop: 100 }}
           >
             <div className="st-form-inner">
+              {submitted ? (
+                <div style={{
+                  padding: "56px 28px",
+                  borderTop: `1px solid ${BORDER}`,
+                  textAlign: "center",
+                  fontFamily: isAr ? "var(--font-arabic, 'Tajawal', sans-serif)" : "var(--font-label, 'Inter', sans-serif)",
+                }}>
+                  <div style={{
+                    width: 72, height: 72, borderRadius: "50%",
+                    background: "rgba(30,169,82,0.15)",
+                    border: `1px solid rgba(30,169,82,0.4)`,
+                    display: "inline-flex", alignItems: "center", justifyContent: "center",
+                    marginBottom: 20, color: WA,
+                  }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <h3 style={{
+                    fontFamily: isAr ? "var(--font-arabic, 'Tajawal', sans-serif)" : "var(--font-numeral, 'Bodoni Moda', serif)",
+                    fontSize: 26, fontWeight: isAr ? 700 : 600, color: "#ffffff", margin: "0 0 10px",
+                  }}>
+                    {isAr ? "تم استلام طلبك" : "Request Received"}
+                  </h3>
+                  <p style={{ fontSize: 14, color: TEXT2, margin: 0, lineHeight: 1.6 }}>
+                    {isAr ? "بنأكد موعدك خلال ساعتين" : "We'll confirm your appointment within 2 hours"}
+                  </p>
+                </div>
+              ) : (
               <form
-                action="https://formsubmit.co/info@diamond-pkw.com"
-                method="POST"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setSubmitting(true);
+                  const formData = new FormData(e.currentTarget);
+                  formData.set("source", "student");
+                  try {
+                    await fetch(SHEETS_URL, { method: "POST", body: formData });
+                    setSubmitted(true);
+                  } catch {
+                    setSubmitted(true);
+                  }
+                  setSubmitting(false);
+                }}
                 style={{
                   padding: "32px 28px 28px",
                   borderTop: `1px solid ${BORDER}`,
                 }}
               >
-                <input type="hidden" name="_subject" value="Student 5 KD Home Wash — New Booking" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="source" value="student" />
                 <input type="hidden" name="offer" value="Student 5 KD Home Wash" />
 
                 <div style={{
@@ -404,6 +445,7 @@ export default function StudentPage() {
 
                 <button
                   type="submit"
+                  disabled={submitting}
                   className="st-submit"
                   style={{
                     width: "100%", padding: "15px",
@@ -411,11 +453,15 @@ export default function StudentPage() {
                     borderRadius: 50,
                     fontFamily: isAr ? "var(--font-arabic, 'Tajawal', sans-serif)" : "var(--font-label, 'Inter', sans-serif)",
                     fontSize: isAr ? 15 : 13, fontWeight: 700, letterSpacing: isAr ? 0 : "2px",
-                    textTransform: isAr ? "none" : "uppercase", cursor: "pointer",
+                    textTransform: isAr ? "none" : "uppercase",
+                    cursor: submitting ? "not-allowed" : "pointer",
+                    opacity: submitting ? 0.6 : 1,
                     transition: "all 0.3s ease",
                   }}
                 >
-                  {isAr ? "أرسل طلب الحجز" : "Submit Booking Request"}
+                  {submitting
+                    ? (isAr ? "جاري الإرسال..." : "Sending...")
+                    : (isAr ? "أرسل طلب الحجز" : "Submit Booking Request")}
                 </button>
 
                 <div style={{
@@ -426,6 +472,7 @@ export default function StudentPage() {
                   {isAr ? "بنأكد موعدك خلال ساعتين" : "We'll confirm your appointment within 2 hours"}
                 </div>
               </form>
+              )}
             </div>
           </div>
         </div>

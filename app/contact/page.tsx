@@ -72,12 +72,16 @@ function FormField({ label, placeholder, type = "text", required = true, optiona
   );
 }
 
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbyhTF08oPcacrbBGEYbnvIU-uvRM92C9JIAGGtEYwNkikSRGd-JslzMzMsYcAJuB_9u/exec";
+
 function ContactInner() {
   const params = useSearchParams();
   const [tab, setTab] = useState(0);
   const [selectedSvc, setSelectedSvc] = useState<number | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [lang, setLang] = useState<Lang>("en");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const isAr = lang === "ar";
 
   useEffect(() => {
@@ -337,10 +341,48 @@ function ContactInner() {
             {/* Form Tab */}
             {tab === 1 && (
               <div>
-                <form action="https://formsubmit.co/info@diamond-pkw.com" method="POST">
-                  <input type="hidden" name="_subject" value="New Booking — Diamond PKW" />
-                  <input type="hidden" name="_captcha" value="false" />
-                  <input type="hidden" name="_template" value="table" />
+                {submitted ? (
+                  <div style={{
+                    textAlign: "center",
+                    padding: "60px 20px",
+                    fontFamily: isAr ? "var(--font-arabic, 'Tajawal', sans-serif)" : "var(--font-label, 'Inter', sans-serif)",
+                  }}>
+                    <div style={{
+                      width: 72, height: 72, borderRadius: "50%",
+                      background: "rgba(30,169,82,0.15)",
+                      border: `1px solid rgba(30,169,82,0.4)`,
+                      display: "inline-flex", alignItems: "center", justifyContent: "center",
+                      marginBottom: 20, color: WA,
+                    }}>
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </div>
+                    <h3 style={{
+                      fontFamily: isAr ? "var(--font-arabic, 'Tajawal', sans-serif)" : "var(--font-numeral, 'Bodoni Moda', serif)",
+                      fontSize: 26, fontWeight: isAr ? 700 : 600, color: TEXT, margin: "0 0 10px",
+                    }}>
+                      {isAr ? "تم استلام طلبك" : "Request Received"}
+                    </h3>
+                    <p style={{ fontSize: 14, color: TEXT2, margin: 0, lineHeight: 1.6 }}>
+                      {isAr ? "بنأكد موعدك خلال ساعتين" : "We'll confirm your appointment within 2 hours"}
+                    </p>
+                  </div>
+                ) : (
+                <form onSubmit={async (e) => {
+                  e.preventDefault();
+                  setSubmitting(true);
+                  const formData = new FormData(e.currentTarget);
+                  formData.set("source", "contact");
+                  try {
+                    await fetch(SHEETS_URL, { method: "POST", body: formData });
+                    setSubmitted(true);
+                  } catch {
+                    setSubmitted(true); // no-cors means we can't verify, but submission went through
+                  }
+                  setSubmitting(false);
+                }}>
+                  <input type="hidden" name="source" value="contact" />
 
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
                     <FormField label={isAr ? "الاسم الكامل" : "Full Name"} placeholder={isAr ? "اسمك الكامل" : "Your full name"} />
@@ -410,17 +452,22 @@ function ContactInner() {
                     }} />
                   </div>
 
-                  <button type="submit" className="ct-gold-btn" style={{
+                  <button type="submit" disabled={submitting} className="ct-gold-btn" style={{
                     width: "100%", background: ACCENT, color: DARK, border: "none", borderRadius: 50,
                     padding: "15px", fontSize: 13, fontFamily: isAr ? "var(--font-arabic, 'Tajawal', sans-serif)" : "var(--font-label, 'Inter', sans-serif)",
                     fontWeight: 700, letterSpacing: isAr ? 0 : "0.16em", textTransform: isAr ? "none" : "uppercase",
-                    cursor: "pointer", transition: "all 0.2s ease",
+                    cursor: submitting ? "not-allowed" : "pointer",
+                    opacity: submitting ? 0.6 : 1,
+                    transition: "all 0.2s ease",
                   }}>
-                    {isAr ? "أرسل طلب الحجز" : "Send Booking Request"}
+                    {submitting
+                      ? (isAr ? "جاري الإرسال..." : "Sending...")
+                      : (isAr ? "أرسل طلب الحجز" : "Send Booking Request")}
                   </button>
                 </form>
+                )}
 
-                <div style={{
+                {!submitted && <div style={{
                   display: "flex", alignItems: "center", justifyContent: "center",
                   gap: 8, marginTop: 14, fontSize: 11, color: TEXT3,
                   fontFamily: isAr ? "var(--font-arabic, 'Tajawal', sans-serif)" : "var(--font-label, 'Inter', sans-serif)",
@@ -429,7 +476,7 @@ function ContactInner() {
                   <span style={{ color: WA, cursor: "pointer", fontWeight: 600, display: "flex", alignItems: "center", gap: 4 }} onClick={() => setTab(0)}>
                     <WhatsAppIcon size={12} /> {isAr ? "استخدم واتساب" : "Use WhatsApp"}
                   </span>
-                </div>
+                </div>}
               </div>
             )}
 

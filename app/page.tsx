@@ -1668,12 +1668,16 @@ export default function Home() {
 
         <div className="spotlight-grid reveal">
           {[
-            { key: "ferrari", name: "Ferrari 488" },
-            { key: "goldwing", name: "Honda Goldwing" },
-            { key: "denza", name: "BYD Denza 5" },
+            { key: "ferrari", name: "Ferrari 488", img: "/ferarri.jpg" },
+            { key: "goldwing", name: "Honda Goldwing", img: "/honda.jpg" },
+            { key: "denza", name: "BYD Denza 5", img: "/byd.jpg" },
           ].map((car) => (
             <div className="spotlight-card" key={car.key}>
-              <div className="spotlight-card-image" aria-label={car.name} />
+              <div className="spotlight-card-image" aria-label={car.name} style={{
+                backgroundImage: `url(${car.img})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }} />
               <div className="spotlight-card-body">
                 <h3 className="spotlight-card-title">{car.name}</h3>
               </div>

@@ -2397,7 +2397,9 @@ body.ar-active .svc-mini {
 .spotlight-card-image {
   aspect-ratio: 4 / 3;
   width: 100%;
-  background: linear-gradient(135deg, #6e7680 0%, #a8b0b8 45%, #c8ced6 70%, #a8b0b8 100%);
+  background: #0a0a0f linear-gradient(135deg, #6e7680 0%, #a8b0b8 45%, #c8ced6 70%, #a8b0b8 100%);
+  background-size: cover;
+  background-position: center;
   position: relative;
 }
 
