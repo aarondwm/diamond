@@ -16,10 +16,10 @@ const T: Record<Lang, Record<string, string>> = {
     // Nav
     navHome: "Home",
     navServices: "Services",
-    navPackages: "Packages",
+    navPackages: "Pricing",
     navOffers: "Offers",
     navGallery: "Gallery",
-    navAbout: "About",
+    navAbout: "Reviews",
     navContact: "Contact",
     navFaq: "FAQ",
     langLabel: "العربية",
@@ -120,10 +120,9 @@ const T: Record<Lang, Record<string, string>> = {
     submitFeedback: "Submit Feedback",
 
     // Services Section
-    servicesLabel: "Our Services",
-    servicesTitle: "Premium Detailing Services",
-    servicesSubtitle:
-      "From paint protection to interior restoration, we offer a comprehensive range of premium car care services.",
+    servicesLabel: "Services",
+    servicesTitle: "What We Do",
+    servicesSubtitle: "We don't cut corners, we protect them.",
 
     // Service items
     svc1Title: "Paint Protection Film (PPF)",
@@ -413,10 +412,10 @@ const T: Record<Lang, Record<string, string>> = {
     // Nav
     navHome: "الرئيسية",
     navServices: "الخدمات",
-    navPackages: "الباقات",
+    navPackages: "الأسعار",
     navOffers: "العروض",
     navGallery: "المعرض",
-    navAbout: "من نحن",
+    navAbout: "التقييمات",
     navContact: "اتصل بنا",
     navFaq: "الأسئلة",
     langLabel: "English",
@@ -518,9 +517,8 @@ const T: Record<Lang, Record<string, string>> = {
 
     // Services Section
     servicesLabel: "خدماتنا",
-    servicesTitle: "خدمات التفصيل المتميزة",
-    servicesSubtitle:
-      "من حماية الطلاء إلى ترميم الداخلية، نقدم مجموعة شاملة من خدمات العناية المتميزة بالسيارات.",
+    servicesTitle: "ما نقوم به",
+    servicesSubtitle: "ما نقصّر، نحمي سيارتك",
 
     // Service items
     svc1Title: "فيلم حماية الطلاء (PPF)",
@@ -814,31 +812,135 @@ const T: Record<Lang, Record<string, string>> = {
 
 const REVIEWS = [
   { name: "Bashar Alsarraf", text: "Very professional work. They used top grade materials and truly restored the car to its original state. Good value for the money.", stars: 5, initial: "B" },
-  { name: "Ahmed Alatheri", text: "This is one of the best places in Kuwait for detailing and polishing your car or motorcycle. They offer vehicle protection film and window tinting as well.", stars: 5, initial: "A" },
+  { name: "أحمد الأثري", text: "من أفضل الأماكن في الكويت لتفصيل وتلميع سيارتك أو دراجتك. عندهم فيلم حماية وتظليل نوافذ بجودة ممتازة.", stars: 5, initial: "أ" },
   { name: "Khaled Alkhawari", text: "One of the best companies in Kuwait offering protection, window tinting, and heat insulation services for cars.", stars: 5, initial: "K" },
-  { name: "MESHAL ALNEJADI", text: "One of the best protection shops I have dealt with. I had a car that I was selling and took it to them to wash and polish it. After they finished it, it was easier to sell because they returned it to me as new.", stars: 5, initial: "M" },
+  { name: "مشعل النجادي", text: "من أفضل محلات الحماية اللي تعاملت معاهم. كانت عندي سيارة بايعها وديتها لهم يغسلونها ويلمعونها، رجعوها لي كأنها جديدة وباعتها بسرعة.", stars: 5, initial: "م" },
   { name: "Mohammed Almoumen", text: "Neat work, excellent customer service, and reasonable prices. May God grant them success.", stars: 5, initial: "M" },
-  { name: "A.Qambar", text: "The most elegant way to pamper your car. They are professional at what they do.", stars: 5, initial: "A" },
+  { name: "عبدالله قنبر", text: "أرقى طريقة تدلل فيها سيارتك. محترفين في شغلهم وخدمتهم فوق الممتاز.", stars: 5, initial: "ع" },
   { name: "Ali Al", text: "The staff is attentive to details and is honest. The owner of the shop is a special person.", stars: 5, initial: "A" },
-  { name: "Moh ALQaed", text: "The best types of protection and shading, very nice treatment and excellent manner of dealing by management and technicians, prices are reasonable for the market.", stars: 5, initial: "M" },
+  { name: "محمد القاعد", text: "أفضل أنواع الحماية والتظليل، معاملة راقية وتعامل ممتاز من الإدارة والفنيين، والأسعار مناسبة.", stars: 5, initial: "م" },
   { name: "Ali Ghuloum", text: "Best gift to have for your ride — the strongest protection ever.", stars: 5, initial: "A" },
-  { name: "Mohammed Ali", text: "Excellent materials with quick work and excellent finishing, thanks.", stars: 5, initial: "M" },
+  { name: "محمد علي", text: "مواد ممتازة، شغل سريع، وتشطيب دقيق. شكراً لكم.", stars: 5, initial: "م" },
   { name: "Husain Alsarraf", text: "I tried their cleaning service; it was excellent, and they use high-quality materials I haven't seen at any other company.", stars: 5, initial: "H" },
-  { name: "Refaat Dahey", text: "One of the best car service centers in the field of heat-resistant window tinting and protection of all kinds, and even better is their excellent reception.", stars: 5, initial: "R" },
+  { name: "رفعت ضاحي", text: "من أفضل مراكز خدمة السيارات في مجال التظليل الحراري وحماية السيارات بكل أنواعها، واستقبالهم يفوق التوقعات.", stars: 5, initial: "ر" },
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
    OUR WORK SLIDESHOW
    ═══════════════════════════════════════════════════════════════════════════ */
-const OW_SLIDES: Array<{ image?: string; gradient?: string; label: string }> = [
-  { image: "/Gemini_Generated_Image_x11nwpx11nwpx11n.png", label: "Diamond PKW — Premium Detailing" },
-  { image: "/Gemini_Generated_Image_q3dp3dq3dp3dq3dp.png", label: "Diamond PKW — Paint Protection" },
-  { gradient: "linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%)", label: "Rolls Royce Cullinan — Full PPF" },
-  { gradient: "linear-gradient(135deg, #2d1b30 0%, #1a1a2e 40%, #0d1117 100%)", label: "Ferrari 488 GTB — Ceramic Coating" },
-  { gradient: "linear-gradient(135deg, #1b2838 0%, #171a21 40%, #1e2328 100%)", label: "Mercedes AMG GT — Window Tint" },
-  { gradient: "linear-gradient(135deg, #1c1c1c 0%, #2a2a2a 40%, #111 100%)", label: "Porsche 911 Turbo S — Full Detail" },
-];
 const OW_DURATION = 4000;
+
+const SERVICE_MINI_CARDS = [
+  { key: "ppf", label: "PPF", labelAr: "فيلم حماية الطلاء", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" },
+  { key: "tinting", label: "Tinting", labelAr: "تظليل النوافذ", icon: "M2 3h20v14H2zM8 21h8M12 17v4" },
+  { key: "polish", label: "Polish", labelAr: "تلميع وتصحيح الطلاء", icon: "M12 3v1m0 16v1m-7.07-2.93l.7-.7m12.73-12.73l.7-.7M3 12h1m16 0h1M5.64 5.64l.7.7m12.02 12.02l.7.7" },
+  { key: "full-wash", label: "Full Wash", labelAr: "غسيل كلة", icon: "M4 10h16c1 0 2 1 2 2v2c0 4-4 8-10 8S2 18 2 14v-2c0-1 1-2 2-2zM12 2v4M8 4l1 2M16 4l-1 2" },
+  { key: "home-service", label: "Home Service", labelAr: "خدمات منازل", icon: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10" },
+];
+
+/* Most Booked cards (right panel of the Our Work / Most Booked section) */
+type BookingCard = {
+  key: string;
+  badge?: string;
+  badgeAr?: string;
+  title: string;
+  titleAr?: string;
+  subtitle?: string;
+  subtitleAr?: string;
+  features: string[];
+  featuresAr?: string[];
+  price: string;
+  priceAr?: string;
+  hasCountdown?: boolean;
+};
+const MOST_BOOKED_CARDS: BookingCard[] = [
+  {
+    key: "vip-wash",
+    badge: "1 WASH",
+    badgeAr: "غسلة وحدة",
+    title: "VIP Wash Experience",
+    titleAr: "غسلة VIP",
+    features: [
+      "Exterior wash",
+      "Full interior clean",
+      "AC vent cleaning",
+      "Light scratch removal",
+      "Exterior wax polish",
+    ],
+    featuresAr: [
+      "غسيل خارجي",
+      "تنظيف داخلي كامل",
+      "تنظيف فتحات التكييف",
+      "إزالة خدوش خفيفة",
+      "تلميع الشمع الخارجي",
+    ],
+    price: "15 KD",
+    priceAr: "١٥ د.ك",
+  },
+  {
+    key: "gold",
+    badge: "Membership",
+    badgeAr: "عضوية",
+    title: "Gold",
+    titleAr: "الذهبية",
+    subtitle: "8 washes per month",
+    subtitleAr: "٨ غسلات بالشهر",
+    features: [
+      "Priority booking",
+      "Interior & exterior clean",
+      "Unlimited reschedules",
+    ],
+    featuresAr: [
+      "أولوية بالحجز",
+      "تنظيف داخلي وخارجي",
+      "تغيير المواعيد بدون حدود",
+    ],
+    price: "30 KD",
+    priceAr: "٣٠ د.ك",
+  },
+  {
+    key: "denza-byd",
+    badge: "Club",
+    badgeAr: "نادي",
+    title: "Denza & BYD Club",
+    titleAr: "نادي دينزا و BYD",
+    features: [
+      "Complete PPF & nano ceramic coverage",
+      "Offer extends to family members",
+      "Full body paint protection included",
+    ],
+    featuresAr: [
+      "تغطية كاملة PPF وطلاء نانو سيراميك",
+      "العرض يشمل أفراد العائلة",
+      "حماية كاملة لطلاء الجسم",
+    ],
+    price: "500 KD",
+    priceAr: "٥٠٠ د.ك",
+  },
+  {
+    key: "koc",
+    badge: "KOC Staff — Limited Time",
+    badgeAr: "موظفي KOC — لفترة محدودة",
+    title: "KOC Staff",
+    titleAr: "موظفي KOC",
+    features: [
+      "Professional window tinting for 3 vehicles",
+      "Nano Guard Certified",
+      "Exclusive rate",
+    ],
+    featuresAr: [
+      "تظليل نوافذ احترافي لـ ٣ سيارات",
+      "معتمد من نانو جارد",
+      "سعر حصري",
+    ],
+    price: "Limited Time",
+    priceAr: "عرض محدود",
+    hasCountdown: true,
+  },
+];
+const BOOKING_CARD_DURATION = 8000;
+// KOC countdown ends 2026-05-11 00:00:00 local time.
+const KOC_DEADLINE = new Date(2026, 4, 11, 0, 0, 0).getTime();
 
 /* ═══════════════════════════════════════════════════════════════════════════
    ANIMATED COUNTER HOOK + STAT CARDS
@@ -886,16 +988,16 @@ function StatCards({ lang }: { lang: Lang }) {
       {/* Google Rating */}
       <div className={`sc-card${visible ? " sc-visible" : ""}`} style={{ animationDelay: "0s" }}>
         <div className="sc-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#a8b0b8"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#8a929a"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#c8ced6"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#6e7680"/></svg>
         </div>
-        <div className="sc-num">{ratingDisplay}</div>
+        <div className="sc-num">{isAr ? "٤٫٩" : ratingDisplay}</div>
         <div className="sc-stars">
           {Array.from({ length: 5 }, (_, i) => (
-            <span key={i} style={{ color: "var(--gold)", fontSize: "14px" }}>&#9733;</span>
+            <span key={i} style={{ color: "#c9a84c", fontSize: "14px" }}>&#9733;</span>
           ))}
         </div>
         <div className="sc-divider" />
-        <div className="sc-label">{isAr ? "تقييم Google" : "Google Rating"}</div>
+        <div className="sc-label">{isAr ? "تقييم جوجل" : "Google Rating"}</div>
       </div>
 
       {/* Happy Clients */}
@@ -903,10 +1005,10 @@ function StatCards({ lang }: { lang: Lang }) {
         <div className="sc-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
-        <div className="sc-num sc-num-gold">{clientsDisplay}<span className="sc-plus">+</span></div>
-        <div className="sc-sub">{isAr ? "عملاء سعداء" : "satisfied drivers"}</div>
+        <div className="sc-num sc-num-gold">{isAr ? "١٩٤" : clientsDisplay}<span className="sc-plus">+</span></div>
+        <div className="sc-stars sc-stars-placeholder" aria-hidden="true" />
         <div className="sc-divider" />
-        <div className="sc-label">{isAr ? "عملاء سعداء" : "Happy Clients"}</div>
+        <div className="sc-label">{isAr ? "عملاء سعداء" : "Satisfied Drivers"}</div>
       </div>
 
       {/* Years */}
@@ -914,8 +1016,8 @@ function StatCards({ lang }: { lang: Lang }) {
         <div className="sc-icon">
           <svg width="24" height="24" viewBox="0 0 40 40" fill="none"><path d="M20 2L38 16L20 38L2 16L20 2Z" stroke="var(--gold)" strokeWidth="2" fill="none"/><path d="M8 16H32M20 2L14 16L20 38L26 16L20 2Z" stroke="var(--gold)" strokeWidth="1.5" fill="none" opacity="0.4"/></svg>
         </div>
-        <div className="sc-num">{yearsDisplay}<span className="sc-plus">+</span></div>
-        <div className="sc-sub">{isAr ? "سنوات من الإتقان" : "years of craft"}</div>
+        <div className="sc-num">{isAr ? "٥" : yearsDisplay}<span className="sc-plus">+</span></div>
+        <div className="sc-stars sc-stars-placeholder" aria-hidden="true" />
         <div className="sc-divider" />
         <div className="sc-label">{isAr ? "سنوات التميز" : "Years of Excellence"}</div>
       </div>
@@ -923,84 +1025,396 @@ function StatCards({ lang }: { lang: Lang }) {
   );
 }
 
-function OurWorkSlideshow({ lang }: { lang: Lang }) {
+function KocCountdown({ isAr }: { isAr?: boolean }) {
+  // Render zeros initially so SSR + first client render match. Tick on mount.
+  const [cd, setCd] = useState({ d: 0, h: 0, m: 0, s: 0 });
+  useEffect(() => {
+    const tick = () => {
+      const diff = Math.max(0, KOC_DEADLINE - Date.now());
+      setCd({
+        d: Math.floor(diff / 864e5),
+        h: Math.floor((diff / 36e5) % 24),
+        m: Math.floor((diff / 6e4) % 60),
+        s: Math.floor((diff / 1e3) % 60),
+      });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  const pad = (n: number) => {
+    const s = String(n).padStart(2, "0");
+    if (!isAr) return s;
+    const arDigits = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
+    return s.split("").map(ch => /[0-9]/.test(ch) ? arDigits[parseInt(ch, 10)] : ch).join("");
+  };
+  const labels = isAr
+    ? [[cd.d, "أيام"], [cd.h, "ساعات"], [cd.m, "دقائق"], [cd.s, "ثوانٍ"]] as const
+    : [[cd.d, "DAYS"], [cd.h, "HRS"], [cd.m, "MIN"], [cd.s, "SEC"]] as const;
+  return (
+    <div className="bk-countdown">
+      {labels.map(([v, l]) => (
+        <div key={l as string} className="bk-cd-cell">
+          <span className="bk-cd-num">{pad(v as number)}</span>
+          <span className="bk-cd-lbl">{l}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function BookingCardSlide({ card, visible, isAr }: { card: BookingCard; visible: boolean; isAr?: boolean }) {
+  const badge = isAr && card.badgeAr ? card.badgeAr : card.badge;
+  const title = isAr && card.titleAr ? card.titleAr : card.title;
+  const subtitle = isAr && card.subtitleAr ? card.subtitleAr : card.subtitle;
+  const features = isAr && card.featuresAr ? card.featuresAr : card.features;
+  const price = isAr && card.priceAr ? card.priceAr : card.price;
+  return (
+    <div className="bk-slide" style={{ opacity: visible ? 1 : 0 }}>
+      <div className={`bk-card${isAr ? " bk-card-ar" : ""}`}>
+        {badge && <div className="bk-badge">{badge}</div>}
+        <h3 className="bk-title">{title}</h3>
+        {subtitle && <div className="bk-subtitle">{subtitle}</div>}
+        <ul className="bk-features">
+          {features.map((f, i) => (
+            <li key={i}><span className="bk-check">✓</span>{f}</li>
+          ))}
+        </ul>
+        {card.hasCountdown && <KocCountdown isAr={isAr} />}
+        <div className="bk-footer">
+          <div className="bk-price">{price}</div>
+          <a href={`/contact?service=${encodeURIComponent(card.key)}`} className="bk-book">
+            {isAr ? "احجز الآن" : "BOOK NOW"}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+type SlideItem = { image?: string; gradient?: string; label: string };
+
+function OurWorkPanel({ slides, cards, serviceCards, side, lang, eyebrow, title, subtitle, ctaText, ctaLink, cta2Text, cta2Link }: {
+  slides?: SlideItem[];
+  cards?: BookingCard[];
+  serviceCards?: boolean;
+  side: "left" | "right"; lang: Lang; eyebrow?: string; title: React.ReactNode; subtitle: string; ctaText?: string; ctaLink?: string; cta2Text?: string; cta2Link?: string;
+}) {
+  const usingCards = !!cards;
+  const usingServices = !!serviceCards;
+  const total = usingCards ? cards!.length : usingServices ? 0 : slides!.length;
+  const tickMs = usingCards ? BOOKING_CARD_DURATION : OW_DURATION;
   const [current, setCurrent] = useState(0);
   const [fade, setFade] = useState(true);
+  const isRight = side === "right";
+
+  useEffect(() => {
+    if (usingServices || total === 0) return;
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => { setCurrent(p => (p + 1) % total); setFade(true); }, 600);
+    }, tickMs);
+    return () => clearInterval(interval);
+  }, [total, tickMs]);
+
+  return (
+    <div className={`ow-panel${isRight ? " ow-panel-mirrored" : ""}`}>
+      {/* Media side */}
+      <div className={`ow-panel-slides${usingServices ? " ow-panel-services" : ""}`}>
+        {usingServices
+          ? (
+            <div className="svc-stack">
+              {SERVICE_MINI_CARDS.map((svc, i) => (
+                <a
+                  key={svc.key}
+                  href="/services"
+                  className="svc-mini"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                >
+                  <svg className="svc-mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <path d={svc.icon} />
+                  </svg>
+                  <span className="svc-mini-label">{lang === "ar" ? svc.labelAr : svc.label}</span>
+                  <svg className="svc-mini-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          )
+          : usingCards
+            ? cards!.map((card, i) => (
+                <BookingCardSlide
+                  key={card.key}
+                  card={card}
+                  visible={i === current && fade}
+                  isAr={lang === "ar"}
+                />
+              ))
+            : slides!.map((slide: SlideItem, i: number) => (
+                <div key={i} className={`ow-slide${i === current ? " ow-slide-active" : ""}`} style={{ background: slide.gradient || "#000", opacity: i === current && fade ? 1 : 0 }}>
+                  {slide.image && <img src={slide.image} alt={slide.label} className="ow-slide-img" />}
+                  {!slide.image && <div className="ow-slide-silhouette" />}
+                </div>
+              ))}
+        {/* Card-area nav: arrows + dots, sitting under the cards themselves */}
+        {usingCards && (
+          <div className="ow-cards-nav">
+            <button
+              type="button"
+              className="ow-arrow"
+              aria-label="Previous"
+              onClick={() => { setCurrent(p => (p - 1 + total) % total); setFade(true); }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <div className="ow-dots">
+              {Array.from({ length: total }, (_, i) => (
+                <button key={i} className={`ow-dot${i === current ? " ow-dot-active" : ""}`} onClick={() => { setCurrent(i); setFade(true); }} />
+              ))}
+            </div>
+            <button
+              type="button"
+              className="ow-arrow"
+              aria-label="Next"
+              onClick={() => { setCurrent(p => (p + 1) % total); setFade(true); }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Text content */}
+      <div className={`ow-panel-text${lang === "ar" ? " ow-text-rtl" : ""}`}>
+        <div className="ow-eyebrow">
+          <div className="ow-eyebrow-line" />
+          <span>{eyebrow || "DIAMOND PKW"}</span>
+        </div>
+        <h2 className="ow-title">
+          {title}
+        </h2>
+        <div className="ow-divider" />
+        <p className="ow-desc">{subtitle}</p>
+        <div className="ow-cta-group">
+          <a href={ctaLink || "/services"} className="ow-cta">
+            {ctaText || (lang === "ar" ? "عرض الخدمات" : "VIEW SERVICES")}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          {cta2Text && (
+            <a href={cta2Link || "/packages"} className="ow-cta">
+              {cta2Text}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          )}
+        </div>
+        {!usingCards && !usingServices && (
+          <>
+            <div className="ow-nav">
+              <div className="ow-dots">
+                {Array.from({ length: total }, (_, i) => (
+                  <button key={i} className={`ow-dot${i === current ? " ow-dot-active" : ""}`} onClick={() => { setCurrent(i); setFade(true); }} />
+                ))}
+              </div>
+              <span className="ow-counter">
+                <span className="ow-counter-current">{String(current + 1).padStart(2, "0")}</span>
+                <span>/</span>
+                <span>{String(total).padStart(2, "0")}</span>
+              </span>
+            </div>
+            <div className="ow-progress">
+              <div className="ow-progress-bar" key={current} />
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function OurWorkSection({ lang }: { lang: Lang }) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const lineRef = useRef<SVGPathElement>(null);
   const isAr = lang === "ar";
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setFade(false);
-      setTimeout(() => { setCurrent(p => (p + 1) % OW_SLIDES.length); setFade(true); }, 600);
-    }, OW_DURATION);
-    return () => clearInterval(interval);
+    const pathEl = lineRef.current;
+    const svgEl = svgRef.current;
+    const section = sectionRef.current;
+    if (!pathEl || !svgEl || !section) return;
+
+    let totalLength = 0;
+    let h1 = 0;
+    let sectionH = 0;
+    let L1 = 0; // length of panel-1 diagonal
+    let L2 = 0; // length of horizontal seam
+    let L3 = 0; // length of panel-2 diagonal
+
+    // viewBox uses real pixel dimensions of the section so x and y stay in
+    // the correct ratio (preserveAspectRatio="none" would otherwise distort
+    // the diagonals). The SVG is pinned top:0 + bottom:0 in CSS so its
+    // rendered box matches the section exactly.
+    const measureAndBuildPath = () => {
+      const panels = section.querySelectorAll<HTMLElement>(".ow-panel");
+      if (panels.length < 2) return;
+      h1 = panels[0].offsetHeight;
+      const sectionW = section.offsetWidth;
+      sectionH = section.offsetHeight;
+      if (!h1 || !sectionH || !sectionW) return;
+      const W = sectionW;
+      const p1Top = W * 0.494;
+      const p1Bot = W * 0.45;
+      const p2Top = W * 0.55;
+      const p2Bot = W * 0.506;
+      const d = `M ${p1Top} 0 L ${p1Bot} ${h1} L ${p2Top} ${h1} L ${p2Bot} ${sectionH}`;
+      svgEl.setAttribute("viewBox", `0 0 ${W} ${sectionH}`);
+      pathEl.setAttribute("d", d);
+      totalLength = pathEl.getTotalLength();
+      pathEl.style.strokeDasharray = String(totalLength);
+      // Per-segment lengths so drawing can be mapped to vertical y instead
+      // of raw path length — this makes both panels draw at the same speed
+      // in vertical pixels per scrolled pixel.
+      L1 = Math.hypot(p1Top - p1Bot, h1);
+      L2 = Math.abs(p2Top - p1Bot);
+      L3 = Math.hypot(p2Top - p2Bot, sectionH - h1);
+    };
+
+    let targetDrawn = 0;
+    let currentDrawn = 0;
+    let rafId = 0;
+
+    const compute = () => {
+      if (!totalLength) measureAndBuildPath();
+      if (!totalLength || !sectionH) return;
+      const rect = section.getBoundingClientRect();
+      const viewH = window.innerHeight;
+
+      // Snap to fully-drawn the moment the next section after Our Work enters
+      // view. That used to be #reviews, but the gallery/spotlight section now
+      // sits immediately below Our Work, so use whichever comes first.
+      const nextEl =
+        document.getElementById("gallery") ||
+        document.getElementById("reviews");
+      if (nextEl && nextEl.getBoundingClientRect().top <= viewH) {
+        targetDrawn = totalLength;
+        return;
+      }
+
+      // Slow the draw down: stretch the active scroll range so the line
+      // completes ~30% later than the section's bottom hitting viewH.
+      const distance = viewH - rect.top;
+      const totalScroll = sectionH * 1.3;
+      const yProgress = Math.max(0, Math.min(distance / totalScroll, 1));
+      const targetY = yProgress * sectionH;
+      // Convert vertical y → drawn path length, accounting for the seam jog.
+      if (targetY <= h1) {
+        targetDrawn = (targetY / h1) * L1;
+      } else {
+        const yIn2 = targetY - h1;
+        targetDrawn = L1 + L2 + (yIn2 / (sectionH - h1)) * L3;
+      }
+    };
+
+    const animate = () => {
+      // Smooth ease toward the scroll-driven target.
+      currentDrawn += (targetDrawn - currentDrawn) * 0.1;
+      if (Math.abs(targetDrawn - currentDrawn) < 0.5) currentDrawn = targetDrawn;
+      pathEl.style.strokeDashoffset = String(totalLength - currentDrawn);
+      if (currentDrawn !== targetDrawn) {
+        rafId = requestAnimationFrame(animate);
+      } else {
+        rafId = 0;
+      }
+    };
+
+    const update = () => {
+      compute();
+      if (!rafId) rafId = requestAnimationFrame(animate);
+    };
+
+    const rebuildAndUpdate = () => { measureAndBuildPath(); update(); };
+
+    requestAnimationFrame(rebuildAndUpdate);
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", rebuildAndUpdate);
+
+    // Rebuild whenever the section's measured size changes (image loads,
+    // font swap, slide transitions, anything that might shift layout).
+    const ro = new ResizeObserver(rebuildAndUpdate);
+    ro.observe(section);
+    section.querySelectorAll<HTMLElement>(".ow-panel").forEach(p => ro.observe(p));
+
+    // Also rebuild after every image inside the section finishes loading.
+    section.querySelectorAll<HTMLImageElement>("img").forEach(img => {
+      if (!img.complete) img.addEventListener("load", rebuildAndUpdate, { once: true });
+    });
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", rebuildAndUpdate);
+      if (rafId) cancelAnimationFrame(rafId);
+      ro.disconnect();
+    };
   }, []);
 
-  return (
-    <div className="ow-container">
-      {/* Slides */}
-      {OW_SLIDES.map((slide, i) => (
-        <div key={i} className={`ow-slide${i === current ? " ow-slide-active" : ""}`} style={{ background: slide.gradient || "#000", opacity: i === current && fade ? 1 : 0 }}>
-          {slide.image && (
-            <img src={slide.image} alt={slide.label} className="ow-slide-img" />
-          )}
-          {!slide.image && <div className="ow-slide-silhouette" />}
-          <div className="ow-slide-label">{slide.label.toUpperCase()}</div>
-        </div>
-      ))}
+  // Gold line path follows the diagonal clip-path edges of both panels
+  // Panel 1: text is right side, clip starts at ~49% top to ~45% bottom
+  // Horizontal bridge at the seam
+  // Panel 2: text is left side, clip starts at ~55% top to ~51% bottom
 
-      {/* Diagonal cut */}
-      <div className="ow-diagonal" />
-      <svg className="ow-diag-line" viewBox="0 0 1000 520" preserveAspectRatio="none">
-        <line x1={isAr ? "615" : "385"} y1="0" x2={isAr ? "755" : "245"} y2="520" stroke="rgba(200,170,100,0.25)" strokeWidth="1" />
+  return (
+    <div className="ow-dual" ref={sectionRef}>
+      {/* Scroll-driven gold line following panel edges */}
+      <svg ref={svgRef} className="ow-gold-line-svg" viewBox="0 0 1000 1040">
+        <path
+          ref={lineRef}
+          d="M 494 0 L 450 520 L 550 520 L 506 1040"
+          fill="none"
+          stroke="#a8b0b8"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
+        />
       </svg>
 
-      {/* Text content — right-aligned (flips for RTL) */}
-      <div className={`ow-text${isAr ? " ow-text-rtl" : ""}`}>
-        <div className="ow-eyebrow">
-          <div className="ow-eyebrow-line" />
-          <span>DIAMOND PKW</span>
-        </div>
-        <h2 className="ow-title">
-          {isAr ? "" : "Our "}<span className="ow-title-accent">{isAr ? "أعمالنا" : "Work"}</span>
-        </h2>
-        <div className="ow-divider" />
-        <p className="ow-desc">
-          {isAr
-            ? "عرض للتفصيل الدقيق والحماية المثالية واللمسات النهائية بمستوى صالات العرض — صُنع في الكويت."
-            : "A showcase of precision detailing, flawless protection, and showroom-level finishes — crafted in Kuwait."}
-        </p>
-        <a href="/services" className="ow-cta">
-          {isAr ? "عرض الخدمات" : "CLICK TO VIEW"}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d={isAr ? "M19 12H5M12 19l-7-7 7-7" : "M5 12h14M12 5l7 7-7 7"} />
-          </svg>
-        </a>
+      {/* Panel 1: service cards left, text right */}
+      <OurWorkPanel
+        serviceCards
+        side="left"
+        lang={lang}
+        eyebrow={isAr ? "خدماتنا" : "SERVICES"}
+        title={isAr ? "ما نقوم به" : <>WHAT WE <span className="gold-text">DO</span></>}
+        subtitle={isAr
+          ? "ما نقصّر، نحمي سيارتك"
+          : "We don't cut corners, we protect them"}
+      />
 
-        {/* Dots + counter */}
-        <div className="ow-nav">
-          <div className="ow-dots">
-            {OW_SLIDES.map((_, i) => (
-              <button key={i} className={`ow-dot${i === current ? " ow-dot-active" : ""}`} onClick={() => { setCurrent(i); setFade(true); }} />
-            ))}
-          </div>
-          <span className="ow-counter">
-            <span className="ow-counter-current">{String(current + 1).padStart(2, "0")}</span>
-            <span>/</span>
-            <span>{String(OW_SLIDES.length).padStart(2, "0")}</span>
-          </span>
-        </div>
-
-        {/* Progress bar */}
-        <div className="ow-progress">
-          <div className="ow-progress-bar" key={current} />
-        </div>
-      </div>
-
-      {/* Vignette */}
-      <div className="ow-vignette" />
-      <div className="ow-fade-top" />
-      <div className="ow-fade-bottom" />
+      {/* Panel 2: text left, cards right (mirrored) */}
+      <OurWorkPanel
+        cards={MOST_BOOKED_CARDS}
+        side="right"
+        lang={lang}
+        eyebrow={isAr ? "الأسعار" : "PRICING"}
+        title={isAr ? "الأكثر حجزاً" : <>MOST <span className="gold-text">BOOKED</span></>}
+        subtitle={isAr
+          ? "الباقات اللي عملاءنا يرجعون لها دايم"
+          : "The packages our clients keep coming back for"}
+        ctaText={isAr ? "عرض الأسعار" : "VIEW PRICING"}
+        ctaLink="/packages"
+      />
     </div>
   );
 }
@@ -1012,7 +1426,6 @@ export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [headerScrolled, setHeaderScrolled] = useState(false);
-  const [bookingStripVisible, setBookingStripVisible] = useState(false);
 
 
   const t = useCallback((key: string) => T[lang][key] || key, [lang]);
@@ -1035,6 +1448,19 @@ export default function Home() {
     }
   }, [lang]);
 
+  // ─── Sync with SiteHeader lang toggle + restore from localStorage ───
+  useEffect(() => {
+    const saved = localStorage.getItem("dpkw-lang") as Lang | null;
+    if (saved === "ar") setLang("ar");
+
+    const handler = (e: Event) => {
+      const next = (e as CustomEvent).detail as Lang;
+      setLang(next);
+    };
+    window.addEventListener("lang-change", handler);
+    return () => window.removeEventListener("lang-change", handler);
+  }, []);
+
   // ─── Scroll handler (header + booking strip + reveal + hero parallax) ───
   const heroRef = useRef<HTMLElement>(null);
 
@@ -1042,7 +1468,7 @@ export default function Home() {
     const onScroll = () => {
       const scrollY = window.scrollY;
       setHeaderScrolled(scrollY > 50);
-      setBookingStripVisible(scrollY > 600);
+
 
       // Hero parallax: zoom out bg + fade out content
       const hero = heroRef.current;
@@ -1092,8 +1518,6 @@ export default function Home() {
 
 
   // ─── Marquee items (doubled for infinite scroll) ───
-  const marqueeKeys = ["marquee1", "marquee2", "marquee3", "marquee4", "marquee5", "marquee6", "marquee7", "marquee8"];
-  const marqueeItems = [...marqueeKeys, ...marqueeKeys];
 
 
   /* ═══════════════════════════════════════════════════════════════════════════
@@ -1102,105 +1526,40 @@ export default function Home() {
   return (
     <>
 
-      {/* ─── HEADER ─── */}
-      <header className={`header${headerScrolled ? " scrolled" : ""}`}>
-        <a href="#hero" className="header-brand">
-          <img src="/diamond_logo_transparent.png" alt="Diamond PKW" className="header-logo" />
-          <span className="header-brand-name">DIAMOND <span className="gold-text">PKW</span></span>
-        </a>
-
-        <nav className="nav-links">
-          <a href="#hero" onClick={handleNavClick}>{t("navHome")}</a>
-          <a href="/services" onClick={handleNavClick}>{t("navServices")}</a>
-          <a href="/packages" onClick={handleNavClick}>{t("navPackages")}</a>
-          <a href="/deals" onClick={handleNavClick}>{t("navOffers")}</a>
-          <a href="#gallery" onClick={handleNavClick}>{t("navGallery")}</a>
-          <a href="#reviews" onClick={handleNavClick}>{t("navAbout")}</a>
-          <a href="#contact" onClick={handleNavClick}>{t("navContact")}</a>
-        </nav>
-
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <button className="lang-toggle" onClick={toggleLang}>
-            <svg className="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10" />
-              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-            </svg>
-            {t("langLabel")}
-          </button>
-
-          <button
-            className={`mobile-menu-btn${mobileMenuOpen ? " active" : ""}`}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-        </div>
-      </header>
-
-      {/* ─── MOBILE MENU ─── */}
-      <div className={`mobile-menu${mobileMenuOpen ? " open" : ""}`}>
-        <a href="#hero" onClick={handleNavClick}>{t("navHome")}</a>
-        <a href="/services" onClick={handleNavClick}>{t("navServices")}</a>
-        <a href="/packages" onClick={handleNavClick}>{t("navPackages")}</a>
-        <a href="/deals" onClick={handleNavClick}>{t("navOffers")}</a>
-        <a href="#gallery" onClick={handleNavClick}>{t("navGallery")}</a>
-        <a href="#reviews" onClick={handleNavClick}>{t("navAbout")}</a>
-        <a href="#contact" onClick={handleNavClick}>{t("navContact")}</a>
-        <button className="lang-toggle" onClick={toggleLang} style={{ marginTop: "16px" }}>
-          <svg className="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-          </svg>
-          {t("langLabel")}
-        </button>
-      </div>
-
       {/* ─── HERO ─── */}
       <section className="hero" id="hero" ref={heroRef}>
-        {/* Background image */}
-        <img src="/Gemini_Generated_Image_x11nwpx11nwpx11n.png" alt="" className="hero-bg-image" />
+        {/* Background video */}
+        <video
+          className="hero-bg-video"
+          src="/0410(1).MP4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
         <div className="hero-video-overlay" />
 
         {/* Layered atmospheric backgrounds */}
         <div className="hero-bg-noise" />
-        <div className="hero-bg-beams">
-          <div className="hero-beam hero-beam-1" />
-          <div className="hero-beam hero-beam-2" />
-          <div className="hero-beam hero-beam-3" />
-        </div>
         <div className="hero-gradient" />
         <div className="hero-vignette" />
 
+        {/* Champagne bubbles */}
+        <div className="hero-bubbles" aria-hidden="true">
+          {Array.from({ length: 18 }, (_, i) => (
+            <span key={i} className="hero-bubble" style={{
+              left: `${8 + Math.random() * 84}%`,
+              animationDuration: `${6 + Math.random() * 8}s`,
+              animationDelay: `${Math.random() * 10}s`,
+              width: `${3 + Math.random() * 5}px`,
+              height: `${3 + Math.random() * 5}px`,
+              opacity: 0.15 + Math.random() * 0.2,
+            }} />
+          ))}
+        </div>
+
 
         <div className="hero-content hero-centered">
-          {/* Social proof strip */}
-          <div className="proof-strip hero-reveal hero-reveal-0">
-            <div className="proof-strip__inner">
-              <svg className="proof-strip__google" width="20" height="20" viewBox="0 0 24 24">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-              </svg>
-              <div className="proof-strip__rating">
-                <span className="proof-strip__number">4.9</span>
-                <div className="proof-strip__stars">
-                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                </div>
-              </div>
-              <div className="proof-strip__divider" />
-              <span className="proof-strip__text">{lang === "ar" ? "١٩٤ تقييم على Google" : "194 reviews on Google"}</span>
-              <div className="proof-strip__divider" />
-              <a href="https://www.google.com/maps/place/Diamond+protection/" target="_blank" rel="noopener noreferrer" className="proof-strip__link">
-                {lang === "ar" ? "اقرأ التقييمات" : "READ REVIEWS"}
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-              </a>
-            </div>
-          </div>
-
           <h1 className="hero-title hero-reveal hero-reveal-1">
             <span className="hero-title-line">DIAMOND</span>
             <span className="hero-title-line hero-title-accent">PKW</span>
@@ -1214,74 +1573,143 @@ export default function Home() {
             <span className="hero-eyebrow-line" />
           </div>
 
-          <div className="hero-tags hero-reveal hero-reveal-3">
-            {(lang === "ar"
-              ? ["حماية الطلاء", "سيراميك", "تظليل", "غسيل"]
-              : ["PPF", "Ceramic Coating", "Tinting", "Wash"]
-            ).map((tag, i, arr) => (
-              <span className="hero-tag" key={i}>
-                {tag}
-                {i < arr.length - 1 && <span className="hero-tag-dot" />}
-              </span>
-            ))}
-          </div>
-
-          <p className="hero-slogan hero-reveal hero-reveal-4">
+          <p className="hero-slogan hero-reveal hero-reveal-3">
             {lang === "ar"
               ? "حيث يلتقي الكمال بالحماية"
               : "Where Perfection Meets Protection"}
           </p>
 
-          <div className="hero-cta-group hero-reveal hero-reveal-5">
+          <div className="hero-cta-group hero-reveal hero-reveal-4">
             <a
               href="https://wa.me/96595536344?text=Hi%20Diamond%20PKW%2C%20I'd%20like%20to%20book%20a%20service."
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary btn-lg hero-btn-glow"
+              className="hero-whatsapp-btn"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{opacity:0.8}}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.486a.75.75 0 0 0 .921.921l4.452-1.495A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" />
               </svg>
-              {t("heroCta1")}
+              {lang === "ar" ? "احجز الآن" : "BOOK APPOINTMENT"}
             </a>
-            <a href="/services" className="btn btn-secondary btn-lg">
-              {t("heroCta2")}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
+            <a href="/packages" className="hero-pricing-btn">
+              {lang === "ar" ? "اسعارنا" : "VIEW PRICING"}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
+          </div>
+
+          {/* Social proof strip */}
+          <div className="proof-strip hero-reveal hero-reveal-5">
+            <div className="proof-strip__inner">
+              <svg className="proof-strip__google" width="20" height="20" viewBox="0 0 24 24">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#a8b0b8"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#8a929a"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#c8ced6"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#6e7680"/>
+              </svg>
+              <div className="proof-strip__rating">
+                <span className="proof-strip__number">{lang === "ar" ? "٤٫٩" : "4.9"}</span>
+                <div className="proof-strip__stars">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+              </div>
+              <div className="proof-strip__divider" />
+              <span className="proof-strip__text">{lang === "ar" ? "١٥٠+ تقييم على جوجل" : "150+ reviews on Google"}</span>
+              <div className="proof-strip__divider" />
+              <a href="https://www.google.com/maps/place/Diamond+protection/" target="_blank" rel="noopener noreferrer" className="proof-strip__link">
+                {lang === "ar" ? "اقرأ التقييمات" : "READ REVIEWS"}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
           </div>
 
         </div>
 
       </section>
 
-      {/* ─── MARQUEE TICKER ─── */}
-      <div className="marquee-section">
-        <div className="marquee-track">
-          {marqueeItems.map((key, i) => (
-            <span className="marquee-item" key={i}>
-              <span className="diamond-sep" />
-              {t(key)}
-            </span>
+      {/* ─── OUR WORK SECTION ─── */}
+      <section className="ourwork-section">
+        <OurWorkSection lang={lang} />
+      </section>
+
+      {/* Divider: Pricing → Gallery */}
+      <div className="section-divider reveal" />
+
+      {/* Shared gradient wrapper for Gallery + Reviews */}
+      <div className="sweep-bg">
+
+      {/* ─── SPOTLIGHT / GALLERY SECTION ─── */}
+      <section className="section spotlight-section" id="gallery">
+        <div className="section-header reveal">
+          <div className="section-label">
+            <span className="line" />
+            {lang === "ar" ? "المعرض" : "GALLERY"}
+            <span className="line" />
+          </div>
+          <h2 className="section-title">
+            {lang === "ar" ? <>أعمالنا <span className="gold-text">المميزة</span></> : <>OUR <span className="gold-text">WORK</span></>}
+          </h2>
+          <p className="section-subtitle">
+            {lang === "ar"
+              ? "شاهد عينات من أعمالنا بمعايير دايموند عبر الإنترنت"
+              : "View samples online of our Diamond standard work"}
+          </p>
+        </div>
+
+        <div className="spotlight-title reveal">
+          <span className="spotlight-title-line" />
+          <span>{lang === "ar" ? "أعمال مختارة" : "SPOTLIGHT WORK"}</span>
+          <span className="spotlight-title-line" />
+        </div>
+
+        <div className="spotlight-grid reveal">
+          {[
+            { key: "ferrari", name: "Ferrari 488" },
+            { key: "goldwing", name: "Honda Goldwing" },
+            { key: "denza", name: "BYD Denza 5" },
+          ].map((car) => (
+            <div className="spotlight-card" key={car.key}>
+              <div className="spotlight-card-image" aria-label={car.name} />
+              <div className="spotlight-card-body">
+                <h3 className="spotlight-card-title">{car.name}</h3>
+              </div>
+            </div>
           ))}
         </div>
-      </div>
 
-      {/* ─── OUR WORK SECTION ─── */}
-      <section className="ourwork-section" id="gallery">
-        <OurWorkSlideshow lang={lang} />
+        <div className="spotlight-cta reveal">
+          <a href="#gallery" className="spotlight-btn">
+            {lang === "ar" ? "عرض المعرض" : "VIEW GALLERY"}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
       </section>
+
+      {/* Divider: Gallery → Reviews */}
+      <div className="section-divider reveal" />
 
       {/* ─── REVIEWS SECTION ─── */}
       <section className="section reviews-marquee-section" id="reviews">
-        {/* Google rating header */}
-        <div className="reviews-header reveal">
-          <h2 className="reviews-section-title">
-            {lang === "ar" ? <>ماذا يقول <span className="gold-text">عملاؤنا</span></> : <>What Our <span className="gold-text">Clients</span> Say</>}
+        <div className="section-header reveal">
+          <div className="section-label">
+            <span className="line" />
+            {lang === "ar" ? "آراء" : "REVIEWS"}
+            <span className="line" />
+          </div>
+          <h2 className="section-title">
+            {lang === "ar" ? <>ماذا يقول عملاؤنا</> : <>What Our Clients <span className="gold-text">Say</span></>}
           </h2>
-          <div className="reviews-divider" />
+          <p className="section-subtitle">
+            {lang === "ar"
+              ? "تجارب حقيقية من عملاء حقيقيين يثقون بنا في سياراتهم"
+              : "Real experiences from real clients who trust us with their vehicles"}
+          </p>
+        </div>
+        <div className="reveal" style={{ display: "flex", justifyContent: "center", marginBottom: "40px" }}>
           <StatCards lang={lang} />
         </div>
 
@@ -1327,127 +1755,87 @@ export default function Home() {
         </div>
       </section>
 
+      </div>
+      {/* /sweep-bg wrapper */}
+
+      {/* Divider: Reviews → Contact */}
+      <div className="section-divider reveal" />
+
       {/* ─── CONTACT SECTION ─── */}
       <section className="section" id="contact">
         <div className="section-header reveal">
           <div className="section-label">
             <span className="line" />
-            {t("contactLabel")}
+            {lang === "ar" ? "تواصل" : "CONTACT"}
             <span className="line" />
           </div>
-          <h2 className="section-title">{t("contactTitle")}</h2>
-          <p className="section-subtitle">{t("contactSubtitle")}</p>
-        </div>
-
-        {/* WhatsApp Hero */}
-        <div className="contact-hero reveal">
-          <p style={{ fontSize: "16px", color: "var(--text-dim)", marginBottom: "8px" }}>
-            {t("contactWhatsappText")}
-          </p>
-          <a
-            href="https://wa.me/96595536344"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whatsapp-big-btn"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.486a.75.75 0 0 0 .921.921l4.452-1.495A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-2.33 0-4.487-.764-6.234-2.058l-.436-.328-3.017 1.012 1.012-3.017-.328-.436A9.723 9.723 0 0 1 2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z" />
-            </svg>
-            {t("contactWhatsappBtn")}
-          </a>
-        </div>
-
-        {/* Info Cards */}
-        <div className="contact-info-cards reveal">
-          <div className="contact-info-card">
-            <div className="icon">📞</div>
-            <h4>{t("infoPhone")}</h4>
-            <p>
-              <a href="tel:+96595536344">{t("infoPhoneVal1")}</a>
-              <br />
-              <a href="tel:+96595539114">{t("infoPhoneVal2")}</a>
-            </p>
-          </div>
-          <div className="contact-info-card">
-            <div className="icon">✉️</div>
-            <h4>{t("infoEmail")}</h4>
-            <p>
-              <a href="mailto:info@diamond-pkw.com">{t("infoEmailVal")}</a>
-            </p>
-          </div>
-          <div className="contact-info-card">
-            <div className="icon">📍</div>
-            <h4>{t("infoLocation")}</h4>
-            <p>{t("infoLocationVal")}</p>
-          </div>
-          <div className="contact-info-card">
-            <div className="icon">🕐</div>
-            <h4>{t("infoHours")}</h4>
-            <p>
-              {t("infoHoursVal1")}
-              <br />
-              {t("infoHoursVal2")}
-            </p>
-          </div>
-        </div>
-
-        {/* Booking Form + Map */}
-        <div className="booking-form-section reveal">
-          <div className="booking-form">
-            <h3>{t("bookingFormTitle")}</h3>
-            <form
-              action="https://formsubmit.co/info@diamond-pkw.com"
-              method="POST"
+          <h2 className="section-title">
+            {lang === "ar" ? "احجز زيارتك" : <>BOOK YOUR <span className="gold-text">VISIT</span></>}
+          </h2>
+          <div className="contact-actions reveal">
+            <a href="/contact" className="contact-btn contact-btn-primary">
+              {lang === "ar" ? "احجز عبر الإنترنت" : "BOOK ONLINE"}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <a
+              href="https://wa.me/96595536344"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-btn contact-btn-ghost"
             >
-              <input type="hidden" name="_subject" value="New Booking — Diamond PKW" />
-              <input type="hidden" name="_captcha" value="false" />
+              {lang === "ar" ? "اتصل بنا" : "CONTACT US"}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
 
-              <div className="form-group">
-                <label>{t("formName")}</label>
-                <input type="text" name="name" required placeholder={t("formName")} />
+        {/* Info blocks (left) + Map (right) */}
+        <div className="contact-layout reveal">
+          <div className="contact-info-col">
+            <div className="contact-info-block">
+              <div className="contact-info-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
               </div>
-              <div className="form-group">
-                <label>{t("formPhone")}</label>
-                <input type="tel" name="phone" required placeholder={t("formPhone")} />
+              <h4>{lang === "ar" ? "ساعات العمل" : "Opening Hours"}</h4>
+              <p>
+                {lang === "ar" ? "السبت – الخميس" : "Sat – Thu"}
+                <br />
+                {lang === "ar" ? "٩:٠٠ صباحاً — ٨:٠٠ مساءً" : "9:00 AM — 8:00 PM"}
+              </p>
+            </div>
+            <div className="contact-info-block">
+              <div className="contact-info-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.8 12.8 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.8 12.8 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
               </div>
-              <div className="form-group">
-                <label>{t("formEmail")}</label>
-                <input type="email" name="email" placeholder={t("formEmail")} />
+              <h4>{lang === "ar" ? "الهاتف" : "Phone Numbers"}</h4>
+              <p>
+                <a href="tel:+96595536344">{lang === "ar" ? "+٩٦٥ ٩٥٥٣ ٦٣٤٤" : "+965 9553 6344"}</a>
+                <br />
+                <a href="tel:+96595539114">{lang === "ar" ? "+٩٦٥ ٩٥٥٣ ٩١١٤" : "+965 9553 9114"}</a>
+              </p>
+            </div>
+            <div className="contact-info-block">
+              <div className="contact-info-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
               </div>
-              <div className="form-group">
-                <label>{t("formVehicle")}</label>
-                <input type="text" name="vehicle" required placeholder={t("formVehicle")} />
-              </div>
-              <div className="form-group">
-                <label>{t("formService")}</label>
-                <select name="service" required>
-                  <option value="">{t("formService")}</option>
-                  <option value="ppf">{t("formServiceOpt1")}</option>
-                  <option value="ceramic">{t("formServiceOpt2")}</option>
-                  <option value="tinting">{t("formServiceOpt3")}</option>
-                  <option value="interior">{t("formServiceOpt4")}</option>
-                  <option value="polish">{t("formServiceOpt5")}</option>
-                  <option value="full-detail">{t("formServiceOpt6")}</option>
-                  <option value="other">{t("formServiceOpt7")}</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label>{t("formDate")}</label>
-                <input type="date" name="date" required />
-              </div>
-              <div className="form-group">
-                <label>{t("formNotes")}</label>
-                <textarea name="notes" placeholder={t("formNotes")} />
-              </div>
-              <button type="submit" className="btn btn-primary btn-block">
-                {t("formSubmit")}
-              </button>
-            </form>
+              <h4>{lang === "ar" ? "الموقع" : "Location"}</h4>
+              <p>{lang === "ar" ? "شارع ١٦، مدينة الكويت" : "16 St, Kuwait City"}</p>
+            </div>
           </div>
 
-          {/* Google Maps */}
-          <div className="map-container">
+          <div className="contact-map">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3476.6!2d47.95!3d29.35!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDIxJzAwLjAiTiA0N8KwNTcnMDAuMCJF!5e0!3m2!1sen!2skw!4v1234567890"
               allowFullScreen
@@ -1464,12 +1852,18 @@ export default function Home() {
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-brand">
-            <img src="/diamond_logo_transparent.png" alt="Diamond PKW" className="footer-logo" />
-            <p>{t("footerDesc")}</p>
+            <div className="footer-logo-row">
+              <img src="/diamond_logo_transparent.png" alt="Diamond PKW" className="footer-logo" />
+              <h3 className="footer-brand-name">DIAMOND PKW</h3>
+            </div>
+            <p className="footer-brand-tagline">
+              {lang === "ar" ? "حيث يلتقي الإتقان بالحماية" : "Where Perfection Meets Protection"}
+            </p>
             <div className="footer-socials">
               <a href="https://wa.me/96595536344" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.486a.75.75 0 0 0 .921.921l4.452-1.495A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
                 </svg>
               </a>
               <a href="https://www.instagram.com/diamond.pkw" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -1477,6 +1871,12 @@ export default function Home() {
                   <rect x="2" y="2" width="20" height="20" rx="5" />
                   <circle cx="12" cy="12" r="5" />
                   <circle cx="17.5" cy="6.5" r="1.5" />
+                </svg>
+              </a>
+              <a href="https://www.google.com/maps/place/Diamond+protection/" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
                 </svg>
               </a>
             </div>
@@ -1488,19 +1888,15 @@ export default function Home() {
               <li><a href="#hero">{t("navHome")}</a></li>
               <li><a href="/services">{t("navServices")}</a></li>
               <li><a href="/packages">{t("navPackages")}</a></li>
-              <li><a href="/deals">{t("navOffers")}</a></li>
               <li><a href="#gallery">{t("navGallery")}</a></li>
             </ul>
           </div>
 
           <div className="footer-column">
-            <h4>{t("footerServices")}</h4>
+            <h4>{lang === "ar" ? "قانوني" : "Legal"}</h4>
             <ul>
-              <li><a href="/services">{t("svc1Title")}</a></li>
-              <li><a href="/services">{t("svc2Title")}</a></li>
-              <li><a href="/services">{t("svc3Title")}</a></li>
-              <li><a href="/services">{t("svc4Title")}</a></li>
-              <li><a href="/services">{t("svc5Title")}</a></li>
+              <li><a href="#">{lang === "ar" ? "الشروط والأحكام" : "Terms & Conditions"}</a></li>
+              <li><a href="#">{lang === "ar" ? "سياسة الخصوصية" : "Privacy Policy"}</a></li>
             </ul>
           </div>
 
@@ -1517,28 +1913,10 @@ export default function Home() {
 
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} Diamond PKW. {t("footerRights")}</p>
-          <div className="footer-bottom-links">
-            <a href="#">{t("footerPrivacy")}</a>
-            <a href="#">{t("footerTerms")}</a>
-          </div>
         </div>
       </footer>
 
       {/* ─── STICKY BOOKING STRIP ─── */}
-      <div className={`booking-strip${bookingStripVisible ? " visible" : ""}`}>
-        <span className="booking-strip-text">
-          {t("bookingText")} <span className="gold">Diamond PKW</span>
-        </span>
-        <a
-          href="https://wa.me/96595536344"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-primary btn-sm"
-        >
-          {t("bookingCta")}
-        </a>
-      </div>
-
       {/* ─── FLOATING WHATSAPP BUTTON ─── */}
       <a
         href="https://wa.me/96595536344"

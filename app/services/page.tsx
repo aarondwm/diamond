@@ -1,727 +1,435 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 
 type Lang = "en" | "ar";
 
 const SERVICES = [
   {
-    icon: "🛡️",
-    en: {
-      title: "Paint Protection Film (PPF)",
-      desc: "Ultimate invisible armor for your vehicle's paint",
-      details: [
-        "Self-healing film technology",
-        "Full or partial body coverage",
-        "10-year manufacturer warranty",
-        "Invisible protection against chips & scratches",
-      ],
-      price: "250 KD",
-    },
-    ar: {
-      title: "فيلم حماية الطلاء (PPF)",
-      desc: "درع غير مرئي لطلاء سيارتك",
-      details: [
-        "تقنية فيلم ذاتي الشفاء",
-        "تغطية كاملة أو جزئية للجسم",
-        "ضمان الشركة المصنعة 10 سنوات",
-        "حماية غير مرئية ضد الرقائق والخدوش",
-      ],
-      price: "250 د.ك",
-    },
+    key: "ppf",
+    image: "/ppf.PNG",
+    en: { title: "Paint Protection Film", badge: "Nano Guard Certified" },
+    ar: { title: "فيلم حماية الطلاء", badge: "معتمد من نانو جارد" },
   },
   {
-    icon: "💎",
-    en: {
-      title: "Ceramic Coating",
-      desc: "Long-lasting shine & hydrophobic protection",
-      details: [
-        "9H hardness ceramic layer",
-        "Hydrophobic water-repelling surface",
-        "UV & chemical resistance",
-        "2-5 year protection duration",
-      ],
-      price: "120 KD",
-    },
-    ar: {
-      title: "الطلاء السيراميكي",
-      desc: "لمعان طويل الأمد وحماية مقاومة للماء",
-      details: [
-        "طبقة سيراميك بصلابة 9H",
-        "سطح طارد للماء",
-        "مقاومة الأشعة فوق البنفسجية والمواد الكيميائية",
-        "مدة حماية 2-5 سنوات",
-      ],
-      price: "120 د.ك",
-    },
+    key: "tinting",
+    image: "/tinting.PNG",
+    en: { title: "Tinting & Heat Insulation", badge: "Nano Guard Films" },
+    ar: { title: "التظليل والعزل الحراري", badge: "أفلام نانو جارد" },
   },
   {
-    icon: "🪟",
-    en: {
-      title: "Window Tinting",
-      desc: "Heat rejection & privacy",
-      details: [
-        "Premium nano-ceramic films",
-        "Up to 99% UV rejection",
-        "Heat reduction up to 60%",
-        "Legal compliance guaranteed",
-      ],
-      price: "35 KD",
-    },
-    ar: {
-      title: "تظليل النوافذ",
-      desc: "عزل حراري وخصوصية",
-      details: [
-        "أفلام نانو سيراميك متميزة",
-        "رفض يصل إلى 99% من الأشعة فوق البنفسجية",
-        "تقليل الحرارة حتى 60%",
-        "ضمان الامتثال القانوني",
-      ],
-      price: "35 د.ك",
-    },
+    key: "polish",
+    image: "/polish.PNG",
+    en: { title: "Polishing & Paint Correction", badge: "Mirror Finish" },
+    ar: { title: "التلميع وتصحيح الطلاء", badge: "لمسة نهائية مرآة" },
   },
   {
-    icon: "🧹",
-    en: {
-      title: "Interior Detailing",
-      desc: "Deep cleaning & restoration",
-      details: [
-        "Leather conditioning & protection",
-        "Steam cleaning & sanitization",
-        "Odor elimination treatment",
-        "Dashboard & trim restoration",
-      ],
-      price: "25 KD",
-    },
-    ar: {
-      title: "التفصيل الداخلي",
-      desc: "تنظيف عميق وترميم",
-      details: [
-        "تكييف وحماية الجلد",
-        "تنظيف بالبخار والتعقيم",
-        "علاج إزالة الروائح",
-        "ترميم لوحة القيادة والتشطيبات",
-      ],
-      price: "25 د.ك",
-    },
+    key: "full-wash",
+    image: "/carwash.PNG",
+    en: { title: "Full Wash", badge: "Interior · Exterior · Wheels" },
+    ar: { title: "غسيل كامل", badge: "داخلي · خارجي · عجلات" },
   },
   {
-    icon: "✨",
-    en: {
-      title: "Exterior Polish",
-      desc: "Paint correction & mirror finish",
-      details: [
-        "Multi-stage paint correction",
-        "Swirl mark & scratch removal",
-        "High-gloss mirror finish",
-        "Machine polish with premium compounds",
-      ],
-      price: "40 KD",
-    },
-    ar: {
-      title: "التلميع الخارجي",
-      desc: "تصحيح الطلاء ولمسة نهائية لامعة",
-      details: [
-        "تصحيح الطلاء متعدد المراحل",
-        "إزالة علامات الدوامة والخدوش",
-        "لمسة نهائية لامعة عالية",
-        "تلميع آلي بمركبات متميزة",
-      ],
-      price: "40 د.ك",
-    },
-  },
-  {
-    icon: "🔧",
-    en: {
-      title: "Wheel & Caliper Coating",
-      desc: "Protection & aesthetics for wheels",
-      details: [
-        "Ceramic wheel coating",
-        "Brake caliper painting",
-        "Brake dust protection",
-        "Custom color options",
-      ],
-      price: "60 KD",
-    },
-    ar: {
-      title: "طلاء العجلات والمكابح",
-      desc: "حماية وجمالية للعجلات",
-      details: [
-        "طلاء سيراميك للعجلات",
-        "طلاء مكابح الفرامل",
-        "حماية من غبار المكابح",
-        "خيارات ألوان مخصصة",
-      ],
-      price: "60 د.ك",
-    },
-  },
-  {
-    icon: "💡",
-    en: {
-      title: "Headlight Restoration",
-      desc: "Clarity & improved visibility",
-      details: [
-        "Oxidation removal",
-        "UV protective coating",
-        "Improved night visibility",
-        "PPF protection option",
-      ],
-      price: "15 KD",
-    },
-    ar: {
-      title: "ترميم المصابيح",
-      desc: "وضوح ورؤية محسنة",
-      details: [
-        "إزالة الأكسدة",
-        "طلاء واقي من الأشعة فوق البنفسجية",
-        "تحسين الرؤية الليلية",
-        "خيار حماية PPF",
-      ],
-      price: "15 د.ك",
-    },
-  },
-  {
-    icon: "🔩",
-    en: {
-      title: "Underbody Coating",
-      desc: "Rust & corrosion prevention",
-      details: [
-        "Anti-rust rubberized coating",
-        "Sound deadening properties",
-        "Sand & gravel protection",
-        "Chassis preservation",
-      ],
-      price: "45 KD",
-    },
-    ar: {
-      title: "طلاء الأسفل",
-      desc: "حماية من الصدأ والتآكل",
-      details: [
-        "طلاء مطاطي مضاد للصدأ",
-        "خصائص عزل الصوت",
-        "حماية من الرمل والحصى",
-        "حفظ الهيكل",
-      ],
-      price: "45 د.ك",
-    },
+    key: "home-service",
+    image: "/home wash.PNG",
+    en: { title: "Home Service", badge: "Car Wash · Tinting" },
+    ar: { title: "خدمة منزلية", badge: "غسيل سيارات · تظليل" },
   },
 ];
 
-const WASH_DATA = {
-  en: {
-    title: "Wash & Quick Services",
-    cols: ["Service", "Sedan", "SUV", "Truck"],
-    rows: [
-      ["Exterior Wash", "3 KD", "4 KD", "5 KD"],
-      ["Interior Clean", "5 KD", "6 KD", "7 KD"],
-      ["Full Detail Wash", "8 KD", "10 KD", "12 KD"],
-      ["Engine Bay Clean", "5 KD", "6 KD", "7 KD"],
-      ["Quick Wax & Shine", "4 KD", "5 KD", "6 KD"],
-    ],
-  },
-  ar: {
-    title: "خدمات الغسيل السريعة",
-    cols: ["الخدمة", "سيدان", "دفع رباعي", "شاحنة"],
-    rows: [
-      ["غسيل خارجي", "3 د.ك", "4 د.ك", "5 د.ك"],
-      ["تنظيف داخلي", "5 د.ك", "6 د.ك", "7 د.ك"],
-      ["غسيل تفصيلي كامل", "8 د.ك", "10 د.ك", "12 د.ك"],
-      ["تنظيف حجرة المحرك", "5 د.ك", "6 د.ك", "7 د.ك"],
-      ["تلميع سريع بالشمع", "4 د.ك", "5 د.ك", "6 د.ك"],
-    ],
-  },
-};
-
 const T = {
   en: {
-    pageTitle: "Our Services",
-    pageSubtitle: "Premium detailing & protection services tailored for Kuwait's roads and climate.",
-    startingFrom: "Starting from",
-    bookService: "Book This Service",
-    homeTitle: "Home Service Available",
-    homeDesc: "Can't come to us? We'll come to you! Our mobile detailing unit brings the full Diamond PKW experience to your doorstep.",
-    homeCta: "Book Home Service",
+    pageEyebrow: "Services",
+    pageTitle: "What We Offer",
+    pageSubtitle: "Premium detailing and protection services tailored for Kuwait's roads and climate.",
     backHome: "Back to Home",
+    enquire: "Enquire",
   },
   ar: {
-    pageTitle: "خدماتنا",
+    pageEyebrow: "خدماتنا",
+    pageTitle: "ما نقدمه",
     pageSubtitle: "خدمات تلميع وحماية متميزة مصممة لطرق ومناخ الكويت.",
-    startingFrom: "يبدأ من",
-    bookService: "احجز هذه الخدمة",
-    homeTitle: "خدمة منزلية متوفرة",
-    homeDesc: "لا تستطيع المجيء إلينا؟ سنأتي إليك! وحدة التلميع المتنقلة تجلب تجربة Diamond PKW الكاملة إلى باب منزلك.",
-    homeCta: "احجز خدمة منزلية",
     backHome: "العودة للرئيسية",
+    enquire: "استفسر",
   },
 };
 
 export default function ServicesPage() {
   const [lang, setLang] = useState<Lang>("en");
-  const t = useCallback((key: string) => T[lang][key as keyof (typeof T)["en"]] || key, [lang]);
+  const t = useCallback((k: string) => T[lang][k as keyof (typeof T)["en"]] || k, [lang]);
   const isAr = lang === "ar";
-  const wash = WASH_DATA[lang];
+
+  useEffect(() => {
+    const saved = localStorage.getItem("dpkw-lang") as Lang | null;
+    if (saved === "ar") setLang("ar");
+    const handler = (e: Event) => {
+      setLang((e as CustomEvent).detail as Lang);
+    };
+    window.addEventListener("lang-change", handler);
+    return () => window.removeEventListener("lang-change", handler);
+  }, []);
 
   return (
-    <div className={`services-page ${isAr ? "services-rtl" : ""}`}>
-      {/* Minimal top bar */}
-      <header className="sp-header">
-        <Link href="/" className="sp-back">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points={isAr ? "9 18 15 12 9 6" : "15 18 9 12 15 6"} />
-          </svg>
-          {t("backHome")}
-        </Link>
-        <button className="sp-lang" onClick={() => setLang(isAr ? "en" : "ar")}>
-          {isAr ? "English" : "العربية"}
-        </button>
-      </header>
+    <div className={`svc-page${isAr ? " svc-rtl" : ""}`}>
+      {/* Header provided by layout */}
 
-      {/* Page hero */}
-      <div className="sp-hero">
-        <div className="sp-hero-bg" />
-        <h1 className="sp-hero-title">{t("pageTitle")}</h1>
-        <p className="sp-hero-sub">{t("pageSubtitle")}</p>
+      <div className="sv-hero">
+        <div className="sv-hero-bg" />
+        <div className="sv-eyebrow">
+          <span className="sv-eyebrow-line" />
+          {t("pageEyebrow")}
+          <span className="sv-eyebrow-line" />
+        </div>
+        <h1>{t("pageTitle")}</h1>
+        <p>{t("pageSubtitle")}</p>
       </div>
 
-      {/* Services list */}
-      <div className="sp-list">
+      {/* Home service pricing strip */}
+      <div className="sv-pricing-strip">
+        <div className="sv-pricing-label">{lang === "ar" ? "غسيل ومسح منزلي" : "Home Service Wash & Wipe"}</div>
+        <div className="sv-pricing-pills">
+          <Link href="/contact?service=motorcycle-wash" className="sv-pill">
+            <svg className="sv-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="5.5" cy="17.5" r="3.5" /><circle cx="18.5" cy="17.5" r="3.5" />
+              <path d="M15 6h3l1.5 5M5.5 17.5L9 8h6l3.5 9.5M9 8L7 6" />
+            </svg>
+            <div className="sv-pill-info">
+              <span className="sv-pill-type">{lang === "ar" ? "دراجة نارية" : "Motorcycle"}</span>
+              <span className="sv-pill-service">{lang === "ar" ? "غسيل ومسح" : "Wash & Wipe"}</span>
+            </div>
+            <span className="sv-pill-price">{isAr ? "٣" : "3"} <span className="sv-pill-kd">{isAr ? "د.ك" : "KD"}</span></span>
+          </Link>
+          <Link href="/contact?service=sedan-wash" className="sv-pill">
+            <svg className="sv-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 17h18M5 17v-5l2-5h10l2 5v5M7 7h10" />
+              <circle cx="7" cy="17" r="2" /><circle cx="17" cy="17" r="2" />
+            </svg>
+            <div className="sv-pill-info">
+              <span className="sv-pill-type">{lang === "ar" ? "سيدان" : "Sedan"}</span>
+              <span className="sv-pill-service">{lang === "ar" ? "داخلي + خارجي" : "Interior + Exterior"}</span>
+            </div>
+            <span className="sv-pill-price">{isAr ? "٥" : "5"} <span className="sv-pill-kd">{isAr ? "د.ك" : "KD"}</span></span>
+          </Link>
+          <Link href="/contact?service=suv-wash" className="sv-pill">
+            <svg className="sv-pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 17h18M5 17v-5l2-5h10l2 5v5M7 7h10" />
+              <circle cx="7" cy="17" r="2" /><circle cx="17" cy="17" r="2" />
+              <path d="M7 7V5M17 7V5" opacity="0.5" />
+            </svg>
+            <div className="sv-pill-info">
+              <span className="sv-pill-type">{lang === "ar" ? "دفع رباعي" : "SUV"}</span>
+              <span className="sv-pill-service">{lang === "ar" ? "داخلي + خارجي" : "Interior + Exterior"}</span>
+            </div>
+            <span className="sv-pill-price">{isAr ? "٧" : "7"} <span className="sv-pill-kd">{isAr ? "د.ك" : "KD"}</span></span>
+          </Link>
+        </div>
+      </div>
+
+      <div className="sv-grid">
         {SERVICES.map((svc, i) => {
           const data = svc[lang];
           return (
-            <div
-              className="sp-row"
-              key={i}
-              style={{ animationDelay: `${i * 0.07}s` }}
-            >
-              <div className="sp-row-left">
-                <div className="sp-row-icon">{svc.icon}</div>
-                <div className="sp-row-info">
-                  <h2 className="sp-row-title">{data.title}</h2>
-                  <p className="sp-row-desc">{data.desc}</p>
-                  <ul className="sp-row-details">
-                    {data.details.map((d, j) => (
-                      <li key={j}>
-                        <span className="sp-bullet" />
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            <div className="sv-card" key={svc.key}>
+              <div className="sv-card-img">
+                <img src={svc.image} alt={data.title} />
               </div>
-              <div className="sp-row-right">
-                <div className="sp-row-price-label">{t("startingFrom")}</div>
-                <div className="sp-row-price">{data.price}</div>
-                <a
-                  href={`https://wa.me/96595536344?text=Hi Diamond PKW, I'm interested in ${svc.en.title}.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="sp-row-cta"
+              <div className="sv-card-content">
+                <div className="sv-card-badge">{data.badge}</div>
+                <h2 className="sv-card-title">{data.title}</h2>
+                <Link
+                  href={`/contact?service=${encodeURIComponent(svc.key)}`}
+                  className="sv-card-cta"
                 >
-                  {t("bookService")}
-                </a>
+                  {t("enquire")}
+                </Link>
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* Wash pricing table */}
-      <div className="sp-wash">
-        <h2 className="sp-wash-title">{wash.title}</h2>
-        <div className="sp-wash-table-wrap">
-          <table className="sp-wash-table">
-            <thead>
-              <tr>
-                {wash.cols.map((c, i) => (
-                  <th key={i}>{c}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {wash.rows.map((row, i) => (
-                <tr key={i}>
-                  {row.map((cell, j) => (
-                    <td key={j} className={j === 0 ? "sp-wash-name" : "sp-wash-price"}>
-                      {cell}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Home service banner */}
-      <div className="sp-home-banner">
-        <div>
-          <h3>🏠 {t("homeTitle")}</h3>
-          <p>{t("homeDesc")}</p>
-        </div>
-        <a
-          href="https://wa.me/96595536344?text=Hi Diamond PKW, I'd like to book a home service."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="sp-home-cta"
-        >
-          {t("homeCta")}
-        </a>
-      </div>
-
-      <style jsx>{`
-        .services-page {
+      <style jsx global>{`
+        .svc-page {
           min-height: 100vh;
-          background: #050508;
+          background: #0a0a0f;
           color: #f0ece2;
           font-family: var(--font-body, 'DM Sans', sans-serif);
         }
-        .services-rtl {
-          direction: rtl;
-          font-family: var(--font-arabic, 'Tajawal', sans-serif);
-        }
+        .svc-rtl { direction: rtl; font-family: var(--font-arabic, 'Tajawal', sans-serif); }
 
-        /* Header */
-        .sp-header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 100;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+        .sv-header {
+          position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+          display: flex; align-items: center; justify-content: space-between;
           padding: 16px 32px;
-          background: rgba(5,5,8,0.85);
-          backdrop-filter: blur(16px);
-          border-bottom: 1px solid rgba(201,168,76,0.08);
+          background: rgba(10,10,15,0.85); backdrop-filter: blur(16px);
+          border-bottom: 1px solid rgba(168,176,184,0.1);
         }
-        .sp-back {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          color: rgba(255,255,255,0.6);
-          text-decoration: none;
-          font-size: 14px;
-          letter-spacing: 0.5px;
-          transition: color 0.3s;
+        .sv-back {
+          display: flex; align-items: center; gap: 8px;
+          color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; transition: color 0.3s;
         }
-        .sp-back:hover { color: #c9a84c; }
-        .sp-lang {
-          background: rgba(201,168,76,0.1);
-          border: 1px solid rgba(201,168,76,0.2);
-          color: #c9a84c;
-          padding: 6px 16px;
-          border-radius: 50px;
-          font-size: 12px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s;
+        .sv-back:hover { color: #a8b0b8; }
+        .sv-lang {
+          background: rgba(168,176,184,0.1); border: 1px solid rgba(168,176,184,0.25);
+          color: #a8b0b8; padding: 6px 16px; border-radius: 50px; font-size: 12px;
+          font-weight: 600; cursor: pointer; transition: all 0.3s;
         }
-        .sp-lang:hover {
-          background: rgba(201,168,76,0.2);
-        }
+        .sv-lang:hover { background: rgba(168,176,184,0.2); }
 
-        /* Page hero */
-        .sp-hero {
-          padding: 140px 32px 60px;
-          text-align: center;
-          position: relative;
-          overflow: hidden;
+        .sv-hero {
+          padding: 100px 32px 60px; text-align: center; position: relative; overflow: visible;
         }
-        .sp-hero-bg {
+        .sv-hero-bg {
           position: absolute;
-          inset: 0;
-          background: radial-gradient(ellipse at 50% 80%, rgba(201,168,76,0.06) 0%, transparent 60%);
+          top: 0; left: -10%; right: -10%;
+          height: 300%;
+          background: radial-gradient(ellipse at 50% 20%, rgba(168,176,184,0.08) 0%, transparent 55%);
           pointer-events: none;
         }
-        .sp-hero-title {
-          font-family: var(--font-display, 'Playfair Display', serif);
-          font-size: clamp(36px, 6vw, 56px);
-          font-weight: 700;
-          letter-spacing: -0.5px;
-          margin-bottom: 16px;
-          position: relative;
+        .sv-eyebrow {
+          display: inline-flex; align-items: center; gap: 12px;
+          font-family: var(--font-label, 'Inter', sans-serif);
+          font-size: 16px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+          color: #a8b0b8; margin-bottom: 18px;
         }
-        .sp-hero-sub {
-          font-size: 16px;
-          color: rgba(255,255,255,0.8);
-          max-width: 500px;
-          margin: 0 auto;
-          line-height: 1.6;
-          position: relative;
+        .sv-eyebrow-line { width: 32px; height: 1px; background: linear-gradient(90deg, transparent, #a8b0b8, transparent); }
+        .sv-hero h1 {
+          font-family: var(--font-numeral, 'Bodoni Moda', serif);
+          font-size: clamp(40px, 6vw, 64px); font-weight: 600; margin: 0 0 16px;
+          color: #f0ece2; letter-spacing: -0.5px;
+        }
+        .sv-hero p {
+          font-size: 16px; color: rgba(255,255,255,0.7); max-width: 560px;
+          margin: 0 auto; line-height: 1.65;
         }
 
-        /* Services list */
-        .sp-list {
-          max-width: 900px;
+        .sv-grid {
+          max-width: 1200px; margin: 0 auto; padding: 30px 32px 100px;
+          display: grid; grid-template-columns: repeat(6, 1fr); gap: 22px;
+          justify-items: center;
+        }
+        /* First 3 cards span 2 columns each (fills the row of 3) */
+        .sv-card:nth-child(1),
+        .sv-card:nth-child(2),
+        .sv-card:nth-child(3) {
+          grid-column: span 2;
+        }
+        /* Last 2 cards: each spans 2 cols, offset by 1 col to center them */
+        .sv-card:nth-child(4) {
+          grid-column: 2 / 4;
+        }
+        .sv-card:nth-child(5) {
+          grid-column: 4 / 6;
+        }
+
+        .sv-card {
+          position: relative;
+          background: linear-gradient(180deg, rgba(168,176,184,0.04) 0%, rgba(255,255,255,0.015) 100%);
+          border: 1px solid rgba(168,176,184,0.18);
+          border-radius: 20px;
+          overflow: hidden;
+          display: flex; flex-direction: column;
+          transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+          box-shadow: 0 0 24px rgba(168,176,184,0.06), 0 12px 32px rgba(0,0,0,0.35);
+        }
+
+        /* Pure opacity fade-in — no transforms, no magnify */
+        @keyframes svFade { from { opacity: 0; } to { opacity: 1; } }
+
+        .sv-eyebrow, .sv-hero h1, .sv-hero p,
+        .sv-pricing-label, .sv-pill, .sv-card {
+          animation: svFade 0.9s ease-out both;
+        }
+        .sv-eyebrow       { animation-delay: 0.1s; }
+        .sv-hero h1       { animation-delay: 0.25s; }
+        .sv-hero p        { animation-delay: 0.4s; }
+        .sv-pricing-label { animation-delay: 0.6s; }
+        .sv-pill:nth-of-type(1) { animation-delay: 0.75s; }
+        .sv-pill:nth-of-type(2) { animation-delay: 0.9s; }
+        .sv-pill:nth-of-type(3) { animation-delay: 1.05s; }
+        .sv-card:nth-of-type(1) { animation-delay: 1.25s; }
+        .sv-card:nth-of-type(2) { animation-delay: 1.4s; }
+        .sv-card:nth-of-type(3) { animation-delay: 1.55s; }
+        .sv-card:nth-of-type(4) { animation-delay: 1.7s; }
+        .sv-card:nth-of-type(5) { animation-delay: 1.85s; }
+        .sv-card:hover {
+          transform: translateY(-5px);
+          border-color: rgba(168,176,184,0.45);
+          box-shadow: 0 0 48px rgba(168,176,184,0.15), 0 20px 48px rgba(0,0,0,0.45);
+        }
+
+        .sv-card-img {
+          width: 100%;
+          aspect-ratio: 4 / 3;
+          overflow: hidden;
+          background: #0a0a0f;
+        }
+        .sv-card-img img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+        .sv-card:hover .sv-card-img img {
+          transform: scale(1.05);
+        }
+
+        .sv-card-content {
+          padding: 22px 24px 24px;
+          display: flex; flex-direction: column; gap: 10px;
+          align-items: center; text-align: center;
+        }
+
+        .sv-card-badge {
+          font-family: var(--font-label, 'Inter', sans-serif);
+          font-size: 10px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase;
+          color: #a8b0b8;
+          background: rgba(168,176,184,0.08);
+          border: 1px solid rgba(168,176,184,0.18);
+          border-radius: 50px; padding: 5px 13px;
+        }
+
+        .sv-card-title {
+          font-family: var(--font-numeral, 'Bodoni Moda', serif);
+          font-size: 24px; font-weight: 600; color: #ffffff;
+          margin: 0; letter-spacing: 0.3px; line-height: 1.2;
+        }
+
+        .sv-card-cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 11px 30px;
+          border-radius: 50px;
+          font-family: var(--font-label, 'Inter', sans-serif);
+          font-size: 12px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase;
+          text-decoration: none;
+          background: linear-gradient(135deg, #a8b0b8, #c8ced6);
+          color: #0a0a0f;
+          border: 2px solid #a8b0b8;
+          transition: all 0.3s ease;
+          margin-top: 4px;
+        }
+        .sv-card-cta:hover {
+          background: transparent;
+          color: #c8ced6;
+          box-shadow: 0 8px 24px rgba(168,176,184,0.35);
+          transform: translateY(-2px);
+        }
+
+        /* ── Home service pricing strip ── */
+        .sv-pricing-strip {
+          max-width: 1200px;
           margin: 0 auto;
-          padding: 20px 32px 60px;
+          padding: 0 32px 48px;
+          text-align: center;
+        }
+
+        .sv-pricing-label {
+          font-family: var(--font-numeral, 'Bodoni Moda', serif);
+          font-size: 28px;
+          font-weight: 600;
+          color: #ffffff;
+          margin-bottom: 24px;
+          letter-spacing: 0.3px;
+        }
+
+        .sv-pricing-pills {
+          display: flex;
+          justify-content: center;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        .sv-pill {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding: 20px 28px;
+          background: linear-gradient(180deg, rgba(168,176,184,0.06) 0%, rgba(255,255,255,0.02) 100%);
+          border: 1px solid rgba(168,176,184,0.25);
+          border-radius: 60px;
+          transition: all 0.35s ease;
+          text-decoration: none;
+          color: inherit;
+          cursor: pointer;
+          box-shadow:
+            0 0 24px rgba(168,176,184,0.1),
+            0 0 48px rgba(168,176,184,0.05),
+            0 12px 32px rgba(0,0,0,0.35);
+        }
+
+        .sv-pill:hover {
+          border-color: rgba(168,176,184,0.5);
+          transform: translateY(-2px);
+          box-shadow:
+            0 0 36px rgba(168,176,184,0.2),
+            0 0 64px rgba(168,176,184,0.1),
+            0 16px 40px rgba(0,0,0,0.45);
+        }
+
+        .sv-pill-icon {
+          width: 32px;
+          height: 32px;
+          flex-shrink: 0;
+          color: var(--gold, #a8b0b8);
+        }
+
+        .sv-pill-info {
           display: flex;
           flex-direction: column;
           gap: 2px;
-        }
-
-        .sp-row {
-          display: flex;
-          align-items: stretch;
-          justify-content: space-between;
-          gap: 32px;
-          padding: 32px 0;
-          border-bottom: 1px solid rgba(255,255,255,0.05);
-          opacity: 0;
-          transform: translateY(16px);
-          animation: spReveal 0.6s ease forwards;
-        }
-        @keyframes spReveal {
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .sp-row-left {
-          display: flex;
-          gap: 20px;
-          flex: 1;
-          min-width: 0;
-        }
-        .sp-row-icon {
-          flex-shrink: 0;
-          width: 48px;
-          height: 48px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 24px;
-          background: rgba(201,168,76,0.08);
-          border-radius: 12px;
-          border: 1px solid rgba(201,168,76,0.1);
-        }
-        .sp-row-info {
-          min-width: 0;
-        }
-        .sp-row-title {
-          font-family: var(--font-display, 'Playfair Display', serif);
-          font-size: 20px;
-          font-weight: 600;
-          color: #fff;
-          margin-bottom: 4px;
-        }
-        .sp-row-desc {
-          font-size: 13px;
-          color: rgba(255,255,255,0.8);
-          margin-bottom: 12px;
-        }
-        .sp-row-details {
-          list-style: none;
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-        }
-        .sp-row-details li {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 13px;
-          color: rgba(255,255,255,0.8);
-        }
-        .sp-bullet {
-          width: 4px;
-          height: 4px;
-          border-radius: 50%;
-          background: #c9a84c;
-          opacity: 0.5;
-          flex-shrink: 0;
-        }
-
-        .sp-row-right {
-          flex-shrink: 0;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          justify-content: center;
-          text-align: right;
-          min-width: 140px;
-        }
-        .services-rtl .sp-row-right {
-          align-items: flex-start;
           text-align: left;
         }
-        .sp-row-price-label {
-          font-size: 10px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.7);
-          margin-bottom: 4px;
-        }
-        .sp-row-price {
-          font-family: var(--font-display, 'Playfair Display', serif);
-          font-size: 28px;
-          font-weight: 700;
-          color: #c9a84c;
-          margin-bottom: 12px;
-          letter-spacing: -0.5px;
-        }
-        .sp-row-cta {
-          display: inline-block;
-          padding: 8px 20px;
-          font-size: 12px;
-          font-weight: 500;
-          letter-spacing: 0.5px;
-          color: #c9a84c;
-          border: 1px solid rgba(201,168,76,0.25);
-          border-radius: 50px;
-          text-decoration: none;
-          transition: all 0.3s;
-          white-space: nowrap;
-        }
-        .sp-row-cta:hover {
-          background: rgba(201,168,76,0.1);
-          border-color: rgba(201,168,76,0.5);
-        }
 
-        /* Wash table */
-        .sp-wash {
-          max-width: 700px;
-          margin: 0 auto 60px;
-          padding: 0 32px;
-        }
-        .sp-wash-title {
-          font-family: var(--font-display, 'Playfair Display', serif);
-          font-size: 24px;
-          font-weight: 600;
-          text-align: center;
-          margin-bottom: 24px;
-          color: #fff;
-        }
-        .sp-wash-table-wrap {
-          overflow-x: auto;
-          border-radius: 16px;
-          border: 1px solid rgba(255,255,255,0.06);
-          background: rgba(255,255,255,0.02);
-        }
-        .sp-wash-table {
-          width: 100%;
-          border-collapse: collapse;
-          min-width: 400px;
-        }
-        .sp-wash-table th {
-          padding: 14px 20px;
-          font-size: 10px;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          color: #c9a84c;
-          font-weight: 500;
-          text-align: center;
-          border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-        .sp-wash-table th:first-child {
-          text-align: left;
-        }
-        .services-rtl .sp-wash-table th:first-child {
-          text-align: right;
-        }
-        .sp-wash-table td {
-          padding: 14px 20px;
-          font-size: 14px;
-          text-align: center;
-          border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-        .sp-wash-name {
-          text-align: left !important;
-          color: rgba(255,255,255,0.7);
-          font-weight: 500;
-        }
-        .services-rtl .sp-wash-name {
-          text-align: right !important;
-        }
-        .sp-wash-price {
-          color: #c9a84c;
-          font-weight: 400;
-        }
-
-        /* Home banner */
-        .sp-home-banner {
-          max-width: 700px;
-          margin: 0 auto 80px;
-          padding: 32px;
-          border-radius: 20px;
-          border: 1px solid rgba(201,168,76,0.12);
-          background: linear-gradient(135deg, rgba(201,168,76,0.04), rgba(255,255,255,0.02));
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 24px;
-          flex-wrap: wrap;
-          margin-left: 32px;
-          margin-right: 32px;
-          max-width: calc(700px);
-        }
-        @media (min-width: 764px) {
-          .sp-home-banner {
-            margin-left: auto;
-            margin-right: auto;
-          }
-        }
-        .sp-home-banner h3 {
+        .sv-pill-type {
+          font-family: var(--font-numeral, 'Bodoni Moda', serif);
           font-size: 18px;
           font-weight: 600;
-          color: #fff;
-          margin-bottom: 6px;
-        }
-        .sp-home-banner p {
-          font-size: 13px;
-          color: rgba(255,255,255,0.8);
-          line-height: 1.6;
-          max-width: 400px;
-        }
-        .sp-home-cta {
-          display: inline-block;
-          padding: 12px 28px;
-          font-size: 13px;
-          font-weight: 600;
-          color: #050508;
-          background: linear-gradient(135deg, #c9a84c, #e8d48b);
-          border-radius: 50px;
-          text-decoration: none;
-          white-space: nowrap;
-          transition: all 0.3s;
-        }
-        .sp-home-cta:hover {
-          box-shadow: 0 0 24px rgba(201,168,76,0.3);
-          transform: translateY(-1px);
+          color: #ffffff;
+          letter-spacing: 0.3px;
+          line-height: 1.1;
         }
 
-        /* Mobile */
+        .sv-pill-service {
+          font-family: var(--font-label, 'Inter', sans-serif);
+          font-size: 11px;
+          font-weight: 400;
+          letter-spacing: 1.4px;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.55);
+        }
+
+        .sv-pill-price {
+          font-family: var(--font-numeral, 'Bodoni Moda', serif);
+          font-size: 36px;
+          font-weight: 600;
+          color: var(--gold, #a8b0b8);
+          line-height: 1;
+          letter-spacing: -0.5px;
+          margin-left: 8px;
+        }
+
+        .sv-pill-kd {
+          font-size: 16px;
+          font-weight: 500;
+          letter-spacing: 1px;
+          opacity: 0.7;
+        }
+
+        @media (max-width: 1100px) {
+          .sv-grid { grid-template-columns: repeat(2, 1fr); }
+          .sv-card:nth-child(1),
+          .sv-card:nth-child(2),
+          .sv-card:nth-child(3),
+          .sv-card:nth-child(4),
+          .sv-card:nth-child(5) { grid-column: span 1; }
+        }
         @media (max-width: 640px) {
-          .sp-header { padding: 12px 20px; }
-          .sp-hero { padding: 110px 20px 40px; }
-          .sp-list { padding: 10px 20px 40px; }
-          .sp-row {
-            flex-direction: column;
-            gap: 16px;
-            padding: 24px 0;
-          }
-          .sp-row-right {
-            align-items: flex-start;
-            text-align: left;
-            flex-direction: row;
-            gap: 16px;
-            flex-wrap: wrap;
-            min-width: 0;
-          }
-          .services-rtl .sp-row-right {
-            align-items: flex-start;
-            text-align: right;
-          }
-          .sp-row-price {
-            font-size: 24px;
-            margin-bottom: 0;
-          }
-          .sp-row-price-label {
-            display: none;
-          }
-          .sp-wash { padding: 0 20px; }
-          .sp-home-banner { margin: 0 20px 60px; }
+          .sv-header { padding: 12px 20px; }
+          .sv-hero { padding: 120px 20px 40px; }
+          .sv-grid { padding: 20px 20px 60px; grid-template-columns: 1fr; }
         }
       `}</style>
     </div>

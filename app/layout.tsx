@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans, Tajawal } from "next/font/google";
+import SiteHeader from "./components/SiteHeader";
+import { Playfair_Display, DM_Sans, Tajawal, Inter, Bodoni_Moda } from "next/font/google";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -20,6 +21,20 @@ const tajawal = Tajawal({
   subsets: ["arabic"],
   variable: "--font-arabic",
   weight: ["300", "400", "500", "700", "800"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-label",
+  weight: ["300", "400", "500"],
+  display: "swap",
+});
+
+const bodoni = Bodoni_Moda({
+  subsets: ["latin"],
+  variable: "--font-numeral",
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -57,8 +72,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${playfairDisplay.variable} ${dmSans.variable} ${tajawal.variable}`}
+        className={`${playfairDisplay.variable} ${dmSans.variable} ${tajawal.variable} ${inter.variable} ${bodoni.variable}`}
       >
+        <SiteHeader />
         {children}
         {/* Grain overlay */}
         <div className="grain-overlay" />

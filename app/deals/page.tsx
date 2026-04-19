@@ -62,13 +62,7 @@ export default function DealsPage() {
 
   return (
     <div className={`deals-page${isAr ? " deals-rtl" : ""}`}>
-      <header className="dp-header">
-        <Link href="/" className="dp-back">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points={isAr ? "9 18 15 12 9 6" : "15 18 9 12 15 6"} /></svg>
-          {t("backHome")}
-        </Link>
-        <button className="dp-lang" onClick={() => setLang(isAr ? "en" : "ar")}>{isAr ? "English" : "العربية"}</button>
-      </header>
+      {/* Header provided by layout */}
 
       <div className="dp-hero">
         <div className="dp-hero-bg" />
@@ -112,33 +106,33 @@ export default function DealsPage() {
       <style jsx>{`
         .deals-page { min-height:100vh; background:#050508; color:#f0ece2; font-family:var(--font-body,'DM Sans',sans-serif); }
         .deals-rtl { direction:rtl; font-family:var(--font-arabic,'Tajawal',sans-serif); }
-        .dp-header { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:16px 32px; background:rgba(5,5,8,0.85); backdrop-filter:blur(16px); border-bottom:1px solid rgba(201,168,76,0.08); }
+        .dp-header { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:16px 32px; background:rgba(5,5,8,0.85); backdrop-filter:blur(16px); border-bottom:1px solid rgba(168,176,184,0.08); }
         .dp-back { display:flex; align-items:center; gap:8px; color:rgba(255,255,255,0.85); text-decoration:none; font-size:14px; transition:color 0.3s; }
-        .dp-back:hover { color:#c9a84c; }
-        .dp-lang { background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2); color:#c9a84c; padding:6px 16px; border-radius:50px; font-size:12px; font-weight:600; cursor:pointer; }
+        .dp-back:hover { color:#a8b0b8; }
+        .dp-lang { background:rgba(168,176,184,0.1); border:1px solid rgba(168,176,184,0.2); color:#a8b0b8; padding:6px 16px; border-radius:50px; font-size:12px; font-weight:600; cursor:pointer; }
         .dp-hero { padding:140px 32px 60px; text-align:center; position:relative; }
-        .dp-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 80%, rgba(201,168,76,0.06) 0%, transparent 60%); pointer-events:none; }
+        .dp-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 80%, rgba(168,176,184,0.06) 0%, transparent 60%); pointer-events:none; }
         .dp-hero h1 { font-family:var(--font-display,'Playfair Display',serif); font-size:clamp(36px,6vw,56px); font-weight:700; margin-bottom:16px; position:relative; }
         .dp-hero p { font-size:16px; color:rgba(255,255,255,0.8); max-width:500px; margin:0 auto; line-height:1.6; position:relative; }
         .dp-grid { max-width:1100px; margin:0 auto; padding:20px 32px 80px; display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px; }
         .dp-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:20px; padding:28px; opacity:0; transform:translateY(16px); animation:dpIn 0.5s ease forwards; transition:border-color 0.3s; }
-        .dp-card:hover { border-color:rgba(201,168,76,0.2); }
+        .dp-card:hover { border-color:rgba(168,176,184,0.2); }
         @keyframes dpIn { to { opacity:1; transform:translateY(0); } }
         .dp-card-top { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
         .dp-icon { font-size:28px; }
-        .dp-badge { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#c9a84c; background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.15); border-radius:50px; padding:4px 14px; }
+        .dp-badge { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#a8b0b8; background:rgba(168,176,184,0.08); border:1px solid rgba(168,176,184,0.15); border-radius:50px; padding:4px 14px; }
         .dp-card h2 { font-family:var(--font-display,'Playfair Display',serif); font-size:22px; font-weight:700; margin-bottom:8px; }
         .dp-desc { font-size:13px; color:rgba(255,255,255,0.8); line-height:1.6; margin-bottom:16px; }
-        .dp-price { font-family:var(--font-display,'Playfair Display',serif); font-size:28px; font-weight:700; color:#c9a84c; margin-bottom:16px; }
+        .dp-price { font-family:var(--font-display,'Playfair Display',serif); font-size:28px; font-weight:700; color:#a8b0b8; margin-bottom:16px; }
         .dp-countdown { display:flex; gap:8px; margin-bottom:16px; }
-        .dp-cd-box { background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.12); border-radius:10px; padding:8px 12px; text-align:center; min-width:52px; }
-        .dp-cd-num { display:block; font-family:var(--font-display); font-size:20px; color:#c9a84c; }
+        .dp-cd-box { background:rgba(168,176,184,0.05); border:1px solid rgba(168,176,184,0.12); border-radius:10px; padding:8px 12px; text-align:center; min-width:52px; }
+        .dp-cd-num { display:block; font-family:var(--font-display); font-size:20px; color:#a8b0b8; }
         .dp-cd-label { font-size:8px; letter-spacing:1px; color:rgba(255,255,255,0.7); text-transform:uppercase; }
         .dp-features { list-style:none; padding:0; margin:0 0 20px; display:flex; flex-direction:column; gap:8px; }
         .dp-features li { display:flex; align-items:center; gap:8px; font-size:13px; color:rgba(255,255,255,0.85); }
-        .dp-check { color:#c9a84c; font-size:13px; }
-        .dp-cta { display:block; text-align:center; padding:12px 24px; border-radius:50px; font-size:13px; font-weight:600; text-decoration:none; background:linear-gradient(135deg,#c9a84c,#e8d48b); color:#0a0a0f; transition:all 0.3s; }
-        .dp-cta:hover { box-shadow:0 0 24px rgba(201,168,76,0.3); transform:translateY(-1px); }
+        .dp-check { color:#a8b0b8; font-size:13px; }
+        .dp-cta { display:block; text-align:center; padding:12px 24px; border-radius:50px; font-size:13px; font-weight:600; text-decoration:none; background:linear-gradient(135deg,#a8b0b8,#c8ced6); color:#0a0a0f; transition:all 0.3s; }
+        .dp-cta:hover { box-shadow:0 0 24px rgba(168,176,184,0.3); transform:translateY(-1px); }
         @media(max-width:640px) { .dp-header{padding:12px 20px} .dp-hero{padding:110px 20px 40px} .dp-grid{padding:10px 20px 60px; grid-template-columns:1fr} }
       `}</style>
     </div>

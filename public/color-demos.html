@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diamond PKW — Color Palette Options</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0f;
+    color: #888;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    padding: 3rem 2rem 4rem;
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    font-size: 2rem;
+    color: #ddd;
+    text-align: center;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.06em;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 3rem;
+    letter-spacing: 0.04em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .grid { grid-template-columns: 1fr; max-width: 400px; }
+  }
+
+  .col {
+    background: #111118;
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  /* --- Header --- */
+  .col-header { text-align: center; }
+  .col-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .col-hex {
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: #555;
+    font-family: 'Inter', monospace;
+  }
+
+  /* --- Sample heading --- */
+  .sample-heading {
+    font-family: 'Bodoni Moda', serif;
+    font-weight: 400;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+  }
+
+  /* --- Sample body --- */
+  .sample-body {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* --- Buttons --- */
+  .btn-row { display: flex; gap: 0.6rem; }
+
+  .btn-fill {
+    flex: 1;
+    padding: 0.55rem 0;
+    border: none;
+    border-radius: 100px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0a0a0f;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .btn-ghost {
+    flex: 1;
+    padding: 0.55rem 0;
+    background: transparent;
+    border: 1.5px solid;
+    border-radius: 100px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  /* --- Card --- */
+  .sample-card {
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 1rem;
+    background: rgba(255,255,255,0.015);
+  }
+  .card-title {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+  }
+  .card-text {
+    font-size: 0.7rem;
+    line-height: 1.55;
+    color: #555;
+  }
+
+  /* --- Stars --- */
+  .stars {
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+  }
+
+  /* --- Gradient swatch --- */
+  .swatch {
+    height: 28px;
+    border-radius: 6px;
+  }
+
+  /* --- Divider --- */
+  .divider {
+    border: none;
+    border-top: 1px solid #1a1a22;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Diamond PKW</h1>
+<p class="subtitle">Accent Color Palette Options</p>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const palettes = [
+  { name: "Brushed Platinum", primary: "#c2bfb6", light: "#dbd8d0", dark: "#8a877e" },
+  { name: "Iced Silver",      primary: "#a8b0b8", light: "#c8ced6", dark: "#6e7680" },
+  { name: "Warm Titanium",    primary: "#9a8e7a", light: "#beb3a0", dark: "#6b6254" },
+  { name: "Pearl White",      primary: "#d4d0c8", light: "#eae8e2", dark: "#9e9b94" },
+  { name: "Rose Copper",      primary: "#b08d78", light: "#d0b5a2", dark: "#7a5f4e" },
+];
+
+const grid = document.getElementById("grid");
+
+palettes.forEach(p => {
+  const col = document.createElement("div");
+  col.className = "col";
+  col.innerHTML = `
+    <div class="col-header">
+      <div class="col-name" style="color:${p.primary}">${p.name}</div>
+      <div class="col-hex">${p.primary} &middot; ${p.light} &middot; ${p.dark}</div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="sample-heading" style="color:${p.primary}">Premium Auto Detailing</div>
+
+    <div class="sample-body" style="color:${p.light}">Meticulous care for your vehicle, from paint correction to ceramic coating. Every detail matters.</div>
+
+    <div class="btn-row">
+      <div class="btn-fill" style="background:${p.primary}">Book Now</div>
+      <div class="btn-ghost" style="border-color:${p.primary}; color:${p.primary}">Our Work</div>
+    </div>
+
+    <div class="sample-card" style="border-color:${p.dark}; box-shadow: 0 0 20px ${p.dark}33;">
+      <div class="card-title" style="color:${p.primary}">Ceramic Coating</div>
+      <div class="card-text">Long-lasting protection with a showroom finish that repels water and contaminants.</div>
+    </div>
+
+    <div class="stars" style="color:${p.primary}">&starf;&starf;&starf;&starf;&starf;</div>
+
+    <div class="swatch" style="background: linear-gradient(to right, ${p.dark}, ${p.primary}, ${p.light})"></div>
+  `;
+  grid.appendChild(col);
+});
+</script>
+
+</body>
+</html>
