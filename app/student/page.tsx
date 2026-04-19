@@ -385,12 +385,17 @@ export default function StudentPage() {
                   setSubmitting(true);
                   const formData = new FormData(e.currentTarget);
                   formData.set("source", "student");
+                  const params = new URLSearchParams();
+                  formData.forEach((v, k) => { if (typeof v === "string") params.append(k, v); });
                   try {
-                    await fetch(SHEETS_URL, { method: "POST", body: formData });
-                    setSubmitted(true);
-                  } catch {
-                    setSubmitted(true);
-                  }
+                    await fetch(SHEETS_URL, {
+                      method: "POST",
+                      mode: "no-cors",
+                      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                      body: params.toString(),
+                    });
+                  } catch { /* no-cors: response unreadable but POST goes through */ }
+                  setSubmitted(true);
                   setSubmitting(false);
                 }}
                 style={{
