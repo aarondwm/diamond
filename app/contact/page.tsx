@@ -72,8 +72,6 @@ function FormField({ label, placeholder, type = "text", required = true, optiona
   );
 }
 
-type Lang = "en" | "ar";
-
 function ContactInner() {
   const params = useSearchParams();
   const [tab, setTab] = useState(0);
