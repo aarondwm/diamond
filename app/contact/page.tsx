@@ -43,7 +43,7 @@ const MapIcon = ({ size = 18 }: { size?: number }) => (<svg width={size} height=
 const ArrowIcon = ({ size = 14 }: { size?: number }) => (<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>);
 const CameraIcon = ({ size = 18 }: { size?: number }) => (<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" /><circle cx="12" cy="13" r="4" /></svg>);
 
-function FormField({ label, placeholder, type = "text", required = true, optionalLabel }: { label: string; placeholder?: string; type?: string; required?: boolean; optionalLabel?: string }) {
+function FormField({ label, name, placeholder, type = "text", required = true, optionalLabel }: { label: string; name: string; placeholder?: string; type?: string; required?: boolean; optionalLabel?: string }) {
   return (
     <div style={{ marginBottom: 16 }} className="ct-field">
       <label style={{
@@ -56,7 +56,9 @@ function FormField({ label, placeholder, type = "text", required = true, optiona
       </label>
       <input
         type={type}
+        name={name}
         placeholder={placeholder}
+        required={required}
         style={{
           width: "100%", padding: "12px 14px",
           background: "rgba(255,255,255,0.02)",
@@ -390,13 +392,13 @@ function ContactInner() {
                   <input type="hidden" name="source" value="contact" />
 
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
-                    <FormField label={isAr ? "الاسم الكامل" : "Full Name"} placeholder={isAr ? "اسمك الكامل" : "Your full name"} />
-                    <FormField label={isAr ? "رقم الهاتف" : "Phone Number"} placeholder="+965 XXXX XXXX" />
+                    <FormField name="name" label={isAr ? "الاسم الكامل" : "Full Name"} placeholder={isAr ? "اسمك الكامل" : "Your full name"} />
+                    <FormField name="phone" label={isAr ? "رقم الهاتف" : "Phone Number"} placeholder="+965 XXXX XXXX" />
                   </div>
-                  <FormField label={isAr ? "البريد الإلكتروني" : "Email"} placeholder="your@email.com" required={false} optionalLabel={isAr ? " (اختياري)" : undefined} />
+                  <FormField name="email" label={isAr ? "البريد الإلكتروني" : "Email"} placeholder="your@email.com" required={false} optionalLabel={isAr ? " (اختياري)" : undefined} />
                   <div style={{ display: "grid", gridTemplateColumns: "90px 1fr", gap: "0 12px" }}>
-                    <FormField label={isAr ? "السنة" : "Year"} placeholder="2024" />
-                    <FormField label={isAr ? "ماركة وموديل السيارة" : "Vehicle Make & Model"} placeholder={isAr ? "مرسيدس S-Class" : "Mercedes S-Class"} />
+                    <FormField name="year" label={isAr ? "السنة" : "Year"} placeholder="2024" />
+                    <FormField name="vehicle" label={isAr ? "ماركة وموديل السيارة" : "Vehicle Make & Model"} placeholder={isAr ? "مرسيدس S-Class" : "Mercedes S-Class"} />
                   </div>
 
                   <div style={{ marginBottom: 16 }}>
@@ -422,7 +424,7 @@ function ContactInner() {
                   </div>
 
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 16px" }}>
-                    <FormField label={isAr ? "التاريخ المفضل" : "Preferred Date"} type="date" />
+                    <FormField name="date" label={isAr ? "التاريخ المفضل" : "Preferred Date"} type="date" />
                     <div style={{ marginBottom: 16 }} className="ct-field">
                       <label style={{
                         fontSize: 9, fontWeight: 600, letterSpacing: isAr ? 0 : "0.14em",
