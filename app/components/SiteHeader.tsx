@@ -72,7 +72,7 @@ export default function SiteHeader() {
           <a href={href("#gallery")} onClick={close}>{t.gallery}</a>
           <a href="/packages" onClick={close} className="nav-pricing">{t.pricing}</a>
           <a href={href("#reviews")} onClick={close}>{t.reviews}</a>
-          <a href={href("#contact")} onClick={close}>{t.contact}</a>
+          <a href="/contact" onClick={close}>{t.contact}</a>
         </nav>
 
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
