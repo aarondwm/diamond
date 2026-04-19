@@ -7,12 +7,16 @@ const T = {
   en: {
     home: "Home", services: "Services", pricing: "Pricing",
     gallery: "Gallery", reviews: "Reviews", contact: "Contact", lang: "العربية",
+    location: "Our Location",
   },
   ar: {
     home: "الرئيسية", services: "خدماتنا", pricing: "الأسعار",
     gallery: "المعرض", reviews: "التقييمات", contact: "تواصل", lang: "English",
+    location: "موقعنا",
   },
 };
+
+const LOCATION_URL = "https://share.google/Iw2H2OqBhlgzo2MVD";
 
 type Lang = "en" | "ar";
 
@@ -65,13 +69,25 @@ export default function SiteHeader() {
         <nav className="nav-links">
           <a href={isHome ? "#hero" : "/"} onClick={close}>{t.home}</a>
           <a href="/services" onClick={close}>{t.services}</a>
-          <a href="/packages" onClick={close}>{t.pricing}</a>
           <a href={href("#gallery")} onClick={close}>{t.gallery}</a>
+          <a href="/packages" onClick={close} className="nav-pricing">{t.pricing}</a>
           <a href={href("#reviews")} onClick={close}>{t.reviews}</a>
           <a href={href("#contact")} onClick={close}>{t.contact}</a>
         </nav>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <a
+            href={LOCATION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="header-location"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            {t.location}
+          </a>
           <button className="lang-toggle" onClick={toggleLang}>
             <svg className="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10" />
@@ -96,6 +112,19 @@ export default function SiteHeader() {
         <a href={href("#gallery")} onClick={close}>{t.gallery}</a>
         <a href={href("#reviews")} onClick={close}>{t.reviews}</a>
         <a href={href("#contact")} onClick={close}>{t.contact}</a>
+        <a
+          href={LOCATION_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={close}
+          style={{ marginTop: "12px", display: "inline-flex", alignItems: "center", gap: 8 }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          {t.location}
+        </a>
         <button className="lang-toggle" onClick={toggleLang} style={{ marginTop: "16px" }}>
           <svg className="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="12" cy="12" r="10" />

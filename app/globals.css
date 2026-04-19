@@ -175,6 +175,11 @@ ul, ol {
   position: relative;
 }
 
+.nav-links a.nav-pricing {
+  color: var(--gold) !important;
+  font-weight: 700;
+}
+
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--gold);
@@ -210,6 +215,41 @@ ul, ol {
   font-weight: 600;
   color: var(--text-dim);
   transition: var(--transition);
+}
+
+.header-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(168,176,184,0.08);
+  border: 1px solid rgba(168,176,184,0.25);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-family: var(--font-label, 'Inter', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.header-location:hover {
+  background: rgba(168,176,184,0.16);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+body.ar-active .header-location {
+  font-family: var(--font-arabic, 'Tajawal', sans-serif);
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@media (max-width: 900px) {
+  .header-location { display: none; }
 }
 
 .lang-toggle:hover {
