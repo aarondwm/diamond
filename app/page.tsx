@@ -1063,6 +1063,69 @@ function KocCountdown({ isAr }: { isAr?: boolean }) {
   );
 }
 
+const SPOTLIGHT_CARS = [
+  { key: "ferrari", name: "Ferrari 488", img: "/ferarri.jpg" },
+  { key: "goldwing", name: "Honda Goldwing", img: "/honda.jpg" },
+  { key: "denza", name: "BYD Denza 5", img: "/byd.jpg" },
+];
+
+function SpotlightCards() {
+  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCurrent(p => (p + 1) % SPOTLIGHT_CARS.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <>
+      {/* Desktop: static 3-column grid */}
+      <div className="spotlight-grid reveal spotlight-grid-desktop">
+        {SPOTLIGHT_CARS.map((car) => (
+          <div className="spotlight-card" key={car.key}>
+            <div className="spotlight-card-image" aria-label={car.name} style={{
+              backgroundImage: `url(${car.img})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }} />
+            <div className="spotlight-card-body">
+              <h3 className="spotlight-card-title">{car.name}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Mobile: single-card carousel auto-rotating every 5s */}
+      <div className="spotlight-carousel reveal">
+        <div className="spotlight-carousel-track" style={{ transform: `translateX(-${current * 100}%)` }}>
+          {SPOTLIGHT_CARS.map((car) => (
+            <div className="spotlight-card spotlight-card-mobile" key={car.key}>
+              <div className="spotlight-card-image" aria-label={car.name} style={{
+                backgroundImage: `url(${car.img})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }} />
+              <div className="spotlight-card-body">
+                <h3 className="spotlight-card-title">{car.name}</h3>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="spotlight-carousel-dots">
+          {SPOTLIGHT_CARS.map((_, i) => (
+            <button
+              key={i}
+              className={`spotlight-dot${i === current ? " active" : ""}`}
+              aria-label={`Go to slide ${i + 1}`}
+              onClick={() => setCurrent(i)}
+            />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
 function BookingCardSlide({ card, visible, isAr }: { card: BookingCard; visible: boolean; isAr?: boolean }) {
   const badge = isAr && card.badgeAr ? card.badgeAr : card.badge;
   const title = isAr && card.titleAr ? card.titleAr : card.title;
@@ -1666,24 +1729,7 @@ export default function Home() {
           <span className="spotlight-title-line" />
         </div>
 
-        <div className="spotlight-grid reveal">
-          {[
-            { key: "ferrari", name: "Ferrari 488", img: "/ferarri.jpg" },
-            { key: "goldwing", name: "Honda Goldwing", img: "/honda.jpg" },
-            { key: "denza", name: "BYD Denza 5", img: "/byd.jpg" },
-          ].map((car) => (
-            <div className="spotlight-card" key={car.key}>
-              <div className="spotlight-card-image" aria-label={car.name} style={{
-                backgroundImage: `url(${car.img})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }} />
-              <div className="spotlight-card-body">
-                <h3 className="spotlight-card-title">{car.name}</h3>
-              </div>
-            </div>
-          ))}
-        </div>
+        <SpotlightCards />
 
         <div className="spotlight-cta reveal">
           <a href="#gallery" className="spotlight-btn">

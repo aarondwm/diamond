@@ -2071,22 +2071,18 @@ body.ar-active .header-location {
 @media (max-width: 768px) {
   .ow-panel {
     height: auto;
-    min-height: 480px;
+    min-height: 360px;
     flex-direction: column;
   }
-  .ow-panel-slides {
-    position: relative;
-    width: 100%;
-    height: 250px;
-  }
-  .ow-panel-slides::after { display: none; }
+  /* Hide card areas entirely on mobile — only WHAT WE DO / MOST BOOKED text remain */
+  .ow-panel-slides { display: none !important; }
   .ow-panel-text {
     position: relative;
     width: 100%;
-    padding: 40px 24px;
+    padding: 60px 24px;
+    clip-path: none !important;
   }
-  .ow-panel-mirrored .ow-panel-slides { order: 1; }
-  .ow-panel-mirrored .ow-panel-text { order: 2; }
+  .ow-panel-mirrored .ow-panel-text { clip-path: none !important; }
   .ow-panel::after { display: none; }
   .ow-gold-line-svg { display: none; }
 }
@@ -2375,6 +2371,54 @@ body.ar-active .svc-mini {
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-bottom: 48px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.spotlight-grid-desktop { display: grid; }
+.spotlight-carousel { display: none; }
+
+@media (max-width: 768px) {
+  .spotlight-grid-desktop { display: none !important; }
+  .spotlight-carousel {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    margin: 0 auto 28px;
+    max-width: 360px;
+  }
+  .spotlight-carousel-track {
+    display: flex;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .spotlight-card-mobile {
+    flex: 0 0 100%;
+    min-width: 0;
+    margin: 0;
+  }
+  .spotlight-carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .spotlight-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(168,176,184,0.3);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s;
+  }
+  .spotlight-dot.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    width: 22px;
+    border-radius: 4px;
+  }
 }
 
 .spotlight-card {
