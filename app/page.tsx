@@ -834,7 +834,7 @@ const SERVICE_MINI_CARDS = [
   { key: "ppf", label: "PPF", labelAr: "فيلم حماية الطلاء", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" },
   { key: "tinting", label: "Tinting", labelAr: "تظليل النوافذ", icon: "M2 3h20v14H2zM8 21h8M12 17v4" },
   { key: "polish", label: "Polish", labelAr: "تلميع وتصحيح الطلاء", icon: "M12 3v1m0 16v1m-7.07-2.93l.7-.7m12.73-12.73l.7-.7M3 12h1m16 0h1M5.64 5.64l.7.7m12.02 12.02l.7.7" },
-  { key: "full-wash", label: "Full Wash", labelAr: "غسيل كلة", icon: "M4 10h16c1 0 2 1 2 2v2c0 4-4 8-10 8S2 18 2 14v-2c0-1 1-2 2-2zM12 2v4M8 4l1 2M16 4l-1 2" },
+  { key: "full-wash", label: "Full Wash", labelAr: "غسيل كامل", icon: "M4 10h16c1 0 2 1 2 2v2c0 4-4 8-10 8S2 18 2 14v-2c0-1 1-2 2-2zM12 2v4M8 4l1 2M16 4l-1 2" },
   { key: "home-service", label: "Home Service", labelAr: "خدمات منازل", icon: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10" },
 ];
 
@@ -1829,7 +1829,13 @@ export default function Home() {
                 <a href="tel:+96595539114">{lang === "ar" ? "+٩٦٥ ٩٥٥٣ ٩١١٤" : "+965 9553 9114"}</a>
               </p>
             </div>
-            <div className="contact-info-block">
+            <a
+              href="https://maps.app.goo.gl/ur5bt2FnjcnQxq91A"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-info-block"
+              style={{ textDecoration: "none" }}
+            >
               <div className="contact-info-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
@@ -1838,18 +1844,25 @@ export default function Home() {
               </div>
               <h4>{lang === "ar" ? "الموقع" : "Location"}</h4>
               <p>{lang === "ar" ? "شارع ١٦، مدينة الكويت" : "16 St, Kuwait City"}</p>
-            </div>
+            </a>
           </div>
 
-          <div className="contact-map">
+          <a
+            href="https://maps.app.goo.gl/ur5bt2FnjcnQxq91A"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="contact-map"
+            style={{ display: "block", textDecoration: "none" }}
+          >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3476.6!2d47.95!3d29.35!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDIxJzAwLjAiTiA0N8KwNTcnMDAuMCJF!5e0!3m2!1sen!2skw!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3478.0!2d47.9374304!3d29.3068046!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf9badf21eb609%3A0x98209be21c50f629!2sDiamond%20protection!5e0!3m2!1sen!2skw!4v1700000000000"
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Diamond PKW Location"
+              style={{ pointerEvents: "none" }}
             />
-          </div>
+          </a>
         </div>
       </section>
 

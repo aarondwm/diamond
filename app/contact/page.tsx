@@ -561,29 +561,39 @@ function ContactInner() {
           animation: "ctFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both",
         }}>
           {(isAr ? [
-            { icon: <PhoneIcon size={14} />, label: "اتصل", value: "+٩٦٥ ٩٥٥٣ ٦٣٤٤" },
-            { icon: <MailIcon size={14} />, label: "البريد", value: "info@diamond-pkw.com" },
-            { icon: <MapIcon size={14} />, label: "الموقع", value: "شارع ١٦، مدينة الكويت" },
-            { icon: <ClockIcon size={14} />, label: "الدوام", value: "السبت–الخميس ٩–٨" },
+            { icon: <PhoneIcon size={14} />, label: "اتصل", value: "+٩٦٥ ٩٥٥٣ ٦٣٤٤", href: "tel:+96595536344" },
+            { icon: <MailIcon size={14} />, label: "البريد", value: "info@diamond-pkw.com", href: "mailto:info@diamond-pkw.com" },
+            { icon: <MapIcon size={14} />, label: "الموقع", value: "شارع ١٦، مدينة الكويت", href: "https://maps.app.goo.gl/ur5bt2FnjcnQxq91A" },
+            { icon: <ClockIcon size={14} />, label: "الدوام", value: "السبت–الخميس ٩–٨", href: undefined },
           ] : [
-            { icon: <PhoneIcon size={14} />, label: "Call", value: "+965 9553 6344" },
-            { icon: <MailIcon size={14} />, label: "Email", value: "info@diamond-pkw.com" },
-            { icon: <MapIcon size={14} />, label: "Location", value: "16 St, Kuwait City" },
-            { icon: <ClockIcon size={14} />, label: "Hours", value: "Sat–Thu 9–8" },
-          ]).map((c, i) => (
-            <div key={i} className="ct-info-item" style={{
-              background: GLASS, border: `1px solid ${BORDER}`, borderRadius: 14,
-              backdropFilter: "blur(10px)", padding: "14px 10px",
-              textAlign: "center", transition: "all 0.2s", cursor: "default",
-            }}>
+            { icon: <PhoneIcon size={14} />, label: "Call", value: "+965 9553 6344", href: "tel:+96595536344" },
+            { icon: <MailIcon size={14} />, label: "Email", value: "info@diamond-pkw.com", href: "mailto:info@diamond-pkw.com" },
+            { icon: <MapIcon size={14} />, label: "Location", value: "16 St, Kuwait City", href: "https://maps.app.goo.gl/ur5bt2FnjcnQxq91A" },
+            { icon: <ClockIcon size={14} />, label: "Hours", value: "Sat–Thu 9–8", href: undefined },
+          ]).map((c, i) => {
+            const Wrapper = c.href ? "a" : "div";
+            return (
+            <Wrapper
+              key={i}
+              className="ct-info-item"
+              {...(c.href ? { href: c.href, target: c.href.startsWith("http") ? "_blank" : undefined, rel: c.href.startsWith("http") ? "noopener noreferrer" : undefined } : {})}
+              style={{
+                background: GLASS, border: `1px solid ${BORDER}`, borderRadius: 14,
+                backdropFilter: "blur(10px)", padding: "14px 10px",
+                textAlign: "center", transition: "all 0.2s",
+                cursor: c.href ? "pointer" : "default",
+                color: "inherit", textDecoration: "none",
+                display: "block",
+              }}>
               <div style={{ color: ACCENT, marginBottom: 6, display: "flex", justifyContent: "center" }}>{c.icon}</div>
               <div style={{
                 fontSize: 10, color: TEXT3, letterSpacing: isAr ? 0 : "0.15em", textTransform: isAr ? "none" : "uppercase", marginBottom: 3,
                 fontFamily: isAr ? "var(--font-arabic, 'Tajawal', sans-serif)" : "var(--font-label, 'Inter', sans-serif)", fontWeight: 600,
               }}>{c.label}</div>
               <div style={{ fontSize: 12, color: TEXT2, lineHeight: 1.4, fontFamily: isAr ? "var(--font-arabic, 'Tajawal', sans-serif)" : "var(--font-label, 'Inter', sans-serif)" }}>{c.value}</div>
-            </div>
-          ))}
+            </Wrapper>
+            );
+          })}
         </div>
       </div>
     </div>
