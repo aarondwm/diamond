@@ -51,7 +51,7 @@ const T = {
     pageTitle: "ما نقدمه",
     pageSubtitle: "خدمات تلميع وحماية متميزة مصممة لطرق ومناخ الكويت.",
     backHome: "العودة للرئيسية",
-    enquire: "استفسر",
+    enquire: "احجز الآن",
   },
 };
 
@@ -336,17 +336,20 @@ export default function ServicesPage() {
         }
 
         .sv-pricing-pills {
-          display: flex;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
           justify-content: center;
-          gap: 16px;
-          flex-wrap: wrap;
+          gap: 12px;
+          max-width: 1000px;
+          margin: 0 auto;
         }
 
         .sv-pill {
           display: flex;
           align-items: center;
-          gap: 16px;
-          padding: 20px 28px;
+          justify-content: center;
+          gap: 12px;
+          padding: 18px 16px;
           background: linear-gradient(180deg, rgba(168,176,184,0.06) 0%, rgba(255,255,255,0.02) 100%);
           border: 1px solid rgba(168,176,184,0.25);
           border-radius: 60px;
@@ -354,6 +357,7 @@ export default function ServicesPage() {
           text-decoration: none;
           color: inherit;
           cursor: pointer;
+          min-width: 0;
           box-shadow:
             0 0 24px rgba(168,176,184,0.1),
             0 0 48px rgba(168,176,184,0.05),
@@ -370,8 +374,8 @@ export default function ServicesPage() {
         }
 
         .sv-pill-icon {
-          width: 32px;
-          height: 32px;
+          width: 24px;
+          height: 24px;
           flex-shrink: 0;
           color: var(--gold, #a8b0b8);
         }
@@ -381,41 +385,82 @@ export default function ServicesPage() {
           flex-direction: column;
           gap: 2px;
           text-align: left;
+          min-width: 0;
         }
 
         .sv-pill-type {
           font-family: var(--font-numeral, 'Bodoni Moda', serif);
-          font-size: 18px;
+          font-size: 15px;
           font-weight: 600;
           color: #ffffff;
           letter-spacing: 0.3px;
           line-height: 1.1;
+          white-space: nowrap;
         }
 
         .sv-pill-service {
           font-family: var(--font-label, 'Inter', sans-serif);
-          font-size: 11px;
+          font-size: 9px;
           font-weight: 400;
-          letter-spacing: 1.4px;
+          letter-spacing: 1.2px;
           text-transform: uppercase;
           color: rgba(255,255,255,0.55);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .sv-pill-price {
           font-family: var(--font-numeral, 'Bodoni Moda', serif);
-          font-size: 36px;
+          font-size: 26px;
           font-weight: 600;
           color: var(--gold, #a8b0b8);
           line-height: 1;
           letter-spacing: -0.5px;
-          margin-left: 8px;
+          flex-shrink: 0;
         }
 
         .sv-pill-kd {
-          font-size: 16px;
+          font-size: 12px;
           font-weight: 500;
-          letter-spacing: 1px;
+          letter-spacing: 0.5px;
           opacity: 0.7;
+        }
+
+        /* Mobile: shrink pills even more so all 3 fit on one row */
+        @media (max-width: 640px) {
+          .sv-pricing-pills { gap: 6px; }
+          .sv-pill {
+            padding: 12px 8px;
+            gap: 6px;
+            border-radius: 40px;
+            flex-direction: column;
+            text-align: center;
+          }
+          .sv-pill-info { text-align: center; align-items: center; }
+          .sv-pill-icon { width: 20px; height: 20px; }
+          .sv-pill-type { font-size: 12px; }
+          .sv-pill-service { font-size: 8px; letter-spacing: 0.8px; }
+          .sv-pill-price { font-size: 20px; }
+          .sv-pill-kd { font-size: 10px; }
+        }
+
+        /* Arabic: match site font for services page CTA + pricing pills */
+        body.ar-active .sv-card-cta,
+        body.ar-active .sv-pricing-label,
+        body.ar-active .sv-pill-type,
+        body.ar-active .sv-pill-service,
+        body.ar-active .sv-pill-kd {
+          font-family: var(--font-arabic, 'Tajawal', sans-serif);
+          letter-spacing: 0;
+          text-transform: none;
+        }
+        body.ar-active .sv-card-cta { font-size: 14px; font-weight: 700; }
+        body.ar-active .sv-pill-type { font-size: 16px; font-weight: 700; }
+        body.ar-active .sv-pill-service { font-size: 11px; font-weight: 500; }
+        @media (max-width: 640px) {
+          body.ar-active .sv-pill-type { font-size: 13px; }
+          body.ar-active .sv-pill-service { font-size: 9px; }
         }
 
         @media (max-width: 1100px) {
