@@ -938,7 +938,7 @@ export default function PackagesPage() {
           .pp-grid { grid-template-columns: repeat(2, 1fr); }
           .pp-offers-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .pp-header { padding: 12px 20px; }
           .pp-hero { padding: 120px 20px 40px; }
           .pp-grid, .pp-offers { padding-left: 20px; padding-right: 20px; }

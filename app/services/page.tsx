@@ -428,7 +428,7 @@ export default function ServicesPage() {
         }
 
         /* Mobile: shrink pills even more so all 3 fit on one row */
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .sv-pricing-pills { gap: 6px; }
           .sv-pill {
             padding: 12px 8px;
@@ -458,7 +458,7 @@ export default function ServicesPage() {
         body.ar-active .sv-card-cta { font-size: 14px; font-weight: 700; }
         body.ar-active .sv-pill-type { font-size: 16px; font-weight: 700; }
         body.ar-active .sv-pill-service { font-size: 11px; font-weight: 500; }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           body.ar-active .sv-pill-type { font-size: 13px; }
           body.ar-active .sv-pill-service { font-size: 9px; }
         }
@@ -471,7 +471,7 @@ export default function ServicesPage() {
           .sv-card:nth-child(4),
           .sv-card:nth-child(5) { grid-column: span 1; }
         }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .sv-header { padding: 12px 20px; }
           .sv-hero { padding: 120px 20px 40px; }
           .sv-grid { padding: 20px 20px 60px; grid-template-columns: 1fr; }

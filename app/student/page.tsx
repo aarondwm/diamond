@@ -124,6 +124,22 @@ export default function StudentPage() {
           transform: translateY(-1px);
           box-shadow: 0 6px 24px rgba(168,176,184,0.25);
         }
+
+        @media (max-width: 768px) {
+          .st-cta-row { gap: 8px !important; }
+          .st-wa-btn, .st-book-btn {
+            padding: 13px 10px !important;
+            font-size: 11px !important;
+            letter-spacing: 0.8px !important;
+            gap: 6px !important;
+            border-radius: 40px !important;
+          }
+          .st-wa-btn svg, .st-book-btn svg { width: 14px !important; height: 14px !important; }
+          .st-cta-sub {
+            font-size: 11px !important;
+            margin-top: 12px !important;
+          }
+        }
       `}</style>
 
       {/* Ambient gradient */}
@@ -271,7 +287,7 @@ export default function StudentPage() {
 
           {/* Two-button row: WhatsApp (left) + Book Online (right) */}
           <div style={{ padding: "0 28px 28px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+            <div className="st-cta-row" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
               <a
                 href={waUrl(lang)}
                 target="_blank"
@@ -331,7 +347,7 @@ export default function StudentPage() {
               </button>
             </div>
 
-            <div style={{
+            <div className="st-cta-sub" style={{
               textAlign: "center", marginTop: 16,
               fontFamily: isAr ? "var(--font-arabic, 'Tajawal', sans-serif)" : "var(--font-label, 'Inter', sans-serif)",
               fontSize: isAr ? 15 : 14, color: "#ffffff", letterSpacing: isAr ? 0 : "0.3px",

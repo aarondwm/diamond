@@ -697,7 +697,7 @@ body.ar-active .header-location {
   gap: 8px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .proof-strip { padding: 10px 20px; }
   .proof-strip__inner { flex-wrap: wrap; gap: 8px; }
   .proof-strip__divider { display: none; }
@@ -3524,7 +3524,7 @@ body.ar-active .ow-diagonal {
   text-transform: uppercase;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   /* Keep 3 cards side-by-side on mobile, just much smaller + horizontal layout */
   .stat-cards-wrap {
     grid-template-columns: repeat(3, 1fr);

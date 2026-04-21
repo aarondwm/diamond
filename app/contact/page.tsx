@@ -140,6 +140,18 @@ function ContactInner() {
         @keyframes ctFadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
         @keyframes ctDot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
         @keyframes ctPulse { 0%,100% { box-shadow:0 0 0 0 rgba(30,169,82,0.3); } 50% { box-shadow:0 0 0 8px rgba(30,169,82,0); } }
+
+        @media (max-width: 768px) {
+          .ct-wa-benefits { display: none !important; }
+          .ct-info-strip { display: none !important; }
+          .ct-wa-btn {
+            padding: 14px !important;
+            font-size: 12px !important;
+            letter-spacing: 0.08em !important;
+            gap: 8px !important;
+          }
+          .ct-wa-btn svg { width: 16px !important; height: 16px !important; }
+        }
       `}</style>
 
       {/* Ambient glow */}
@@ -314,9 +326,9 @@ function ContactInner() {
                   cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
                   transition: "all 0.2s ease", textDecoration: "none",
                 }}>
-                  <WhatsAppIcon size={20} /> {isAr ? "ابدأ الحجز عبر واتساب" : "Start Booking on WhatsApp"}
+                  <WhatsAppIcon size={20} /> {isAr ? "احجز عبر واتساب" : "Book on WhatsApp"}
                 </a>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 20 }}>
+                <div className="ct-wa-benefits" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 20 }}>
                   {(isAr ? [
                     { icon: "⚡", text: "تأكيد فوري" },
                     { icon: "📸", text: "ارسل الصور مباشرة" },
@@ -556,7 +568,7 @@ function ContactInner() {
         </div>
 
         {/* Contact Info Strip */}
-        <div style={{
+        <div className="ct-info-strip" style={{
           display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginTop: 16,
           animation: "ctFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both",
         }}>
