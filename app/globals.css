@@ -2732,6 +2732,42 @@ body.ar-active .svc-mini {
     0 28px 64px rgba(0,0,0,0.55);
 }
 
+/* Desktop: accordion body is always visible */
+.contact-info-body {
+  display: block;
+  width: 100%;
+}
+
+/* Mobile: collapse by default, expand when parent has .is-open */
+@media (max-width: 768px) {
+  .contact-info-accordion {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    padding: 20px 24px;
+  }
+  .contact-info-accordion .contact-info-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+  }
+  .contact-info-accordion .contact-info-body > * {
+    overflow: hidden;
+    min-height: 0;
+    margin: 0;
+  }
+  .contact-info-accordion.is-open .contact-info-body {
+    grid-template-rows: 1fr;
+    margin-top: 10px;
+  }
+  .contact-info-accordion h4 {
+    margin-bottom: 0 !important;
+  }
+  .contact-info-accordion:hover {
+    transform: none;
+  }
+}
+
 .contact-info-icon {
   display: inline-flex;
   align-items: center;

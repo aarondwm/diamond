@@ -1520,6 +1520,7 @@ function OurWorkSection({ lang }: { lang: Lang }) {
    ═══════════════════════════════════════════════════════════════════════════ */
 export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
+  const [openInfo, setOpenInfo] = useState<"hours" | "phone" | "location" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [headerScrolled, setHeaderScrolled] = useState(false);
 
@@ -1881,7 +1882,12 @@ export default function Home() {
         {/* Info blocks (left) + Map (right) */}
         <div className="contact-layout reveal">
           <div className="contact-info-col">
-            <div className="contact-info-block">
+            <div
+              className={`contact-info-block contact-info-accordion${openInfo === "hours" ? " is-open" : ""}`}
+              onClick={() => setOpenInfo(openInfo === "hours" ? null : "hours")}
+              role="button"
+              tabIndex={0}
+            >
               <div className="contact-info-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10" />
@@ -1889,31 +1895,39 @@ export default function Home() {
                 </svg>
               </div>
               <h4>{lang === "ar" ? "ساعات العمل" : "Opening Hours"}</h4>
-              <p>
-                {lang === "ar" ? "السبت – الخميس" : "Sat – Thu"}
-                <br />
-                {lang === "ar" ? "٩:٠٠ صباحاً — ٨:٠٠ مساءً" : "9:00 AM — 8:00 PM"}
-              </p>
+              <div className="contact-info-body">
+                <p>
+                  {lang === "ar" ? "السبت – الخميس" : "Sat – Thu"}
+                  <br />
+                  {lang === "ar" ? "٩:٠٠ صباحاً — ٨:٠٠ مساءً" : "9:00 AM — 8:00 PM"}
+                </p>
+              </div>
             </div>
-            <div className="contact-info-block">
+            <div
+              className={`contact-info-block contact-info-accordion${openInfo === "phone" ? " is-open" : ""}`}
+              onClick={() => setOpenInfo(openInfo === "phone" ? null : "phone")}
+              role="button"
+              tabIndex={0}
+            >
               <div className="contact-info-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.8 12.8 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.8 12.8 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
               </div>
               <h4>{lang === "ar" ? "الهاتف" : "Phone Numbers"}</h4>
-              <p>
-                <a href="tel:+96595536344">{lang === "ar" ? "+٩٦٥ ٩٥٥٣ ٦٣٤٤" : "+965 9553 6344"}</a>
-                <br />
-                <a href="tel:+96595539114">{lang === "ar" ? "+٩٦٥ ٩٥٥٣ ٩١١٤" : "+965 9553 9114"}</a>
-              </p>
+              <div className="contact-info-body">
+                <p>
+                  <a href="tel:+96595536344" onClick={(e) => e.stopPropagation()}>{lang === "ar" ? "+٩٦٥ ٩٥٥٣ ٦٣٤٤" : "+965 9553 6344"}</a>
+                  <br />
+                  <a href="tel:+96595539114" onClick={(e) => e.stopPropagation()}>{lang === "ar" ? "+٩٦٥ ٩٥٥٣ ٩١١٤" : "+965 9553 9114"}</a>
+                </p>
+              </div>
             </div>
-            <a
-              href="https://maps.app.goo.gl/ur5bt2FnjcnQxq91A"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-info-block"
-              style={{ textDecoration: "none" }}
+            <div
+              className={`contact-info-block contact-info-accordion${openInfo === "location" ? " is-open" : ""}`}
+              onClick={() => setOpenInfo(openInfo === "location" ? null : "location")}
+              role="button"
+              tabIndex={0}
             >
               <div className="contact-info-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -1922,8 +1936,19 @@ export default function Home() {
                 </svg>
               </div>
               <h4>{lang === "ar" ? "الموقع" : "Location"}</h4>
-              <p>{lang === "ar" ? "شارع ١٦، مدينة الكويت" : "16 St, Kuwait City"}</p>
-            </a>
+              <div className="contact-info-body">
+                <p>
+                  <a
+                    href="https://maps.app.goo.gl/ur5bt2FnjcnQxq91A"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {lang === "ar" ? "شارع ١٦، مدينة الكويت" : "16 St, Kuwait City"}
+                  </a>
+                </p>
+              </div>
+            </div>
           </div>
 
           <a
