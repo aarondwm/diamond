@@ -1071,12 +1071,34 @@ const SPOTLIGHT_CARS = [
 
 function SpotlightCards() {
   const [current, setCurrent] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const startX = useRef<number | null>(null);
+  const total = SPOTLIGHT_CARS.length;
+
   useEffect(() => {
     const id = setInterval(() => {
-      setCurrent(p => (p + 1) % SPOTLIGHT_CARS.length);
+      setCurrent(p => (p + 1) % total);
     }, 5000);
     return () => clearInterval(id);
-  }, []);
+  }, [total]);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    startX.current = e.touches[0].clientX;
+    setDragX(0);
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (startX.current === null) return;
+    setDragX(e.touches[0].clientX - startX.current);
+  };
+  const onTouchEnd = () => {
+    if (startX.current === null) return;
+    const threshold = 50;
+    if (dragX > threshold) setCurrent(p => (p - 1 + total) % total);
+    else if (dragX < -threshold) setCurrent(p => (p + 1) % total);
+    startX.current = null;
+    setDragX(0);
+  };
+
   return (
     <>
       {/* Desktop: static 3-column grid */}
@@ -1095,9 +1117,20 @@ function SpotlightCards() {
         ))}
       </div>
 
-      {/* Mobile: single-card carousel auto-rotating every 5s */}
-      <div className="spotlight-carousel reveal">
-        <div className="spotlight-carousel-track" style={{ transform: `translateX(-${current * 100}%)` }}>
+      {/* Mobile: single-card carousel auto-rotating every 5s (swipeable) */}
+      <div
+        className="spotlight-carousel reveal"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        <div
+          className="spotlight-carousel-track"
+          style={{
+            transform: `translateX(calc(-${current * 100}% + ${dragX}px))`,
+            transition: dragX === 0 ? "transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)" : "none",
+          }}
+        >
           {SPOTLIGHT_CARS.map((car) => (
             <div className="spotlight-card spotlight-card-mobile" key={car.key}>
               <div className="spotlight-card-image" aria-label={car.name} style={{

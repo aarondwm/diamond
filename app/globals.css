@@ -2387,6 +2387,36 @@ body.ar-active .svc-mini {
     border-radius: 18px;
     margin: 0 auto 28px;
     max-width: 360px;
+    direction: ltr;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .spotlight-carousel-track {
+    will-change: transform;
+  }
+  .spotlight-carousel img,
+  .spotlight-carousel .spotlight-card-image {
+    -webkit-user-drag: none;
+    pointer-events: none;
+  }
+  /* Disable hover-lift + tap highlight inside the mobile carousel */
+  .spotlight-carousel .spotlight-card,
+  .spotlight-carousel .spotlight-card:hover,
+  .spotlight-carousel .spotlight-card:active,
+  .spotlight-carousel .spotlight-card:focus {
+    transform: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
+    cursor: default;
+  }
+  .spotlight-carousel .spotlight-card {
+    transition: none !important;
+  }
+  body.ar-active .spotlight-carousel,
+  body.ar-active .spotlight-carousel-track,
+  body.ar-active .spotlight-carousel-dots {
+    direction: ltr;
   }
   .spotlight-carousel-track {
     display: flex;
